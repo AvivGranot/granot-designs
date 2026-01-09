@@ -24,7 +24,7 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
         mousewheel={true}
         keyboard={{ enabled: true }}
         autoplay={{
-          delay: 1000,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         loop={true}
