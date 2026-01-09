@@ -1520,7 +1520,7 @@ header {
   position: relative;
   width: 100%;
   max-width: 1200px;
-  height: 70vh;
+  height: auto;
   margin: 0 auto;
 }
 
@@ -1543,14 +1543,74 @@ header {
 
 .portfolio-image-full {
   width: 100%;
-  height: 100%;
+  flex: 1;
+  max-width: 800px;
+  max-height: 65vh;
+  min-height: 400px;
+  position: relative;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Add sophisticated gradient overlay on top of images */
+.portfolio-section-carousel .portfolio-image-full::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg,
+    rgba(26, 26, 26, 0.3) 0%,
+    rgba(42, 42, 42, 0.2) 50%,
+    rgba(26, 26, 26, 0.3) 100%);
+  border-radius: 0;
+  pointer-events: none;
+  z-index: 3;
+  display: block;
 }
 
 .full-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 0;
+  transition: transform 0.3s ease;
+  box-shadow: none;
   display: block;
+
+  /* Unified Color Grading System */
+  filter:
+    sepia(8%)
+    hue-rotate(-2deg)
+    contrast(1.08)
+    saturate(0.92)
+    brightness(1.02)
+    contrast(1.04);
+}
+
+.full-image:hover {
+  transform: scale(1.02);
+}
+
+/* Color Unification Overlay for Visual Cohesion */
+.portfolio-image-full::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(250, 248, 246, 0.04) 0%,
+    rgba(245, 243, 240, 0.03) 50%,
+    rgba(248, 246, 244, 0.04) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: soft-light;
+  border-radius: 0;
 }
 
 /* Scrollbar */
@@ -1624,8 +1684,8 @@ header {
 
 /* Tablet adjustments */
 @media (max-width: 1024px) {
-  .portfolio-carousel-container {
-    height: 60vh;
+  .portfolio-image-full {
+    max-height: 55vh;
   }
 }
 
@@ -1635,8 +1695,15 @@ header {
     padding: 20px;
   }
 
-  .portfolio-carousel-container {
-    height: 50vh;
+  .portfolio-image-full {
+    max-width: 100%;
+    max-height: 50vh;
+    min-height: 300px;
+  }
+
+  .section-overlay-layout .portfolio-image-full {
+    width: 95%;
+    height: 75%;
   }
 
   .swiper-scrollbar {
@@ -1657,8 +1724,9 @@ header {
 }
 
 @media (max-width: 480px) {
-  .portfolio-carousel-container {
-    height: 40vh;
+  .portfolio-image-full {
+    max-height: 40vh;
+    min-height: 250px;
   }
 }
 
