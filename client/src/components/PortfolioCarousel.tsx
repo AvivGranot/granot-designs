@@ -29,7 +29,8 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
         }}
         speed={300}
         loop={true}
-        loopAdditionalSlides={1}
+        loopAdditionalSlides={2}
+        rewind={false}
         preloadImages={true}
         watchSlidesProgress={true}
         scrollbar={{

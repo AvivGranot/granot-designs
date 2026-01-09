@@ -92,6 +92,7 @@ export default function PortfolioSection() {
               dynamicBullets: true,
             }}
             loop={true}
+            loopAdditionalSlides={2}
             className="portfolio-swiper"
             data-testid="carousel-portfolio"
             breakpoints={{
