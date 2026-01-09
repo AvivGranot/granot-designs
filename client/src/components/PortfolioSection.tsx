@@ -84,6 +84,8 @@ export default function PortfolioSection() {
               delay: 2000,
               disableOnInteraction: false,
             }}
+            speed={300}
+            preloadImages={true}
             navigation={true}
             pagination={{
               clickable: true,

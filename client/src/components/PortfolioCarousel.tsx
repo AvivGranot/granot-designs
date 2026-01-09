@@ -27,8 +27,11 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
           delay: 2000,
           disableOnInteraction: false,
         }}
+        speed={300}
         loop={true}
         loopAdditionalSlides={1}
+        preloadImages={true}
+        watchSlidesProgress={true}
         scrollbar={{
           el: '.swiper-scrollbar',
           hide: false,
