@@ -624,9 +624,8 @@ body.main-content-active .nav-toggle-bar:last-child {
 
   .portfolio-section-carousel .portfolio-image-full {
     width: 100%;
-    height: 70%;
-    max-height: none;
-    min-height: none;
+    height: 45vh;
+    min-height: 200px;
   }
 
   /* Peek carousel specific mobile styling */
@@ -642,16 +641,12 @@ body.main-content-active .nav-toggle-bar:last-child {
 
 .portfolio-image-full {
   width: 100%;
-  flex: 1;
-  max-width: 800px;
-  max-height: 65vh;
-  min-height: 400px;
+  height: 60vh;
+  min-height: 300px;
   position: relative;
-  /* Remove any background - ensure transparent */
   background: transparent !important;
   background-color: transparent !important;
 }
-
 
 .full-image {
   width: 100%;
@@ -660,6 +655,13 @@ body.main-content-active .nav-toggle-bar:last-child {
   border-radius: 0;
   transition: transform 0.3s ease;
   box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .portfolio-image-full {
+    height: 50vh;
+    min-height: 250px;
+  }
 }
 
 .full-image:hover {
