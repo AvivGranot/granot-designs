@@ -35,7 +35,8 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
   };
 
   const handleSlideChange = (swiper: SwiperType) => {
-    setCurrentSlide(swiper.activeIndex + 1);
+    // Use realIndex for loop mode to get correct slide number
+    setCurrentSlide(swiper.realIndex + 1);
   };
 
   const formatNumber = (num: number) => {

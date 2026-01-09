@@ -1599,9 +1599,9 @@ header {
 /* ================================= */
 
 #portfolio {
-  min-height: 100vh;
   background-color: #0a0a0a;
   position: relative;
+  padding: 40px 0;
 }
 
 /* ================================= */
@@ -1611,7 +1611,6 @@ header {
 .portfolio-carousel-container {
   position: relative;
   width: 100%;
-  min-height: 100vh;
   display: flex;
   align-items: center;
   background-color: #000;
