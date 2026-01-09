@@ -11,13 +11,9 @@ import 'swiper/css/scrollbar';
 import Navigation from "./Navigation";
 import HeroSection from "./HeroSection";
 import OverlayMenu from "./OverlayMenu";
-
-// Import background images for slides
-import portfolioImage from "@assets/portfolio1_1758398100598.jpg";
-import servicesImage from "@assets/services1_1758397244207.jpg";
-import mobileServicesImage from "@assets/Mobile_About_1_1758785817261.png";
-import aboutImage from "@assets/about1_1758398114481.jpeg";
-import contactImage from "@assets/contact1_1758397217008.jpg";
+import AboutSection from "./sections/AboutSection";
+import ContactSection from "./sections/ContactSection";
+import FloatingContactButton from "./FloatingContactButton";
 
 // Import portfolio images for mobile carousel
 import mobilePortfolio1 from "@assets/Mobile_Carousel_1_1758782507060.jpg";
@@ -48,7 +44,7 @@ import newPcPortfolio8 from "@assets/PC_Carousel_8_1758796224264.png";
 import newPcPortfolio9 from "@assets/PC_Carousel_9_1758796541477.png";
 import newPcPortfolio10 from "@assets/PC_Carousel_10_1758796936936.png";
 
-// Portfolio images arrays for nested carousel
+// Portfolio images arrays (without about slide - that's now a separate section)
 const mobilePortfolioImages = [
   { src: mobilePortfolio1, alt: "פרוייקט נגרות 1 - ארונות מטבח מודרניים" },
   { src: mobilePortfolio2, alt: "פרוייקט נגרות 2 - ספריה מובנית בסלון" },
@@ -61,12 +57,6 @@ const mobilePortfolioImages = [
   { src: mobilePortfolio9, alt: "פרוייקט נגרות 9 - ארונות משרד" },
   { src: mobilePortfolio10, alt: "פרוייקט נגרות 10 - פינת אוכל מובנית" },
   { src: mobilePortfolio11, alt: "פרוייקט נגרות 11 - חדר רחצה מעוצב ומינימליסטי" },
-  { 
-    type: "about", 
-    title: "אודותינו", 
-    content: `"עיצוב משפיע" - דוב גרנות, מייסד שותף, ובוגר בצלאל אקדמיה לאמנות ועיצוב פנים.<br /><br />גרנות עיצובים הינה נגריית בוטיק עם למעלה משלושים שנות ניסיון, ואלפי פרויקטים שעוצבו אישית, נבנו בקפידה, ונמסרו במרכז הארץ.<br /><br />אנו עובדים בשיתוף פעולה כדי לאפשר לתהליך היצירתי להתפתח באופן אורגני, לצד עיצוב קפדני של אלמנטים ברמת המאקרו והמיקרו. האתוס שלנו הוא לספק גישה משולבת וקוהרנטית לנגרות ועיצוב פנים.<br /><br />בברכה,<br />רו"ח נורית גרנות<br />מנכ"לית ומייסדת שותפה`,
-    alt: "אודותינו - גרנות עיצובים" 
-  }
 ];
 
 const pcPortfolioImages = [
@@ -81,35 +71,16 @@ const pcPortfolioImages = [
   { src: newPcPortfolio8, alt: "מטבח מודרני עם אי זהב וכסאות צהובים" },
   { src: newPcPortfolio10, alt: "מטבח בשלבי בנייה - ארונות ירוקים מעוצבים" },
   { src: pcAbout1, alt: "סקיצת עיצוב נגרות - תכנון מקצועי ויצירתי" },
-  { 
-    type: "about", 
-    title: "אודותינו", 
-    content: `"עיצוב משפיע" - דוב גרנות, מייסד שותף, ובוגר בצלאל אקדמיה לאמנות ועיצוב פנים.<br /><br />גרנות עיצובים הינה נגריית בוטיק עם למעלה משלושים שנות ניסיון, ואלפי פרויקטים שעוצבו אישית, נבנו בקפידה, ונמסרו במרכז הארץ.<br /><br />אנו עובדים בשיתוף פעולה כדי לאפשר לתהליך היצירתי להתפתח באופן אורגני, לצד עיצוב קפדני של אלמנטים ברמת המאקרו והמיקרו. האתוס שלנו הוא לספק גישה משולבת וקוהרנטית לנגרות ועיצוב פנים.<br /><br />בברכה,<br />רו"ח נורית גרנות<br />מנכ"לית ומייסדת שותפה`,
-    alt: "אודותינו - גרנות עיצובים" 
-  }
 ];
 
 export default function HomePage() {
-  const [isMainContentActive, setIsMainContentActive] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Set document direction and lang
     document.documentElement.setAttribute('dir', 'rtl');
     document.documentElement.setAttribute('lang', 'he');
-    
-    // Toggle body class based on state
-    if (isMainContentActive) {
-      document.body.classList.add('main-content-active');
-    } else {
-      document.body.classList.remove('main-content-active');
-    }
-    
-    // Cleanup on unmount
-    return () => {
-      document.body.classList.remove('main-content-active');
-    };
-  }, [isMainContentActive]);
+  }, []);
 
   useEffect(() => {
     // Check screen size for mobile/desktop image switching
@@ -125,21 +96,20 @@ export default function HomePage() {
     };
   }, []);
 
-
-  const toggleMainContent = () => {
-    setIsMainContentActive(prev => !prev);
-  };
+  const portfolioImages = isMobile ? mobilePortfolioImages : pcPortfolioImages;
 
   return (
     <>
-      {/* Single Navigation at top level */}
-      <Navigation onToggle={toggleMainContent} />
-      {/* Hero View */}
-      <div className="hero-view min-h-screen">
+      {/* Fixed Navigation */}
+      <Navigation />
+
+      {/* Hero Section */}
+      <section id="hero">
         <HeroSection />
-      </div>
-      {/* Main Content View */}
-      <div className="main-content-view">
+      </section>
+
+      {/* Portfolio Section */}
+      <section id="portfolio" className="portfolio-wrapper">
         <Swiper
           className="main-page-swiper"
           modules={[SwiperNavigation, Pagination, Mousewheel, Keyboard, Scrollbar]}
@@ -174,53 +144,42 @@ export default function HomePage() {
             }
           }}
         >
-          {/* Portfolio Slides and About Slide */}
-          {(isMobile ? mobilePortfolioImages : pcPortfolioImages).map((item, index) => (
+          {portfolioImages.map((item, index) => (
             <SwiperSlide key={index} className="portfolio-carousel-slide">
-              {item.type === "about" ? (
-                <section 
-                  className="about-section-carousel bg-[#1a1a1a]" 
-                  id={`about-${index + 1}`}
-                  data-testid={`about-section-${index + 1}`}
-                >
-                  <div className="about-slide">
-                    <div className="about-content">
-                      <h2 className="about-title text-[24px] font-bold">{item.title}</h2>
-                      <div className="about-text text-[14px] font-normal" dangerouslySetInnerHTML={{ __html: item.content }}></div>
-                    </div>
+              <div
+                className="portfolio-section-carousel bg-[#1a1a1a]"
+                data-testid={`portfolio-section-${index + 1}`}
+                style={{
+                  backgroundImage: `url(${item.src})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat'
+                }}
+              >
+                {/* Title above image - hide for first and last slides */}
+                {index !== 0 && index !== portfolioImages.length - 1 && (
+                  <div className="portfolio-header-corner">
+                    <h2 className="section-title-above text-[16px] font-semibold">תיק עבודות</h2>
                   </div>
-                </section>
-              ) : (
-                <section 
-                  className="portfolio-section-carousel bg-[#1a1a1a]" 
-                  id={`portfolio-${index + 1}`}
-                  data-testid={`portfolio-section-${index + 1}`}
-                  style={{
-                    backgroundImage: `url(${item.src})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
-                  }}
-                >
-                  {/* Title above image - hide for first slide, 11th slide and about slide */}
-                  {index !== 0 && index !== 10 && item.type !== "about" && (
-                    <div className="portfolio-header-corner">
-                      <h2 className="section-title-above ml-[0px] mr-[0px] pl-[0px] pr-[0px] pt-[0px] pb-[0px] text-[16px] font-semibold mt-[0px] mb-[0px]">תיק עבודות</h2>
-                    </div>
-                  )}
-                </section>
-              )}
+                )}
+              </div>
             </SwiperSlide>
           ))}
 
-
-          
-
-          
-
           <div className="swiper-scrollbar"></div>
         </Swiper>
-      </div>
+      </section>
+
+      {/* About Section */}
+      <AboutSection />
+
+      {/* Contact Section */}
+      <ContactSection />
+
+      {/* Floating Contact Button */}
+      <FloatingContactButton />
+
+      {/* Mobile Overlay Menu */}
       <OverlayMenu />
     </>
   );

@@ -1,12 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useScrollPosition } from "../hooks/useScrollPosition";
+import { useActiveSection } from "../hooks/useActiveSection";
 
 interface NavigationProps {
   onMenuToggle?: () => void;
-  onToggle?: () => void;
 }
 
-export default function Navigation({ onMenuToggle, onToggle }: NavigationProps) {
+const navLinks = [
+  { label: 'תיק עבודות', href: '#portfolio', sectionId: 'portfolio' },
+  { label: 'אודות', href: '#about', sectionId: 'about' },
+  { label: 'צור קשר', href: '#contact', sectionId: 'contact' }
+];
+
+export default function Navigation({ onMenuToggle }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Scroll detection for header background
+  const { isScrolled } = useScrollPosition(100);
+
+  // Active section detection
+  const sectionIds = useMemo(() => ['hero', 'portfolio', 'about', 'contact'], []);
+  const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
     // Listen for menu close events from OverlayMenu component
@@ -14,75 +28,94 @@ export default function Navigation({ onMenuToggle, onToggle }: NavigationProps) 
       setIsMenuOpen(false);
     };
 
-    // Listen for keyboard shortcut to open menu
-    const handleKeyboardShortcut = (e: KeyboardEvent) => {
-      if (e.key === '0' && !isMenuOpen) {
-        e.preventDefault();
-        handleMenuToggle();
-      }
-    };
-
     window.addEventListener('menuClosed', handleMenuClosed);
-    document.addEventListener('keydown', handleKeyboardShortcut);
-    
+
     return () => {
       window.removeEventListener('menuClosed', handleMenuClosed);
-      document.removeEventListener('keydown', handleKeyboardShortcut);
     };
-  }, [isMenuOpen]);
+  }, []);
 
-  const handleMenuToggle = () => {
-    // Use the new onToggle prop for two-view system if provided
-    if (onToggle) {
-      onToggle();
-      return;
-    }
-    
-    // Legacy overlay functionality
+  const handleMobileMenuToggle = () => {
     const newMenuState = !isMenuOpen;
     setIsMenuOpen(newMenuState);
-    
+
     const menu = document.getElementById('overlayMenu');
     if (menu) {
       if (newMenuState) {
         menu.classList.add('active');
         menu.style.display = 'block';
-        // Prevent body scrolling
         document.body.style.overflow = 'hidden';
       } else {
         menu.classList.remove('active');
         setTimeout(() => {
           menu.style.display = 'none';
         }, 300);
-        // Restore body scrolling
         document.body.style.overflow = '';
       }
     }
-    
+
     if (onMenuToggle) {
       onMenuToggle();
     }
   };
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <header className="fixed top-0 left-0 w-full bg-transparent flex justify-between items-center p-5 z-[2000] transition-colors duration-300" data-testid="main-navigation">
+    <header
+      className={`fixed top-0 left-0 w-full flex justify-between items-center px-5 z-[2000] transition-all duration-300 ${
+        isScrolled ? 'header-scrolled h-[60px] md:h-[70px]' : 'header-transparent h-[70px] md:h-[80px]'
+      }`}
+      data-testid="main-navigation"
+    >
       {/* Logo Container - Right side for RTL */}
       <div className="logo-container">
-        <a href="/" className="text-2xl font-bold text-white no-underline tracking-wide">
+        <a
+          href="/"
+          onClick={handleLogoClick}
+          className="text-xl md:text-2xl font-bold text-white no-underline tracking-wide"
+        >
           גרנות עיצובים
         </a>
       </div>
-      
-      {/* Navigation Toggle - Left side for RTL */}
+
+      {/* Desktop Navigation Links - Center/Left for RTL */}
+      <nav className="nav-links" aria-label="Main navigation">
+        {navLinks.map((link) => (
+          <a
+            key={link.sectionId}
+            href={link.href}
+            onClick={(e) => handleNavClick(e, link.href)}
+            className={`nav-link ${activeSection === link.sectionId ? 'active' : ''}`}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      {/* Mobile Hamburger Menu - Left side for RTL */}
       <button
-        className="nav-toggle w-14 h-5 border-2 border-white bg-transparent cursor-pointer transition-all duration-300 hover:border-opacity-70 flex flex-col justify-center items-center gap-[3px] px-2"
-        onClick={handleMenuToggle}
+        className="hamburger-mobile w-11 h-11 flex flex-col justify-center items-center gap-1.5 cursor-pointer bg-transparent border-none md:hidden"
+        aria-label="פתח תפריט ניווט"
+        onClick={handleMobileMenuToggle}
         data-testid="button-menu-toggle"
         type="button"
-        aria-label="Open navigation menu"
       >
-        <span className="nav-toggle-bar w-full h-[2px] bg-white transition-all duration-300"></span>
-        <span className="nav-toggle-bar w-full h-[2px] bg-white transition-all duration-300"></span>
+        <span className="block w-6 h-0.5 bg-white transition-all"></span>
+        <span className="block w-6 h-0.5 bg-white transition-all"></span>
+        <span className="block w-6 h-0.5 bg-white transition-all"></span>
       </button>
     </header>
   );

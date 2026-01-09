@@ -59,10 +59,10 @@ export default function HeroSection() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
@@ -76,6 +76,14 @@ export default function HeroSection() {
 
     return () => clearInterval(interval);
   }, [heroImages.length]);
+
+  const handleScrollToPortfolio = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const portfolioSection = document.getElementById('portfolio');
+    if (portfolioSection) {
+      portfolioSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="h-screen w-full relative overflow-hidden" data-testid="section-hero">
@@ -109,6 +117,43 @@ export default function HeroSection() {
             />
           </div>
         ))}
+      </div>
+
+      {/* CTA and Scroll Indicator */}
+      <div className="hero-cta-container">
+        {/* CTA Button */}
+        <a
+          href="#portfolio"
+          onClick={handleScrollToPortfolio}
+          className="hero-cta-button"
+        >
+          לעבודות שלנו
+        </a>
+
+        {/* Scroll Indicator */}
+        <div
+          className="scroll-indicator"
+          onClick={handleScrollToPortfolio}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleScrollToPortfolio(e as unknown as React.MouseEvent)}
+          aria-label="גלול למטה לתיק עבודות"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+          <span className="scroll-indicator-text">גללו למטה</span>
+        </div>
       </div>
     </div>
   );
