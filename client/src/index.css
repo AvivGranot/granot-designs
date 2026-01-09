@@ -621,11 +621,107 @@ body.main-content-active .nav-toggle-bar:last-child {
     background: white !important;
     border-radius: 1px !important;
   }
+
+  .portfolio-section-carousel .portfolio-image-full {
+    width: 100%;
+    height: 70%;
+    max-height: none;
+    min-height: none;
+  }
+
+  /* Peek carousel specific mobile styling */
+  .portfolio-carousel-slide {
+    /* Remove individual backgrounds for seamless dark background */
+    background: transparent !important;
+    background-color: transparent !important;
+    /* Remove border-radius for seamless embedded effect */
+    border-radius: 0;
+    overflow: hidden;
+  }
 }
 
-/* portfolio-image-full styles moved to bottom of file for carousel */
+.portfolio-image-full {
+  width: 100%;
+  flex: 1;
+  max-width: 800px;
+  max-height: 65vh;
+  min-height: 400px;
+  position: relative;
+  /* Remove any background - ensure transparent */
+  background: transparent !important;
+  background-color: transparent !important;
+}
 
-/* Image styles moved to portfolio carousel section at bottom */
+/* Add sophisticated gradient overlay on top of images */
+.portfolio-section-carousel .portfolio-image-full::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg,
+    rgba(26, 26, 26, 0.3) 0%,
+    rgba(42, 42, 42, 0.2) 50%,
+    rgba(26, 26, 26, 0.3) 100%);
+  /* Remove border-radius for seamless embedded effect */
+  border-radius: 0;
+  pointer-events: none;
+  z-index: 3;
+  display: block;
+}
+
+.full-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Remove container styling for seamless embedded effect */
+  border-radius: 0;
+  transition: transform 0.3s ease;
+  /* Remove shadow for seamless integration */
+  box-shadow: none;
+
+  /* Unified Color Grading System - Minale + Mann Aesthetic */
+  filter:
+    /* Primary color temperature normalization */
+    sepia(8%)
+    /* Subtle warm/cool balance correction */
+    hue-rotate(-2deg)
+    /* Professional contrast enhancement */
+    contrast(1.08)
+    /* Sophisticated saturation adjustment */
+    saturate(0.92)
+    /* Brightness normalization */
+    brightness(1.02)
+    /* Premium clarity enhancement */
+    contrast(1.04);
+}
+
+.full-image:hover {
+  transform: scale(1.02);
+}
+
+/* Color Unification Overlay for Visual Cohesion */
+.portfolio-image-full::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Subtle unified color wash for temperature normalization */
+  background: linear-gradient(
+    135deg,
+    rgba(250, 248, 246, 0.04) 0%,
+    rgba(245, 243, 240, 0.03) 50%,
+    rgba(248, 246, 244, 0.04) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: soft-light;
+  /* Remove border-radius for seamless embedding */
+  border-radius: 0;
+}
 
 /* New Overlay Layout for All Sections */
 .section-overlay-layout {
@@ -1517,97 +1613,31 @@ header {
 /* ================================= */
 
 .portfolio-carousel-container {
-  position: relative;
   width: 100%;
-  max-width: 1200px;
-  height: 70vh;
+  height: auto;
   margin: 0 auto;
 }
 
-.main-page-swiper {
+.portfolio-swiper {
   width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  overflow: hidden;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
-.portfolio-carousel-slide {
-  width: 100% !important;
-  height: 100% !important;
+.portfolio-swiper .swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 400px;
 }
 
-.portfolio-section-carousel {
-  width: 100%;
-  height: 100%;
-}
-
-.portfolio-image-full {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* Add sophisticated gradient overlay on top of images */
-.portfolio-section-carousel .portfolio-image-full::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg,
-    rgba(26, 26, 26, 0.3) 0%,
-    rgba(42, 42, 42, 0.2) 50%,
-    rgba(26, 26, 26, 0.3) 100%);
-  border-radius: 0;
-  pointer-events: none;
-  z-index: 3;
+.portfolio-swiper .swiper-slide img {
   display: block;
-}
-
-.full-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0;
-  transition: transform 0.3s ease;
-  box-shadow: none;
-  display: block;
-
-  /* Unified Color Grading System */
-  filter:
-    sepia(8%)
-    hue-rotate(-2deg)
-    contrast(1.08)
-    saturate(0.92)
-    brightness(1.02)
-    contrast(1.04);
-}
-
-.full-image:hover {
-  transform: scale(1.02);
-}
-
-/* Color Unification Overlay for Visual Cohesion */
-.portfolio-image-full::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(250, 248, 246, 0.04) 0%,
-    rgba(245, 243, 240, 0.03) 50%,
-    rgba(248, 246, 244, 0.04) 100%
-  );
-  pointer-events: none;
-  z-index: 2;
-  mix-blend-mode: soft-light;
-  border-radius: 0;
+  border-radius: 12px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
 }
 
 /* Scrollbar */
@@ -1679,33 +1709,32 @@ header {
   opacity: 0.7;
 }
 
-/* Tablet adjustments */
-@media (max-width: 1024px) {
-  .portfolio-carousel-container {
-    height: 60vh;
-  }
-}
-
-/* Mobile adjustments for portfolio carousel */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   #portfolio {
     padding: 20px;
   }
 
-  .portfolio-carousel-container {
-    height: 50vh;
+  .portfolio-swiper .swiper-slide {
+    width: 280px;
+    height: 350px;
+  }
+
+  .portfolio-swiper .swiper-button-next,
+  .portfolio-swiper .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+  }
+
+  .portfolio-swiper .swiper-button-next:after,
+  .portfolio-swiper .swiper-button-prev:after {
+    font-size: 14px;
   }
 
   .section-overlay-layout .portfolio-image-full {
     width: 95%;
     height: 75%;
-  }
-
-  .swiper-scrollbar {
-    bottom: 10px !important;
-    left: 20% !important;
-    width: 60% !important;
-    height: 2px !important;
   }
 
   .portfolio-bottom-nav {
@@ -1715,12 +1744,6 @@ header {
   .slide-counter {
     font-size: 14px;
     min-width: 60px;
-  }
-}
-
-@media (max-width: 480px) {
-  .portfolio-carousel-container {
-    height: 40vh;
   }
 }
 
