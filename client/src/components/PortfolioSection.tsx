@@ -112,11 +112,12 @@ export default function PortfolioSection() {
             {portfolioItems.map((item, index) => (
               <SwiperSlide key={index} data-testid={`slide-portfolio-${index}`}>
                 <div className="swiper-slide-content relative">
-                  <img 
-                    src={item.image} 
-                    alt={item.alt} 
+                  <img
+                    src={item.image}
+                    alt={item.alt}
                     className="w-full h-[70vh] object-cover rounded-lg shadow-2xl"
                     data-testid={`img-portfolio-${index}`}
+                    loading="eager"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
                     <p className="text-white text-center text-lg font-medium" data-testid={`text-portfolio-alt-${index}`}>

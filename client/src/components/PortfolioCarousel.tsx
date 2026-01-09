@@ -47,6 +47,7 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
                   src={image.src}
                   alt={image.alt}
                   className="full-image"
+                  loading="eager"
                 />
               </div>
             </div>
