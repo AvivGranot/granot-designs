@@ -1,12 +1,4 @@
 import { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation as SwiperNavigation, Pagination, Mousewheel, Keyboard, Scrollbar } from 'swiper/modules';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 
 import Navigation from "./Navigation";
 import HeroSection from "./HeroSection";
@@ -14,6 +6,8 @@ import OverlayMenu from "./OverlayMenu";
 import AboutSection from "./sections/AboutSection";
 import ContactSection from "./sections/ContactSection";
 import FloatingContactButton from "./FloatingContactButton";
+import FloatingShareNav from "./FloatingShareNav";
+import PortfolioCarousel from "./PortfolioCarousel";
 
 // Import portfolio images for mobile carousel
 import mobilePortfolio1 from "@assets/Mobile_Carousel_1_1758782507060.jpg";
@@ -35,17 +29,14 @@ import pcPortfolio3 from "@assets/PC_Carousel_3_1758790862082.png";
 import pcPortfolio4 from "@assets/PC_Carousel_4_1758790862082.jpg";
 import pcPortfolio5 from "@assets/PC_Carousel_5_1758790862083.png";
 import pcPortfolio6 from "@assets/PC_Carousel_6_1758790862083.png";
-import pcPortfolio7 from "@assets/PC_Carousel_7_1758790862084.png";
 import pcPortfolio8 from "@assets/PC_Carousel_8_1758790862084.png";
-import pcPortfolio9 from "@assets/PC_Carousel_9_1758790862084.png";
-import pcPortfolio10 from "@assets/PC_Carousel_10_1758790862080.png";
 import pcAbout1 from "@assets/PC_About_1_1758790964412.png";
 import newPcPortfolio8 from "@assets/PC_Carousel_8_1758796224264.png";
 import newPcPortfolio9 from "@assets/PC_Carousel_9_1758796541477.png";
 import newPcPortfolio10 from "@assets/PC_Carousel_10_1758796936936.png";
 import hodHasharon from "@assets/Hod_Hasharon.jpg";
 
-// Portfolio images arrays (without about slide - that's now a separate section)
+// Portfolio images arrays
 const mobilePortfolioImages = [
   { src: mobilePortfolio1, alt: "פרוייקט נגרות 1 - ארונות מטבח מודרניים" },
   { src: mobilePortfolio2, alt: "פרוייקט נגרות 2 - ספריה מובנית בסלון" },
@@ -110,66 +101,9 @@ export default function HomePage() {
         <HeroSection />
       </section>
 
-      {/* Portfolio Section */}
-      <section id="portfolio" className="portfolio-wrapper">
-        <Swiper
-          className="main-page-swiper"
-          modules={[SwiperNavigation, Pagination, Mousewheel, Keyboard, Scrollbar]}
-          direction="horizontal"
-          slidesPerView="auto"
-          spaceBetween={20}
-          centeredSlides={true}
-          centeredSlidesBounds={false}
-          mousewheel={true}
-          keyboard={{
-            enabled: true,
-          }}
-          scrollbar={{
-            el: '.swiper-scrollbar',
-            hide: false,
-            draggable: true,
-          }}
-          breakpoints={{
-            // Mobile peek carousel configuration
-            320: {
-              slidesPerView: "auto",
-              spaceBetween: 20,
-              centeredSlides: true,
-              centeredSlidesBounds: false,
-            },
-            // Desktop configuration - horizontal peek layout with centered slides
-            1024: {
-              slidesPerView: "auto",
-              spaceBetween: 40,
-              centeredSlides: true,
-              centeredSlidesBounds: false,
-            }
-          }}
-        >
-          {portfolioImages.map((item, index) => (
-            <SwiperSlide key={index} className="portfolio-carousel-slide">
-              <div
-                className="portfolio-section-carousel bg-[#1a1a1a]"
-                data-testid={`portfolio-section-${index + 1}`}
-                style={{
-                  backgroundImage: `url(${item.src})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
-                }}
-              >
-                {/* Title above image - hide for first and last slides */}
-                {index !== 0 && index !== portfolioImages.length - 1 && (
-                  <div className="portfolio-header-corner">
-                    <h2 className="section-title-above text-[16px] font-semibold">תיק עבודות</h2>
-                  </div>
-                )}
-              </div>
-            </SwiperSlide>
-          ))}
-
-          <div className="swiper-scrollbar"></div>
-        </Swiper>
+      {/* Portfolio Section - Full Screen Carousel */}
+      <section id="portfolio">
+        <PortfolioCarousel images={portfolioImages} />
       </section>
 
       {/* About Section */}
@@ -178,8 +112,11 @@ export default function HomePage() {
       {/* Contact Section */}
       <ContactSection />
 
-      {/* Floating Contact Button */}
+      {/* Floating Contact Button (WhatsApp) */}
       <FloatingContactButton />
+
+      {/* Floating Share Navigation */}
+      <FloatingShareNav />
 
       {/* Mobile Overlay Menu */}
       <OverlayMenu />
