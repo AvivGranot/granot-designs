@@ -53,7 +53,7 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
         slidesPerView={1}
         keyboard={{ enabled: true }}
         autoplay={{
-          delay: 2000,
+          delay: 1000,
           disableOnInteraction: false,
         }}
         loop={true}

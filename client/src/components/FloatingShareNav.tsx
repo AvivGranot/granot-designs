@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 export default function FloatingShareNav() {
   const [isOpen, setIsOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   const pageUrl = typeof window !== 'undefined' ? window.location.href : 'https://granotdesign.com';
   const pageTitle = 'גרנות עיצובים - מטבחים וריהוט פנים בעיצוב אישי';
@@ -51,16 +50,6 @@ export default function FloatingShareNav() {
     },
   ];
 
-  const handleCopyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(pageUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  };
-
   const handleShareClick = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400');
   };
@@ -83,27 +72,6 @@ export default function FloatingShareNav() {
             {link.icon}
           </button>
         ))}
-
-        {/* Copy Link Button */}
-        <button
-          className="share-link-btn copy-link"
-          onClick={handleCopyLink}
-          aria-label="העתק קישור"
-          style={{
-            transitionDelay: isOpen ? `${shareLinks.length * 50}ms` : '0ms',
-          }}
-        >
-          {copied ? (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
-              <path d="M20 6L9 17l-5-5" />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
-            </svg>
-          )}
-        </button>
       </div>
 
       {/* Share Toggle Button */}
@@ -121,13 +89,6 @@ export default function FloatingShareNav() {
           <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
         </svg>
       </button>
-
-      {/* Copied Toast */}
-      {copied && (
-        <div className="copy-toast">
-          הקישור הועתק!
-        </div>
-      )}
     </div>
   );
 }
