@@ -83,16 +83,6 @@ export default function OverlayMenu() {
       aria-modal="true"
       aria-labelledby="nav-title"
     >
-      {/* Close Button */}
-      <button
-        onClick={handleMenuClose}
-        className="absolute top-10 left-10 w-11 h-11 bg-transparent border-2 border-white rounded text-white text-2xl flex items-center justify-center transition-all hover:bg-white/10 font-light z-[1001]"
-        data-testid="button-menu-close"
-        aria-label="סגור תפריט"
-      >
-        &times;
-      </button>
-
       {/* Main Navigation Menu */}
       <div className="absolute top-1/2 right-1/2 transform translate-x-1/2 -translate-y-1/2 text-center">
         <h2 id="nav-title" className="sr-only">תפריט ראשי</h2>
