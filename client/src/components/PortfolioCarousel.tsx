@@ -49,9 +49,8 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
       <Swiper
         modules={[Navigation, Pagination, Keyboard, Mousewheel, Scrollbar, Autoplay]}
         direction="horizontal"
-        slidesPerView="auto"
-        spaceBetween={20}
-        centeredSlides={true}
+        slidesPerView={1}
+        spaceBetween={0}
         mousewheel={true}
         keyboard={{ enabled: true }}
         autoplay={{
@@ -63,18 +62,6 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
           el: '.swiper-scrollbar',
           hide: false,
           draggable: true,
-        }}
-        breakpoints={{
-          320: {
-            slidesPerView: "auto",
-            spaceBetween: 20,
-            centeredSlides: true,
-          },
-          1024: {
-            slidesPerView: "auto",
-            spaceBetween: 40,
-            centeredSlides: true,
-          }
         }}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
