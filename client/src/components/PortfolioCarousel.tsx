@@ -24,10 +24,11 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
         mousewheel={true}
         keyboard={{ enabled: true }}
         autoplay={{
-          delay: 3000,
+          delay: 2000,
           disableOnInteraction: false,
         }}
         loop={true}
+        loopAdditionalSlides={1}
         scrollbar={{
           el: '.swiper-scrollbar',
           hide: false,

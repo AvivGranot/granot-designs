@@ -81,7 +81,7 @@ export default function PortfolioSection() {
               slideShadows: true,
             }}
             autoplay={{
-              delay: 3000,
+              delay: 2000,
               disableOnInteraction: false,
             }}
             navigation={true}
@@ -89,7 +89,7 @@ export default function PortfolioSection() {
               clickable: true,
               dynamicBullets: true,
             }}
-            loop={false}
+            loop={true}
             className="portfolio-swiper"
             data-testid="carousel-portfolio"
             breakpoints={{
