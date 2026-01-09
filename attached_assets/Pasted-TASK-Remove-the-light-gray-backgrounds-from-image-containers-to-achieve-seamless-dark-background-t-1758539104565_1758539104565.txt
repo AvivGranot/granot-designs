@@ -1,0 +1,74 @@
+TASK:
+Remove the light gray backgrounds from image containers to achieve seamless dark background throughout.
+
+IMPLEMENTATION:
+CSS Fix (in style.css):
+
+css
+/* REMOVE LIGHT GRAY BACKGROUNDS FROM IMAGE CONTAINERS */
+
+.portfolio-item-peek {
+    flex: 0 0 60vw;
+    height: 75%;
+    position: relative;
+    scroll-snap-align: center;
+    
+    /* CRITICAL: Remove gray background */
+    background: transparent !important;
+    background-color: transparent !important;
+    
+    /* Remove any card-like styling */
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+/* Ensure no gray backgrounds on any wrapper elements */
+.carousel-container-peek {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+.carousel-container-peek > * {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Only the main carousel should have the dark background */
+.portfolio-peek-carousel {
+    background: linear-gradient(135deg, 
+        rgba(26, 26, 26, 0.95) 0%, 
+        rgba(42, 42, 42, 0.92) 50%, 
+        rgba(26, 26, 26, 0.95) 100%) !important;
+}
+
+/* Images should have no background - just the image content */
+.carousel-image {
+    background: none !important;
+    background-color: transparent !important;
+    border-radius: 8px;
+}
+Alternative - Find and Override Gray Backgrounds:
+
+css
+/* NUCLEAR FIX - Override any gray backgrounds */
+[style*="background: gray"],
+[style*="background-color: gray"],
+[style*="background: #ccc"],
+[style*="background: #ddd"],
+[style*="background: #eee"],
+.portfolio-item-peek[style*="background"] {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+DEBUGGING APPROACH:
+
+Inspect each gray container in browser developer tools
+
+Look for CSS classes like .card, .container, .item that might have gray backgrounds
+
+Check for inline styles that set gray backgrounds
+
+Add !important to override any existing gray background rules
+
+The goal is to have only the dark gradient background visible throughout - no gray containers around individual images. Images should appear to be placed directly on the dark surface, just like the architecture site.

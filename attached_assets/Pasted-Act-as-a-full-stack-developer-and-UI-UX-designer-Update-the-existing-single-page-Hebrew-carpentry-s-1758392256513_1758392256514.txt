@@ -1,0 +1,29 @@
+Act as a full-stack developer and UI/UX designer. Update the existing single-page Hebrew carpentry site ("גרנות עיצובים") as follows:
+
+**1. Navigation Icon – Elegance and Sophistication**
+- Replace the current square navigation icon in the header with a more elegant, visually sophisticated icon.
+- The new icon should:
+  - Be minimalist, white (SVG or CSS), and evoke a modern, architectural theme.
+  - Feature the "holed square" design shown in the third attached image, but with refined line weight, smooth corners, and subtle shadow for dimensionality.
+  - The icon must not look blocky or simplistic; use round corners and balanced proportions for an upscale look.
+  - Position the icon precisely, matching the spacing and alignment from the original reference design.
+
+**2. Embedded Header Overlay Over Hero Section**
+- The header background fill should not be solid black stuck above the hero image.
+- Instead, the header must visually overlay the top of the hero section image (see attached reference), with the following specifications:
+  - Make the header background semi-transparent black (`background: rgba(0,0,0,0.45)` or similar).
+  - The title "גרנות עיצובים" and navigation icon must sit over the hero image, feeling embedded, NOT in a separate black bar.
+  - As the page scrolls past the hero, the header should smoothly transition into a fully opaque dark background at the top (`background: #111` or similar).
+  - Implement this effect using CSS “position: fixed” for the header, with a transition that detects scroll position and sets opacity/darkness appropriately.
+
+**Styling and Performance**
+- All text in the header must remain crisp white, bold, and highly readable.
+- Ensure the visual transition from embedded/semi-transparent to solid/dark occurs smoothly (e.g., over 200ms).
+- All work must be in index.html, style.css, and script.js. No external frameworks.
+- Confirm the header is responsive, works equally well on mobile/desktop, and overlays seamlessly regardless of hero image dimensions.
+
+**Summary**
+- Task 1: Refine navigation icon for elegance, using a sophisticated SVG.
+- Task 2: Rework header background to sit as a sleek overlay on the hero image, transitioning to fully dark only after scrolling below it.
+
+Provide code and verify in browser for clarity and fidelity to original design.

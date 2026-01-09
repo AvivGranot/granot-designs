@@ -1,0 +1,137 @@
+TASK:
+Transform the "תיק עבודות" section from the current mobile carousel with navigation arrows to match the mobile experience of minaleandmann.com - where each project is a full-height mobile screen section that users scroll through naturally.
+
+PROBLEM:
+The current "תיק עבודות" section on mobile shows a carousel with left/right arrows and navigation dots. The reference site (minaleandmann.com) treats each project as a separate, full-height mobile section with smooth vertical scrolling between them - no arrows or navigation controls.
+
+SOLUTION:
+Replace the current carousel in the "תיק עבודות" section with ten individual, full-height mobile sections. Each section will have the Hebrew header "תיק עבודות" with the vertical line (like "SERVICES" on the reference site) and one large, immersive image per section.
+
+NEW CODE:
+HTML Changes (in index.html):
+
+xml
+<!-- FIND the current תיק עבודות section and REPLACE with: -->
+
+<section class="portfolio-section-mobile" id="portfolio-1">
+    <div class="section-header-mobile">
+        <span class="vertical-line-mobile"></span>
+        <h2 class="section-title-mobile">תיק עבודות</h2>
+    </div>
+    <div class="portfolio-image-container-mobile">
+        <img src="path/to/portfolio-image-1.jpg" alt="פרויקט נגרות 1" class="portfolio-main-image-mobile">
+    </div>
+</section>
+
+<section class="portfolio-section-mobile" id="portfolio-2">
+    <div class="section-header-mobile">
+        <span class="vertical-line-mobile"></span>
+        <h2 class="section-title-mobile">תיק עבודות</h2>
+    </div>
+    <div class="portfolio-image-container-mobile">
+        <img src="path/to/portfolio-image-2.jpg" alt="פרויקט נגרות 2" class="portfolio-main-image-mobile">
+    </div>
+</section>
+
+<!-- Continue for all 10 portfolio sections -->
+CSS Changes for Mobile (in style.css):
+
+css
+/* MOBILE-FIRST PORTFOLIO SECTIONS */
+.portfolio-section-mobile {
+    height: 100vh;
+    width: 100%;
+    background-color: #111;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 40px 20px;
+    direction: rtl;
+}
+
+.section-header-mobile {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    z-index: 10;
+}
+
+.vertical-line-mobile {
+    width: 2px;
+    height: 30px;
+    background-color: white;
+    margin-left: 15px;
+}
+
+.section-title-mobile {
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.portfolio-image-container-mobile {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: 100px;
+}
+
+.portfolio-main-image-mobile {
+    width: 90%;
+    height: 70%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* REMOVE old carousel CSS */
+/* Delete: .carousel, .carousel-arrows, .carousel-dots, etc. */
+
+/* Smooth scrolling between sections */
+html {
+    scroll-behavior: smooth;
+}
+JavaScript Changes (in script.js):
+
+javascript
+// REMOVE all carousel/slider JavaScript functions
+// REMOVE arrow click handlers
+// REMOVE dot navigation handlers
+// KEEP all other website functionality intact
+
+// Optional: Add smooth scroll enhancement
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('תיק עבודות sections loaded');
+});
+IMPLEMENTATION STEPS:
+
+Locate the current "תיק עבודות" carousel section in HTML
+
+Replace it with ten individual full-height sections
+
+Add mobile-optimized CSS styling
+
+Remove only the carousel-related JavaScript
+
+Test vertical scrolling between the ten portfolio sections on mobile
+
+Ensure Hebrew text and RTL layout work correctly
+
+MOBILE FOCUS:
+
+Each section takes full mobile screen height (100vh)
+
+Header positioned correctly for Hebrew RTL layout
+
+Touch-friendly scrolling between sections
+
+No navigation arrows or dots needed
+
+Immersive image display optimized for mobile screens

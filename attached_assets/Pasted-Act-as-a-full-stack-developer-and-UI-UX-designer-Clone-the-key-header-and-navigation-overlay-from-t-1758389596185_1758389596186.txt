@@ -1,0 +1,53 @@
+Act as a full-stack developer and UI/UX designer. Clone the key header and navigation overlay from the reference images attached, to perfectly match the modern, white-font, high-impact style for a Hebrew carpentry business "גרנות עיצובים". All content and layout must be right-to-left (RTL), single-page, and in Hebrew only. Use only HTML, CSS, and vanilla JavaScript. All work is in index.html, style.css, and script.js.
+
+**Key Section Instructions:**
+
+1. **Header**
+   * The header background must be solid black.
+   * Font color for logo and all header text must be clean, crisp white (#FFF); NO black fonts anywhere.
+   * Position the business name "גרנות עיצובים" on the top-right (RTL).
+   * Add only the elegant square navigation icon (reference: attached 7th image), deliberately omitting the three-lines hamburger icon.
+   * Style the icon with a white border, visual "hole punch" effect (see reference image), visually symmetrical and minimal.
+
+2. **Square Navigation Icon & Overlay**
+   * Clicking the square icon opens a full-screen, dark overlay (90% opacity). Overlay animates smoothly over 300ms.
+   * Inside the overlay, display four menu items vertically centered, in the order:
+      1. תיק עבודות (Portfolio) – leads to images carousel/gallery (see next step).
+      2. שירותים (Services) – leads to services section (scrolls or overlays).
+      3. אודות (About) – displays about section below (single image).
+      4. צרו קשר (Contact) – displays contact info below (single image).
+   * All menu items use bold white font, with substantial spacing between them.
+   * Overlay closes via a clear "X" button (top-left, white, minimal), or ESC key.
+
+3. **Portfolio: Images Carousel**
+   * When "תיק עבודות" is selected, a carousel-style gallery appears in the overlay, modeled after the attached fourth and fifth images – horizontal sliding of 3-6 high-res carpentry images, each with a caption beneath in white.
+   * Default: Show 3 images, with arrow navigation left/right, seamless looping, cross-fade or slide animation.
+   * Each image covers the majority of overlay width, centered and well-spaced.
+   * Portfolio overlay does NOT link to additional pages – all on the same overlay.
+
+4. **Services, About, Contact**
+   * For "שירותים," show a single clean image with overlaid white caption (as reference sixth image).
+   * For "אודות," show a single image below with a minimal description in white beneath.
+   * For "צרו קשר," show a single clean image with contact details overlaid (see last attached image) – phone icon + number, email icon + address, all centered in white.
+
+5. **General Styling**
+   * Ensure all sections are styled for mobile-first, with absolutely crisp fonts, maximum contrast, and generous spacing.
+   * All overlay content centered vertically and horizontally, full responsiveness, never overflowing.
+   * No extra navigation or scrolling hints; user will scroll main page alone.
+   * No additional pages, no data storage.
+
+6. **Accessibility & Best Practices**
+   * Make all icons keyboard accessible.
+   * Overlay closes on ESC and when clicking outside menu.
+   * High performance, minimal code footprint – leverage CSS transitions/animations, SVG for icons.
+
+**Section-by-Section Workflow:**
+* Build and style only the header first, matching attached image for typography and icon.
+* Next, implement square navigation icon with overlay, styled exactly by attached reference.
+* Then, implement the overlay content for each menu item, focusing on images carousel (Portfolio), and clean image-based panels for other sections.
+* Polish each overlay/menu for spacing, font, colors, icons.
+
+All images should use placeholders as needed; captions and contact info also as placeholders. All site is RTL Hebrew only.
+
+Provide code for index.html, style.css, script.js.
+

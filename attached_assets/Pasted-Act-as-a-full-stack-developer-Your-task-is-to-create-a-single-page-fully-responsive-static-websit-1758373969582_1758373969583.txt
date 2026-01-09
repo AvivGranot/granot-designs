@@ -1,0 +1,26 @@
+Act as a full-stack developer. Your task is to create a single-page, fully responsive, static website for a carpentry business named "גרנות עיצובים".
+
+The design, layout, and user experience (UX/UI) should be a direct clone of https://minaleandmann.com/, but with the specific modifications and constraints listed below. The final output should be three files: index.html, style.css, and script.js.
+
+**Project Constraints & Modifications:**
+
+1.  **Technology:** Use only HTML, CSS, and vanilla JavaScript. Do not use any backend languages, databases (like SQL), or store any user data. The site must be purely static.
+
+2.  **Language & Layout:** The website must be entirely in Hebrew. The entire layout must be adapted for Right-to-Left (RTL) orientation. This means all elements, text, and navigation should be mirrored from the original Left-to-Right site. The business name "גרנות עיצובים" should appear where "Minale + Mann" does.
+
+3.  **Structure:** This will be a single-page website. All sections must be on the main `index.html` page, with smooth scrolling navigation between them. The required sections, in order, are: Hero, Services, Portfolio, About, and Contact.
+
+4.  **Navigation Bar:**
+    *   The top navigation bar should contain the business name "גרנות עיצובים" on the right side (in RTL).
+    *   The square navigation icon (hamburger menu) should be on the left side.
+    *   When the square icon is clicked, it must open a full-screen overlay menu that clones the UI/UX from the reference site.
+    *   Inside this overlay, replace the "Services" list with a visual "Portfolio" grid, exactly like the one that appears when you click 'Services' on the reference site. Use placeholder images for this grid.
+
+5.  **Section-Specific Instructions:**
+    *   **Hero Section:** This is the most critical feature. Create a full-screen, dynamic, and seamless image carousel that automatically transitions between high-quality images. Use a subtle and elegant cross-fade effect. This section must NOT support video, only still images. Use 3-4 high-resolution placeholder images. The goal is a high-impact "wow" effect.
+    *   **Services Section:** Add a section with the title "שירותים". Use placeholder text to describe 3-4 different carpentry services offered.
+    *   **Portfolio Section:** Add a section with the title "תיק עבודות". Create a simple image grid to showcase past work. Use placeholder images.
+    *   **About Section:** Add a section with the title "אודות". It should have a simple layout for text and a picture describing the family business.
+    *   **Contact Section:** Add a section with the title "צור קשר". Do NOT create a contact form. Simply display placeholder text for a phone number, email address, and physical address.
+
+6.  **Excluded Sections:** Do not include the "Publications" or "Create & Construct" sections from the original website.

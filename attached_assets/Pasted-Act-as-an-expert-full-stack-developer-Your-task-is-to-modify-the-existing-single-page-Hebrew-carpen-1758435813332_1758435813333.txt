@@ -1,0 +1,35 @@
+Act as an expert full-stack developer. Your task is to modify the existing single-page Hebrew carpentry website, "גרנות עיצובים," by replacing the current navigation icon with a more elegant and precise version.
+
+**Context:**
+- The current navigation icon is a square with two horizontal lines inside it (see second attached image).
+- The desired navigation icon is a clean, minimalist, hollow rectangle (see first attached image). This new icon is the one used on the reference website, minaleandmann.com.
+
+**Detailed Instructions:**
+
+1.  **Locate and Analyze the Current Icon:**
+    *   Examine the `index.html` and `style.css` files to identify how the current navigation icon is implemented. It may be an SVG, a `<div>` with borders, or an image.
+    *   The current icon is located in the header, on the top-left, to align with the Right-to-Left (RTL) layout.
+
+2.  **Remove the Current Icon:**
+    *   Delete the HTML element and any associated CSS rules that create the current icon (the square with two lines). Ensure that it is completely removed from the header.
+
+3.  **Implement the New, Correct Icon:**
+    *   The new icon must be a perfect visual clone of the first attached image—a simple, hollow rectangle with a clean white border.
+    *   **Implementation Method:** Use a `<div>` element with CSS properties for the best result.
+        *   In `index.html`, add a new `<div id="nav-icon-replacement"></div>` in the exact same position as the old icon.
+        *   In `style.css`, create a new rule for `#nav-icon-replacement`.
+        *   Apply the following styles to create the hollow rectangle:
+            *   `width`: (e.g., 30px)
+            *   `height`: (e.g., 18px)
+            *   `border`: `2px solid white;`
+            *   `background-color`: `transparent;`
+            *   `cursor`: `pointer;`
+            *   Add a subtle `transition` for a smooth hover effect (e.g., `transition: border-color 0.3s ease;`).
+
+4.  **Final Polish and Verification:**
+    *   Ensure the new icon is perfectly aligned within the header, maintaining the correct spacing from the page edges and the business name ("גרנות עיצובים").
+    *   Verify that the icon's click functionality is preserved. The same JavaScript function that opened the overlay menu with the old icon should now be triggered by clicking this new `div`.
+    *   Confirm the icon is fully responsive and maintains its clean, elegant appearance on both mobile and desktop views. The border thickness and size should look proportional on all screens.
+
+**Final Deliverables:**
+Modify and provide the updated `index.html`, `style.css`, and `script.js` files with the new, correct navigation icon fully implemented and functional.

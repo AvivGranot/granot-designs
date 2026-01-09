@@ -1,0 +1,23 @@
+Act as a full-stack developer. I need to update my existing website project for "גרנות עיצובים" by adding two missing features. Please modify the current `index.html`, `style.css`, and `script.js` files accordingly.
+
+**Task 1: Add the Square Navigation and Portfolio Overlay**
+
+1.  **Create the Icon:** In the header of the `index.html` file, add a square navigation icon (a "hamburger" menu) to the top-left corner to align with the Right-to-Left (RTL) layout.
+2.  **Implement Overlay Functionality:** Use JavaScript in `script.js` to make the icon functional. When a user clicks the icon, it must open a full-screen, dark overlay. Clicking it again (or an 'X' close button) should hide the overlay.
+3.  **Build the Portfolio Grid:** Inside the overlay, the main content should be the portfolio.
+    *   Add a title: "תיק עבודות".
+    *   Create a responsive image grid that perfectly clones the UI/UX from the reference image provided [1].
+    *   Use high-quality placeholder images and placeholder text for the grid items.
+4.  **Styling:** In `style.css`, style the icon, the overlay, and the portfolio grid to match the site's minimalist and modern aesthetic. Ensure it is fully responsive and works on all screen sizes.
+
+**Task 2: Add the "Contact" (צרו קשר) Section**
+
+1.  **Create the Section:** At the bottom of the `index.html` file, create a new `<section>` with the `id="contact"`.
+2.  **Add Content:** Inside this section, add the following elements:
+    *   A main heading (`<h2>`): "צרו קשר".
+    *   A subheading with placeholder text like: "נשמח לעמוד לשירותכם לכל שאלה וייעוץ".
+    *   A phone icon followed by a placeholder phone number (e.g., 05X-XXX-XXXX).
+    *   An email icon followed by a placeholder email address (e.g., email@example.com).
+3.  **Styling:** In `style.css`, style this section to be clean, centered, and easy to read. Use the basic layout from the provided reference image as a guide for structure [2]. Ensure there is adequate spacing and the design is consistent with the rest of the site.
+
+Please apply these changes directly to the existing files.

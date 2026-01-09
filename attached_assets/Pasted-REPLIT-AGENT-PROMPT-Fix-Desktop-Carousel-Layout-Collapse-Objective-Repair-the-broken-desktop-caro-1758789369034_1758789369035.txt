@@ -1,0 +1,63 @@
+REPLIT AGENT PROMPT: Fix Desktop Carousel Layout Collapse
+Objective
+Repair the broken desktop carousel layout. The goal is to make the desktop carousel function and appear like the mobile version, where each image is a distinct slide in a horizontal track.
+
+Problem Analysis
+Current State (Desktop): All carousel images are being compressed and displayed vertically within the space of a single slide, as shown in the attached screenshot. This indicates a critical CSS layout issue.
+
+Likely Cause: On desktop screen sizes, the .gallery-track container or the .gallery-slide items are missing the correct width and flex properties, causing them to collapse instead of aligning horizontally.
+
+Crucial Constraint: The mobile version layout must not be changed. All fixes must apply only to screens wider than 1024px.
+
+Technical Implementation
+This task requires adding or correcting the CSS specifically for desktop screen sizes.
+
+1. Locate the Stylesheet
+Find the main CSS file (style.css or similar) where the carousel styles are defined.
+
+2. Add a Desktop-Specific Media Query
+Wrap the following CSS rules inside a media query to ensure they only apply to desktop. Do not alter any existing styles outside of this media query.
+
+css
+@media (min-width: 1024px) {
+
+  /* Ensure the main track is a flex container */
+  .gallery-track {
+    display: flex;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Hide scrollbar for a cleaner look */
+  }
+
+  .gallery-track::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari */
+  }
+
+  /* 
+    Set a fixed, non-shrinkable width for each slide.
+    This is the most critical part of the fix.
+    We'll use the same peek layout as on mobile.
+  */
+  .gallery-slide {
+    flex: 0 0 60vw;      /* Each slide takes 60% of the viewport width */
+    max-width: 60vw;    /* Enforce the max width */
+    height: 70vh;         /* Set an appropriate height for desktop */
+    scroll-snap-align: center; /* Center the active slide */
+  }
+  
+  /* Add padding to the container to create the peek effect */
+  .horizontal-gallery {
+    padding-left: 20vw;
+    padding-right: 20vw;
+  }
+}
+Testing and Verification Steps
+Implement the CSS: Add the complete media query block to the end of the stylesheet.
+
+Verify Desktop View: Refresh the page on a desktop browser. The carousel should now display correctly, with slides laid out horizontally in the "peek" formation (one main slide in the center and parts of the adjacent slides visible).
+
+Test Desktop Scrolling: Confirm that you can scroll horizontally through all the slides using your mouse wheel or by dragging.
+
+CRITICAL - Verify Mobile View: Resize the browser window to a mobile width (less than 1024px). The mobile layout must look and function exactly as it did before, with no changes.
+
+Summary for Agent: The primary task is to fix the desktop CSS for .gallery-track and .gallery-slide by placing them inside a @media (min-width: 1024px) query. This will force the slides to align horizontally on desktop without affecting the already-working mobile design.

@@ -1,0 +1,251 @@
+TASK:
+Create ten separate "תיק עבודות" sections that flow horizontally in a seamless carousel, then change ALL other sections (שירותים, אודות, צור קשר) to use the layout shown in the third attached image - with the section title overlaid on the left side of the image.
+
+PROBLEM:
+Portfolio sections need to be ten separate sections (not one container) but arranged to scroll horizontally like a carousel
+
+All other sections need to match the new layout style (third image) with title overlaid on the image
+
+SOLUTION:
+Create ten individual "תיק עבודות" sections with special CSS to make them scroll horizontally as one seamless experience, then update all other sections to use the overlay text layout.
+
+NEW CODE:
+HTML Changes (in index.html):
+
+xml
+<!-- PORTFOLIO: Ten separate sections with same name -->
+<div class="portfolio-carousel-wrapper">
+    <section class="portfolio-section-carousel" id="portfolio-1">
+        <div class="section-header-overlay">
+            <span class="vertical-line-overlay"></span>
+            <h2 class="section-title-overlay">תיק עבודות</h2>
+        </div>
+        <div class="portfolio-image-full">
+            <img src="path/to/image1.jpg" alt="פרויקט 1" class="full-image">
+        </div>
+    </section>
+
+    <section class="portfolio-section-carousel" id="portfolio-2">
+        <div class="section-header-overlay">
+            <span class="vertical-line-overlay"></span>
+            <h2 class="section-title-overlay">תיק עבודות</h2>
+        </div>
+        <div class="portfolio-image-full">
+            <img src="path/to/image2.jpg" alt="פרויקט 2" class="full-image">
+        </div>
+    </section>
+
+    <!-- Continue for all 10 portfolio sections -->
+</div>
+
+<!-- SERVICES SECTION: New overlay layout -->
+<section class="section-overlay-style" id="services">
+    <div class="section-content-overlay">
+        <div class="text-overlay-left">
+            <h2 class="main-title-overlay">שירותים</h2>
+            <p class="description-overlay">אנו מתמחים בעיצוב פתרונות<br>איכותיים עם דגש על<br>פרטיות, יצירתיות טכנולוגיה עידו<br>קביעות</p>
+        </div>
+        <div class="image-overlay-right">
+            <img src="path/to/services-image.jpg" alt="שירותים" class="overlay-image">
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT SECTION: New overlay layout -->
+<section class="section-overlay-style" id="about">
+    <div class="section-content-overlay">
+        <div class="text-overlay-left">
+            <h2 class="main-title-overlay">אודות</h2>
+            <p class="description-overlay">תיאור על החברה<br>והמומחיות שלנו<br>בתחום הנגרות</p>
+        </div>
+        <div class="image-overlay-right">
+            <img src="path/to/about-image.jpg" alt="אודות" class="overlay-image">
+        </div>
+    </div>
+</section>
+CSS Changes (in style.css):
+
+css
+/* PORTFOLIO CAROUSEL: Horizontal scrolling sections */
+.portfolio-carousel-wrapper {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.portfolio-carousel-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.portfolio-section-carousel {
+    flex: 0 0 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-header-overlay {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+}
+
+.vertical-line-overlay {
+    width: 2px;
+    height: 30px;
+    background-color: white;
+    margin-left: 15px;
+}
+
+.section-title-overlay {
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.portfolio-image-full {
+    width: 90%;
+    height: 70%;
+}
+
+.full-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* NEW OVERLAY SECTIONS LAYOUT */
+.section-overlay-style {
+    height: 100vh;
+    width: 100%;
+    background: #111;
+    position: relative;
+    direction: rtl;
+}
+
+.section-content-overlay {
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+
+.text-overlay-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 10;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-title-overlay {
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.description-overlay {
+    color: white;
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.image-overlay-right {
+    width: 100%;
+    height: 100%;
+}
+
+.overlay-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mobile touch improvements */
+.portfolio-carousel-wrapper {
+    -webkit-overflow-scrolling: touch;
+}
+JavaScript Changes (in script.js):
+
+javascript
+// ADD smooth horizontal scrolling for portfolio
+document.addEventListener('DOMContentLoaded', function() {
+    const portfolioWrapper = document.querySelector('.portfolio-carousel-wrapper');
+    
+    if (portfolioWrapper) {
+        // Enable smooth scrolling
+        portfolioWrapper.style.scrollBehavior = 'smooth';
+        
+        // Optional: Add touch/swipe improvements
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        portfolioWrapper.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - portfolioWrapper.offsetLeft;
+            scrollLeft = portfolioWrapper.scrollLeft;
+        });
+
+        portfolioWrapper.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        portfolioWrapper.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        portfolioWrapper.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - portfolioWrapper.offsetLeft;
+            const walk = (x - startX) * 2;
+            portfolioWrapper.scrollLeft = scrollLeft - walk;
+        });
+    }
+});
+IMPLEMENTATION STEPS:
+
+Create ten separate portfolio sections inside a horizontal scrolling wrapper
+
+Apply overlay text layout to all other sections (services, about, contact)
+
+Add horizontal scrolling CSS and JavaScript
+
+Test smooth horizontal swiping through portfolio sections
+
+Verify other sections match the third image layout style
+
+KEY FEATURES:
+
+Ten individual "תיק עבודות" sections in horizontal carousel
+
+Seamless horizontal scrolling between portfolio sections
+
+All other sections use overlay text layout from third image
+
+Touch-friendly navigation on mobile
+
+Each portfolio section maintains individual identity while flowing together

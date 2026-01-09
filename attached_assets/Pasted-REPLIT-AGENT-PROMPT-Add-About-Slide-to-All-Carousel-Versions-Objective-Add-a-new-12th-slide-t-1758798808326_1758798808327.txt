@@ -1,0 +1,81 @@
+REPLIT AGENT PROMPT: Add "About" Slide to All Carousel Versions
+Objective:
+Add a new, 12th slide to both the desktop and mobile carousel components.
+The slide contains only a title and a text box (no image).
+Do NOT modify the layout or design of any other slides.
+
+Slide details:
+
+Title: "אודותינו"
+
+Text box content:
+בגרנות עיצובים אנחנו מאמינים כי 'עיצוב משפיע' - דוב גרנות, מייסד שותף, ובוגר בצלאל אקדמיה לאמנות ועיצוב פנים.
+
+(space of two lines)
+
+גרנות עיצובים הינה נגריית בוטיק עם למעלה משלושים שנות ניסיון, ואלפי פרויקטים שנמסרו במרוצת השנים. אנו מתמחים ברהיטי פנים: מטחים, ארונות קיר, חדרי אמבטיה, חדרי שינה וחיפוי קיר.
+
+(space of two lines)
+
+אנו עובדים בשיתוף פעולה כדי לאפשר לתהליך היצירתי להתפתח באופן אורגני, לצד עיצוב קפדני של אלמנטים ברמת המאקרו והמיקרו. האתוס שלנו הוא לספק גישה משולבת וקוהרנטית לנגרות ועיצוב פנים.
+
+(space of two lines)
+
+נשמח שתיצרו איתנו קשר לקבלת הצעת מחיר, וכך או כך, מאחלים לכם את מעבר דירה נעים ורגוע.
+
+(space of one line)
+
+בברכה,
+
+רו"ח נורית גרנות
+מנכ"לית ומייסדת שותפה
+
+Instructions for Agent:
+
+Modify the slides array:
+
+Add a new object at the end of the carousel slides array (for both desktop and mobile versions) representing the "About" slide.
+
+The object should have:
+
+A title field set to "אודותינו"
+
+An html or text field with the requested content, using <br /><br /> for 2-line spaces and <br /> for single spaces.
+
+Carousel rendering:
+
+For the "About" slide, render only the Hebrew title and text box. No image should be present.
+
+Make sure the slide looks clean and readable in both desktop and mobile layouts. Use a white/light box or on a dark background, as in the reference site.
+
+Priority:
+
+Do NOT affect navigation, scrolling, or other slide layouts.
+
+The new slide must appear as the last slide in the carousel, after all existing slides, for both desktop and mobile views.
+
+Sample JSX for "About" slide (suggestion):
+
+jsx
+<div className="gallery-slide about-slide">
+  <div className="about-content">
+    <h2>אודותינו</h2>
+    <div className="about-text">
+      בגרנות עיצובים אנחנו מאמינים כי 'עיצוב משפיע' - דוב גרנות, מייסד שותף, ובוגר בצלאל אקדמיה לאמנות ועיצוב פנים.<br /><br />
+      גרנות עיצובים הינה נגריית בוטיק עם למעלה משלושים שנות ניסיון, ואלפי פרויקטים שנמסרו במרוצת השנים. אנו מתמחים ברהיטי פנים: מטחים, ארונות קיר, חדרי אמבטיה, חדרי שינה וחיפוי קיר.<br /><br />
+      אנו עובדים בשיתוף פעולה כדי לאפשר לתהליך היצירתי להתפתח באופן אורגני, לצד עיצוב קפדני של אלמנטים ברמת המאקרו והמיקרו. האתוס שלנו הוא לספק גישה משולבת וקוהרנטית לנגרות ועיצוב פנים.<br /><br />
+      נשמח שתיצרו איתנו קשר לקבלת הצעת מחיר, וכך או כך, מאחלים לכם את מעבר דירה נעים ורגוע.<br />
+      <br />
+      בברכה,<br />
+      <br />
+      רו\"ח נורית גרנות<br />
+      מנכ\"לית ומייסדת שותפה
+    </div>
+  </div>
+</div>
+Recommended (for styling):
+
+In CSS, add a .about-slide style to control spacing, text alignment, and max width.
+
+Do not make any other layout, style, or navigation changes.
+Only add the "About" slide as described, with correct line-spacing between sections as specified.

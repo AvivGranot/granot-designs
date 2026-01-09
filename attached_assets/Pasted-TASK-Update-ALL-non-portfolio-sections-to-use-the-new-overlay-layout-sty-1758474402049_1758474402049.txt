@@ -1,0 +1,219 @@
+TASK:
+Update ALL non-portfolio sections (שירותים, אודות, צור קשר) to use the new overlay layout style shown in the first two attached images, replacing the current centered layout shown in the third and fourth attached images.
+
+PROBLEM:
+The current sections have a centered layout with content in the middle of the screen. The new desired layout has the text overlaid on the left side of a full-screen background image, creating a more immersive and modern design.
+
+SOLUTION:
+Convert all sections to use the overlay layout where text appears on the left side with a semi-transparent dark background, and the main image fills the entire section as a background.
+
+NEW CODE:
+HTML Changes (in index.html):
+
+xml
+<!-- SERVICES SECTION: Update to overlay layout -->
+<section class="section-overlay-layout" id="services">
+    <div class="background-image-section">
+        <img src="path/to/services-background.jpg" alt="שירותים" class="full-background-image">
+    </div>
+    <div class="text-overlay-container">
+        <div class="section-header-simple">
+            <span class="small-vertical-line"></span>
+            <span class="small-section-label">תיק עבודות</span>
+        </div>
+        <h2 class="overlay-main-title">שירותים</h2>
+        <p class="overlay-description">
+            נשמח לעמוד לשירותכם לכל שאלה<br>
+            מוזמן על שגלמות הבית<br>
+            החמימים בעיצוב איכות<br>
+            דיירת החדירים מהמוכר איכות<br>
+            מקצועיות
+        </p>
+    </div>
+</section>
+
+<!-- ABOUT SECTION: Update to overlay layout -->
+<section class="section-overlay-layout" id="about">
+    <div class="background-image-section">
+        <img src="path/to/about-background.jpg" alt="אודות" class="full-background-image">
+    </div>
+    <div class="text-overlay-container">
+        <div class="section-header-simple">
+            <span class="small-vertical-line"></span>
+            <span class="small-section-label">תיק עבודות</span>
+        </div>
+        <h2 class="overlay-main-title">אודותינו</h2>
+        <p class="overlay-description">
+            בית מלאכה משפחתי עם<br>
+            מוזמן על שגלמות הבית<br>
+            החמימים בעיצוב איכות<br>
+            דיירת החדירים מהמוכר איכות<br>
+            מקצועיות
+        </p>
+    </div>
+</section>
+
+<!-- CONTACT SECTION: Update to overlay layout -->
+<section class="section-overlay-layout" id="contact">
+    <div class="background-image-section">
+        <img src="path/to/contact-background.jpg" alt="צור קשר" class="full-background-image">
+    </div>
+    <div class="text-overlay-container">
+        <div class="section-header-simple">
+            <span class="small-vertical-line"></span>
+            <span class="small-section-label">תיק עבודות</span>
+        </div>
+        <h2 class="overlay-main-title">צור קשר</h2>
+        <p class="overlay-description">
+            נשמח לעמוד לשירותכם לכל הבקשים<br>
+            שלכם<br>
+            להציג פתרונות מהסדרים<br>
+            במהיר עובדים
+        </p>
+        <div class="contact-info">
+            <p class="phone-info">052-1234567 :מכירי</p>
+            <p class="email-info">info@granot-design.co.il</p>
+        </div>
+    </div>
+</section>
+CSS Changes (in style.css):
+
+css
+/* NEW OVERLAY LAYOUT FOR ALL SECTIONS */
+.section-overlay-layout {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    direction: rtl;
+}
+
+.background-image-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.full-background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text-overlay-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 10;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section-header-simple {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.small-vertical-line {
+    width: 1px;
+    height: 20px;
+    background-color: white;
+    margin-left: 10px;
+}
+
+.small-section-label {
+    color: white;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.overlay-main-title {
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    line-height: 1.2;
+}
+
+.overlay-description {
+    color: white;
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.85;
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    margin-top: 30px;
+}
+
+.phone-info, .email-info {
+    color: white;
+    font-size: 14px;
+    margin: 8px 0;
+    opacity: 0.9;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+    .text-overlay-container {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 40px 20px;
+    }
+    
+    .overlay-main-title {
+        font-size: 24px;
+    }
+    
+    .overlay-description {
+        font-size: 13px;
+    }
+}
+IMPLEMENTATION STEPS:
+
+REPLACE the current services, about, and contact section HTML with the new overlay structure
+
+ADD the new CSS for overlay layout styling
+
+REMOVE old centered layout CSS rules for these sections
+
+UPDATE background images for each section
+
+TEST the overlay text positioning and readability
+
+ENSURE mobile responsiveness works correctly
+
+KEY FEATURES:
+
+Full-screen background images for each section
+
+Text overlaid on right side (RTL) with dark transparent background
+
+Small section header with vertical line and label
+
+Large main title and descriptive text
+
+Contact section includes phone and email information
+
+Mobile-responsive design with full-width overlay on smaller screens
+
+SECTIONS TO UPDATE:
+
+שירותים (Services)
+
+אודותינו (About)
+
+צור קשר (Contact)

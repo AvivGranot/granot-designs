@@ -1,0 +1,119 @@
+Fantastic, the view-switching logic is in place. Now, let's build out the `.main-content-view` by creating a beautiful portfolio image carousel. We will use the Swiper.js library for this.
+
+**Objective:**
+Integrate Swiper.js and use it to create a responsive, touch-friendly carousel displaying the 13 portfolio images. We will also add the structural containers for the final content sections below the carousel.
+
+**Step-by-Step Instructions:**
+
+**1. Add Swiper.js Library to the Project:**
+   - In `index.html`, add the Swiper.js CSS file inside the `<head>` tag:
+     ```html
+     <link rel="stylesheet" href="[https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css](https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css)" />
+     ```
+   - In `index.html`, add the Swiper.js JavaScript file just before the closing `</body>` tag, but *before* your own `script.js` file:
+     ```html
+     <script src="[https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js](https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js)"></script>
+     ```
+
+**2. Update HTML in `.main-content-view`:**
+   - In `index.html`, find the `<div class="main-content-view">`.
+   - **Remove the placeholder `<h2>` tag** we added in Phase 1.
+   - Inside `.main-content-view`, add the required HTML structure for the Swiper carousel and the placeholders for our next sections. It should look like this:
+
+     ```html
+     <div class="main-content-view">
+         <div class="swiper portfolio-carousel">
+             <div class="swiper-wrapper">
+                 </div>
+             <div class="swiper-pagination"></div>
+             <div class="swiper-button-prev"></div>
+             <div class="swiper-button-next"></div>
+         </div>
+
+         <section id="services" class="content-section">
+             <h2>שירותינו</h2>
+             </section>
+
+         <section id="about" class="content-section">
+             <h2>אודות</h2>
+             </section>
+
+         <section id="contact" class="content-section">
+             <h2>צרו קשר</h2>
+             </section>
+     </div>
+     ```
+
+**3. Generate the Carousel Slides:**
+   - Now, inside the `<div class="swiper-wrapper">` you just added, please programmatically generate 13 `<div class="swiper-slide">` elements.
+   - For each slide, add an `<img>` tag. The `src` attribute should point to the portfolio images, from `portfolio1` to `portfolio13`.
+   - **IMPORTANT:** You must correctly reference the images. I have uploaded them as `portfolio1.jpg`, `portfolio2.png`, etc. Please check for both `.jpg` and `.png` extensions for each image name and use the correct one.
+   - The generated slides should look like this pattern:
+     ```html
+     <div class="swiper-slide"><img src="portfolio1.jpg" alt="Portfolio Image 1"></div>
+     <div class="swiper-slide"><img src="portfolio2.png" alt="Portfolio Image 2"></div>
+     ```
+
+**4. Initialize Swiper in `script.js`:**
+   - Open your `script.js` file.
+   - Inside the `DOMContentLoaded` event listener, after the existing code, add the JavaScript to initialize the Swiper instance.
+
+     ```javascript
+     // Add this new code inside the DOMContentLoaded listener
+     const swiper = new Swiper('.portfolio-carousel', {
+       // Optional parameters
+       loop: true,
+       effect: 'slide', // You can also try 'fade', 'cube', 'coverflow', or 'flip'
+       grabCursor: true,
+       centeredSlides: true,
+       slidesPerView: 'auto',
+       
+       // Autoplay
+       autoplay: {
+         delay: 3000,
+         disableOnInteraction: false,
+       },
+
+       // Pagination
+       pagination: {
+         el: '.swiper-pagination',
+         clickable: true,
+       },
+
+       // Navigation arrows
+       navigation: {
+         nextEl: '.swiper-button-next',
+         prevEl: '.swiper-button-prev',
+       },
+     });
+     ```
+
+**5. Add Basic CSS for the Carousel and Sections:**
+   - In your main CSS file, add the following styles to make the carousel and content sections look good.
+     ```css
+     .portfolio-carousel {
+       width: 100%;
+       height: 70vh; /* Takes up 70% of the viewport height */
+     }
+
+     .swiper-slide img {
+       display: block;
+       width: 100%;
+       height: 100%;
+       object-fit: cover; /* This is key to prevent image stretching */
+     }
+
+     /* Style the navigation arrows and pagination dots to be visible */
+     :root {
+        --swiper-navigation-color: #ffffff;
+        --swiper-pagination-color: #ffffff;
+     }
+
+     .content-section {
+       padding: 40px 20px;
+       text-align: center;
+     }
+     ```
+
+**Summary of Action:**
+Please execute these steps to integrate the Swiper.js library and build the portfolio carousel. The final result should be that when I click the navigation icon, the page transitions to the `main-content-view`, which now displays a fully functional, auto-playing, and swipeable carousel of my 13 portfolio images. Below the carousel, I should see the three headings for the upcoming sections.

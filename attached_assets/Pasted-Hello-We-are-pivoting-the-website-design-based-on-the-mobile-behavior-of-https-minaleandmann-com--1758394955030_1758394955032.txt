@@ -1,0 +1,87 @@
+Hello. We are pivoting the website design based on the mobile behavior of https://minaleandmann.com/. Please discard the previous instructions about a scrolling transition.
+
+**New Objective:**
+Re-architect the website into two distinct views: a "Hero View" that shows on load, and a "Main Content View" that is hidden. The navigation icon will be the ONLY way to switch from the hero to the main content.
+
+**File Analysis:**
+Please analyze my existing `index.html`, CSS, and JavaScript files.
+
+**Step-by-Step Instructions:**
+
+**1. HTML Structure Changes (in `index.html`):**
+   - Wrap the entire current content of the `<body>` in two primary `<div>` containers: `<div class="hero-view">` and `<div class="main-content-view">`.
+   - The **header** and the **hero section** should be moved *inside* the `<div class="hero-view">`.
+   - The `<div class="main-content-view">` will be a container for the portfolio and other sections later. For now, just put a placeholder heading inside it.
+   - The structure should look like this:
+     ```html
+     <body>
+       <div class="hero-view">
+         <header class="site-header">
+           <div class="logo-container">
+             <a href="/">גרנות עיצובים</a>
+           </div>
+           <button class="nav-toggle" aria-label="Toggle navigation">
+             <span class="nav-toggle-bar"></span>
+             <span class="nav-toggle-bar"></span>
+           </button>
+         </header>
+         <main class="hero-content">
+           <h1>בית מלאכה משפחתי לנגרות מעוצבת</h1>
+         </main>
+       </div>
+
+       <div class="main-content-view">
+         <h2 style="padding: 100px 20px; text-align: center;">Main Content Area</h2>
+       </div>
+     </body>
+     ```
+
+**2. CSS Styling Changes (in your main CSS file):**
+   - By default, the main content view should be hidden.
+     ```css
+     .main-content-view {
+       display: none;
+     }
+     ```
+   - When we want to show the main content, we will add a class to the `<body>`. Let's create the styles for that state.
+     ```css
+     body.main-content-active .hero-view {
+       display: none;
+     }
+     body.main-content-active .main-content-view {
+       display: block;
+     }
+     ```
+   - **Crucially, the navigation icon needs to change to an 'X'**. When the menu is open (`body.main-content-active`), we will transform the two bars.
+     ```css
+     body.main-content-active .nav-toggle {
+       /* Optional: Change border or background if you want */
+     }
+
+     body.main-content-active .nav-toggle-bar:first-child {
+       transform: translateY(3.5px) rotate(45deg);
+     }
+
+     body.main-content-active .nav-toggle-bar:last-child {
+       transform: translateY(-3.5px) rotate(-45deg);
+     }
+     ```
+     Ensure the `.nav-toggle-bar` has a `transition` property for a smooth animation, e.g., `transition: transform 0.3s ease-in-out;`
+
+**3. JavaScript Logic (in your `script.js` file):**
+   - If you don't have a `script.js` file, please create one and link it in your `index.html`.
+   - The JavaScript will control the entire logic.
+     ```javascript
+     document.addEventListener('DOMContentLoaded', function() {
+       const navToggle = document.querySelector('.nav-toggle');
+       const body = document.body;
+
+       navToggle.addEventListener('click', function() {
+         body.classList.toggle('main-content-active');
+       });
+     });
+     ```
+   - This script waits for the page to load, finds the navigation button, and adds a `click` listener. When clicked, it adds or removes the `main-content-active` class from the `<body>`, triggering our CSS changes.
+
+**Summary of Action:**
+Please implement this new HTML structure, add the necessary CSS to manage visibility and the icon animation, and create the JavaScript to toggle the `main-content-active` class on the body. The result should be a hero page that, upon clicking the nav icon, disappears and is replaced by the placeholder "Main Content Area", while the nav icon animates into an 'X'. Clicking it again should revert everything.

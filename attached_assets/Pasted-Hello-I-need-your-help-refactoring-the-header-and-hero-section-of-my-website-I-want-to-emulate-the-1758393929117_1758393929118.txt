@@ -1,0 +1,85 @@
+Hello. I need your help refactoring the header and hero section of my website. I want to emulate the design and layout of https://minaleandmann.com/. Please follow these steps carefully.
+
+**Objective:**
+Re-style the header to be a transparent overlay on top of a full-screen hero section and replace the current mobile menu with a new, specific navigation icon.
+
+**File Analysis:**
+Please analyze my existing `index.html` and my primary CSS file. Identify the elements that currently serve as the header, the main hero/banner, and the navigation menu.
+
+**Step-by-Step Instructions:**
+
+**1. HTML Structure Changes (in `index.html`):**
+   - Ensure the header element is a direct child of the `<body>` tag for proper fixed positioning.
+   - The header should contain two main children: a `div` for the logo on the left and a `<button>` for the navigation toggle on the right.
+   - It should look something like this:
+     ```html
+     <body>
+       <header class="site-header">
+         <div class="logo-container">
+           <a href="/">גרנות עיצובים</a>
+         </div>
+         <button class="nav-toggle" aria-label="Open navigation menu">
+           <span class="nav-toggle-bar"></span>
+           <span class="nav-toggle-bar"></span>
+         </button>
+       </header>
+
+       <main>
+         <section class="hero">
+           <h1>בית מלאכה משפחתי לנגרות מעוצבת</h1>
+         </section>
+         </main>
+     </body>
+     ```
+   - Please adapt my existing content to fit this structure.
+
+**2. CSS Styling Changes (in your main CSS file):**
+
+   **a. Site Header (`.site-header`):**
+      - `position: fixed;`
+      - `top: 0;`
+      - `left: 0;`
+      - `width: 100%;`
+      - `padding: 20px;` /* Adjust as needed */
+      - `background-color: transparent;`
+      - `display: flex;`
+      - `justify-content: space-between;`
+      - `align-items: center;`
+      - `z-index: 1000;` /* Make sure it's on top of other content */
+      - `transition: background-color 0.3s ease;` /* For future enhancements */
+
+   **b. Hero Section (`.hero`):**
+      - Set its `height` to `100vh`.
+      - `display: flex;`
+      - `align-items: center;`
+      - `justify-content: center;`
+      - Use one of the images from my current site as a background image. Apply `background-size: cover;`, `background-position: center;`.
+      - Ensure the text is centered and styled nicely.
+
+   **c. Navigation Toggle Icon (`.nav-toggle`):**
+      - This is the most important part. I want a square icon with two horizontal lines inside, exactly like the reference site.
+      - Style the button (`.nav-toggle`):
+        - `width: 40px;` /* Adjust size as needed */
+        - `height: 40px;`
+        - `border: 1px solid white;` /* Or a light grey color */
+        - `background-color: transparent;`
+        - `cursor: pointer;`
+        - `display: flex;`
+        - `flex-direction: column;`
+        - `justify-content: center;`
+        - `align-items: center;`
+        - `gap: 6px;` /* Space between the lines */
+
+      - Style the bars inside the button (`.nav-toggle-bar`):
+        - `display: block;`
+        - `width: 60%;` /* Make them shorter than the button width */
+        - `height: 1px;` /* Very thin lines */
+        - `background-color: white;` /* Or a light grey color */
+        - `transition: transform 0.3s ease;` /* For the 'X' animation later */
+
+**3. Final Check:**
+   - After applying these changes, the page should load with a full-screen background image.
+   - The header with my logo and the new square navigation icon should be floating transparently on top.
+   - For now, clicking the new navigation icon is not expected to do anything.
+
+Please proceed with these modifications.

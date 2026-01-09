@@ -1,0 +1,170 @@
+Hello. We need to perform a major refactor of the website's main content area. The current vertical scroll is incorrect. We need to replicate the horizontal, full-page scrolling experience seen on the desktop version of https://minaleandmann.com/.
+
+**Objective:**
+Transform the `.main-content-view` into a full-screen, horizontal Swiper container. Each slide in this container will represent a major section of the site (Portfolio, Services, About, Contact).
+
+**File Analysis:**
+Please analyze `index.html`, your main CSS file, and `script.js`.
+
+**Step-by-Step Instructions:**
+
+**1. CSS Overhaul (in your main CSS file):**
+   - We need to make the Swiper container and its slides full-screen. This is the most critical step.
+   - **Replace or update** any existing styles for `.portfolio-carousel` and `.content-section` with the following:
+
+   ```css
+   /* Make the main content view a full-screen overlay */
+   .main-content-view {
+     position: fixed; /* Use fixed to cover the whole screen */
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: #1a1a1a; /* A dark background */
+     z-index: 2000; /* Ensure it's on top */
+   }
+
+   /* The main Swiper container now acts as the page */
+   .main-page-swiper {
+     width: 100%;
+     height: 100%;
+   }
+
+   .swiper-slide {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     color: white;
+     /* The background image will be set inline on the element */
+     background-size: cover;
+     background-position: center;
+   }
+
+   /* Add a dark overlay to make text readable */
+   .slide-overlay {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.5);
+     z-index: 1;
+   }
+
+   /* Content inside a slide should be above the overlay */
+   .slide-content {
+     position: relative;
+     z-index: 2;
+     text-align: center;
+     padding: 20px;
+   }
+
+   .slide-content h2 {
+     font-size: 2.5rem;
+     margin-bottom: 10px;
+   }
+
+   .slide-content p {
+     font-size: 1rem;
+     max-width: 500px;
+   }
+   
+   /* Styling for the thin scrollbar at the bottom */
+    .swiper-scrollbar {
+        bottom: 20px !important; /* Position it higher */
+        left: 25% !important;
+        width: 50% !important;
+        height: 2px !important;
+        background: rgba(255, 255, 255, 0.2) !important;
+    }
+    .swiper-scrollbar-drag {
+        background: white !important;
+    }
+2. HTML Refactoring (in index.html):
+
+Find the <div class="main-content-view">.
+
+Delete all of its current contents (the old carousel and the <section> tags).
+
+Replace it with this new structure. We are creating one main Swiper with a slide for each section.
+
+HTML
+
+<div class="main-content-view">
+    <div class="swiper main-page-swiper">
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide portfolio-master-slide">
+                <div class="slide-content">
+                    <h2>תיק עבודות</h2>
+                    <p>מבחר מפרוייקטים שביצענו - מהמטבח הביתי ועד לפרוייקטים מסחריים מורכבים.</p>
+                    </div>
+            </div>
+
+            <div class="swiper-slide" style="background-image: url(services1.jpg);">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2>שירותינו</h2>
+                    <p>פתרונות אחסון חכמים וריהוט מובנה המיועד להתאים בדיוק לחלל שלכם. ארונות קיר, ספריות, יחידות טלוויזיה ועוד - הכל בעבודת יד מקצועית.</p>
+                </div>
+            </div>
+            
+            <div class="swiper-slide" style="background-image: url(about1.jpg);">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2>אודות</h2>
+                    <p>יצירת רהיטים מותאמים אישית בעבודת יד - שולחנות אוכל, ארונות, מיטות ועוד. כל רהיט נבנה באהבה ותשומת לב לפרטים הקטנים.</p>
+                </div>
+            </div>
+
+            <div class="swiper-slide" style="background-image: url(contact1.jpg);">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2>צרו קשר</h2>
+                    <p>טלפון: 052-1234567</p>
+                    <p>אימייל: info@granot-design.co.il</p>
+                    <p>כתובת: רחוב הנגרים 15, תל אביב, ישראל</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+</div>
+3. JavaScript Re-configuration (in script.js):
+
+Find your Swiper initialization code inside the DOMContentLoaded listener.
+
+Delete the entire old const swiper = new Swiper(...) block.
+
+Replace it with this new initialization for our full-page Swiper.
+
+JavaScript
+
+// New Swiper initialization for the main page container
+const mainSwiper = new Swiper('.main-page-swiper', {
+  // Set direction to horizontal
+  direction: 'horizontal',
+  
+  // Ensure only one slide is visible
+  slidesPerView: 1,
+  spaceBetween: 0,
+  
+  // Enable mousewheel control for desktop
+  mousewheel: true,
+  
+  // Enable keyboard control
+  keyboard: {
+     enabled: true,
+  },
+
+  // Add the scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+    hide: false, // Make sure it's always visible
+    draggable: true,
+  },
+});
+Summary of Action:
+Please execute this full refactor. After completion, when a user clicks the main navigation icon, the page should transition to a full-screen, dark-themed view. This view should be a horizontal slider. The user can move between the "Portfolio", "Services", "About", and "Contact" sections by dragging the screen left/right, using the mouse wheel, or dragging the thin scrollbar at the bottom of the page. Each section should be a full-screen slide with its own content and background image.

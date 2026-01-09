@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>גרנות עיצובים - מטבחים וריהוט פנים בעיצוב אישי</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hero-view">
+        <header class="site-header">
+            <div class="logo-container">
+                <a href="/">גרנות עיצובים</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+        </header>
+        <main class="hero-content">
+            <h1>בית מלאכה משפחתי לנגרות מעוצבת</h1>
+        </main>
+    </div>
+
+    <div class="main-content-view">
+        <h2 style="padding: 100px 20px; text-align: center;">Main Content Area</h2>
+    </div>
+
+    <!-- Full-Screen Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay" role="dialog" aria-modal="true" aria-labelledby="nav-title">
+        <!-- Close Button -->
+        <div class="close-btn" id="closeBtn" aria-label="סגור תפריט">&times;</div>
+        
+        <!-- Back to Menu Button -->
+        <div class="back-to-menu-btn" id="backToMenuBtn" aria-label="חזור לתפריט הראשי" style="display: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M19 12H6m6-6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            תפריט ראשי
+        </div>
+        
+        <!-- Navigation Menu -->
+        <nav class="nav-menu" id="navMenu">
+            <h2 id="nav-title" class="sr-only">תפריט ראשי</h2>
+            <ul class="nav-items">
+                <li class="nav-item" data-section="portfolio" tabindex="0" role="button" aria-label="תיק עבודות - לחץ 1">תיק עבודות</li>
+                <li class="nav-item" data-section="services" tabindex="0" role="button" aria-label="שירותים - לחץ 2">שירותים</li>
+                <li class="nav-item" data-section="about" tabindex="0" role="button" aria-label="אודות - לחץ 3">אודות</li>
+                <li class="nav-item" data-section="contact" tabindex="0" role="button" aria-label="צור קשר - לחץ 4">צרו קשר</li>
+            </ul>
+        </nav>
+        
+        <!-- Content Sections -->
+        <div class="content-sections">
+            <!-- Portfolio Carousel -->
+            <section class="section portfolio-section" id="portfolioSection">
+                <div class="carousel-container">
+                    <div class="carousel-wrapper">
+                        <div class="carousel-slide active">
+                            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800" 
+                                 alt="מטבח מותאם אישית עם אלמנטים נגריים מעוצבים" 
+                                 loading="lazy" 
+                                 sizes="(max-width: 768px) 100vw, 1200px"
+                                 srcset="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400 600w,
+                                         https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800 1200w">
+                            <div class="slide-caption">מטבחים מותאמים אישית</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800" alt="ספרייה מובנית בגימור עץ מפואר">
+                            <div class="slide-caption">ריהוט מובנה ייחודי</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1549497538-303791108f95?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800" alt="שולחן אוכל מעץ בעבודת יד מקצועית">
+                            <div class="slide-caption">רהיטים בעבודת יד</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800" alt="מדרגות עץ מעוצבות עם קווים נקיים">
+                            <div class="slide-caption">עבודות נגרות ארכיטקטוניות</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800" alt="ארון בגדים מותאם אישית עם פרטי עיצוב">
+                            <div class="slide-caption">פתרונות אחסון מעוצבים</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800" alt="דק עץ חיצוני עם עיצוב מתוחכם">
+                            <div class="slide-caption">פרוייקטים חיצוניים</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <div class="carousel-nav">
+                        <button class="carousel-btn prev-btn" id="prevBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button class="carousel-btn next-btn" id="nextBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Services Section -->
+            <section class="section services-section" id="servicesSection">
+                <div class="section-content">
+                    <img src="https://images.unsplash.com/photo-1581539250439-c96689b516dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800" alt="בית מלאכה לנגרות מתקדמת">
+                    <div class="content-overlay">
+                        <h2>שירותים</h2>
+                        <p>עיצוב ובנייה של פתרונות נגרות מותאמים אישית.<br>מטבחים, ריהוט מובנה ורהיטים ייחודיים.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- About Section -->
+            <section class="section about-section" id="aboutSection">
+                <div class="section-content">
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800" alt="אמן נגר עובד על יצירת רהיט מעוצב">
+                    <div class="content-overlay">
+                        <h2>אודות</h2>
+                        <p>בית מלאכה משפחתי לנגרות מעוצבת.<br>שלושה דורות של מסורת ומקצועיות.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Contact Section -->
+            <section class="section contact-section" id="contactSection">
+                <div class="section-content">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800" alt="צרו קשר עם גרנות עיצובים">
+                    <div class="content-overlay contact-overlay">
+                        <h2>צרו קשר</h2>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M22 16.92V19a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012 3.18 2 2 0 014 1h2.08a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l2.27-.24a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>052-1234567</span>
+                            </div>
+                            <div class="contact-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>info@granot-design.co.il</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

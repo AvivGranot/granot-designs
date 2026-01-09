@@ -1,0 +1,50 @@
+Act as an expert UI/UX developer. Your task is to completely redesign and re-implement the "תיק עבודות" (Portfolio) section of the single-page Hebrew carpentry website. The current implementation (a simple slider with dots) is incorrect. The goal is to create a high-fidelity clone of the portfolio/services browsing experience from `minaleandmann.com`.
+
+**Core Problem to Solve:**
+The current portfolio is a basic image slider. It needs to be replaced with a full-screen, horizontally-scrolling gallery where each image (or project) is a distinct "stop" or "slide" that fills a significant portion of the viewport.
+
+**Detailed Step-by-Step Instructions:**
+
+1.  **Deconstruct the Current Portfolio:**
+    *   In `index.html`, locate the container for the current portfolio slider. Delete the entire structure, including the images, the container `div`, and the navigation dots.
+    *   In `style.css`, remove all CSS rules related to the old slider (`.slider`, `.dots`, etc.).
+    *   In `script.js`, delete the JavaScript logic that powers the old slider functionality.
+
+2.  **Implement the New Horizontal Scrolling Container:**
+    *   **HTML Structure:**
+        *   Create a main container for the portfolio section: `<section id="portfolio-section" class="horizontal-scroll-container">`.
+        *   Inside this container, create a wrapper that will hold all the portfolio items: `<div class="portfolio-wrapper">`.
+        *   Add ten (10) portfolio items inside the wrapper. Each item will be a `div`: `<div class="portfolio-item">`.
+        *   Inside each `portfolio-item`, place a high-quality placeholder image: `<img src="placeholder.jpg" alt="תיק עבודות 1">`.
+
+    *   **CSS Styling for Horizontal Scrolling:**
+        *   Style the `.horizontal-scroll-container` to have `overflow-x: scroll;` and `display: flex;`. This is the key to enabling the horizontal scroll behavior.
+        *   Style the `.portfolio-wrapper` to also use `display: flex;` to arrange the portfolio items in a row.
+        *   Style each `.portfolio-item` to be full-height and take up a significant portion of the viewport width (e.g., `width: 80vw; height: 90vh;`). This ensures each project image is large and immersive.
+        *   Add `scroll-snap-type: x mandatory;` to the container and `scroll-snap-align: center;` to the items. This will make the scroll "snap" to the center of each image, creating the distinct "stop" effect seen on the reference site.
+        *   Hide the default scrollbar for a cleaner look: `scrollbar-width: none;` (for Firefox) and `::-webkit-scrollbar { display: none; }` (for Chrome/Safari).
+
+3.  **Clone the Section Title and Progress Bar:**
+    *   **Section Title:**
+        *   Replicate the title design from the reference site (see attached image "SERVICES"). It consists of a thin vertical line to the left of the capitalized section title.
+        *   In `index.html`, before the image container, add:
+            ```
+            <div class="section-header">
+                <span class="vertical-line"></span>
+                <h2>תיק עבודות</h2>
+            </div>
+            ```
+        *   In `style.css`, style this header with the correct font, color (white), and spacing. The vertical line should be a `<span>` styled with a `border-left`.
+
+    *   **Scroll Progress Bar:**
+        *   At the bottom of the section, implement a progress bar that shows the user's position within the horizontal gallery.
+        *   This will require JavaScript. As the user scrolls the `.horizontal-scroll-container`, calculate the scroll percentage and update the width of a progress bar `div`.
+
+4.  **Final Polish and Review:**
+    *   Ensure the horizontal scrolling is smooth and works with mouse wheels, trackpads, and touch gestures on mobile devices.
+    *   Confirm that all 10 placeholder images are correctly displayed in the horizontally scrolling gallery.
+    *   Verify that the section title and progress bar are styled correctly and are positioned properly, just like on the reference site.
+    *   The entire implementation must remain responsive and visually appealing on all screen sizes.
+
+**Final Deliverables:**
+Provide the updated `index.html`, `style.css`, and `script.js` files with the new, correctly implemented horizontal scrolling portfolio section.

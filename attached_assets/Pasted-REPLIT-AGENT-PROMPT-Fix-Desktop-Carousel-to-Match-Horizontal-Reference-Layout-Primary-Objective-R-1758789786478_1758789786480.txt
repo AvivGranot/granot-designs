@@ -1,0 +1,91 @@
+REPLIT AGENT PROMPT: Fix Desktop Carousel to Match Horizontal Reference Layout
+Primary Objective
+Repair the broken desktop carousel layout. The current vertical stacking of images must be replaced with a horizontal, multi-image "peek" layout that clones the user experience from minaleandmann.com.
+
+Critical Constraints (Do Not Violate)
+DO NOT CHANGE THE MOBILE VERSION. All modifications MUST be contained within a desktop-specific media query (@media (min-width: 1024px)). The mobile layout is correct and must remain untouched.
+
+DO NOT copy any text from the reference website. This task is purely about the image layout and structure.
+
+DO NOT change any existing JavaScript or HTML rendering logic unless explicitly told to. This is a CSS-only task.
+
+Problem Analysis
+Current State (Desktop): As seen in the provided screenshot, all carousel images are collapsing into a single vertical column instead of a horizontal track. This indicates that the flexbox or grid properties are not being applied correctly on desktop screens.
+
+Desired State (Desktop): The carousel should display three images simultaneously: one large, fully visible image in the center, with partial "peek" views of the previous and next images on either side. This matches the layout of the reference site.
+
+Technical Implementation Steps
+1. Locate the Primary Stylesheet:
+Open the main CSS file for the project (likely style.css or a similar name).
+
+2. Implement Desktop-Specific CSS Overrides:
+Add the following CSS code block to the end of the stylesheet. Wrapping these rules in a media query is the most important step to protect the mobile design.
+
+css
+/* ============================================= */
+/* == DESKTOP CAROUSEL LAYOUT CORRECTION      == */
+/* ============================================= */
+@media (min-width: 1024px) {
+
+  /* 
+   * STEP 1: Define the gallery track as a horizontal flex container.
+   * This forces the slides to sit side-by-side.
+   */
+  .gallery-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    /* Hide the scrollbar for a clean look */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .gallery-track::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  /* 
+   * STEP 2: Give each slide a specific, non-shrinking width.
+   * This is the key to preventing the vertical collapse.
+   * We will make the main slide take up ~60% of the viewport width.
+   */
+  .gallery-slide {
+    flex: 0 0 60vw;
+    width: 60vw;
+    height: 70vh; /* You can adjust this height as needed */
+    scroll-snap-align: center; /* This ensures a slide snaps to the center */
+  }
+
+  /* 
+   * STEP 3: Add padding to the parent container.
+   * This creates the empty space on the sides that allows the adjacent
+   * slides to "peek" into view. 
+   * (100vw - 60vw) / 2 = 20vw padding on each side.
+   */
+  .horizontal-gallery {
+    padding-left: 20vw;
+    padding-right: 20vw;
+  }
+}
+Verification and Testing Protocol
+After applying the code, you must perform these checks:
+
+Desktop View:
+
+Refresh the page on a desktop browser.
+
+Expected Result: The carousel should immediately display the "peek" layout with one central image and parts of two others.
+
+Desktop Scrolling:
+
+Use the mouse wheel or drag to scroll the carousel horizontally.
+
+Expected Result: The carousel scrolls smoothly, with each image snapping into the central position.
+
+Mobile View (CRITICAL TEST):
+
+Resize the browser window to a mobile width (e.g., less than 768px).
+
+Expected Result: The mobile layout must be completely unchanged. It should still display one full-slide image at a time. If it has been affected, the fix has failed.
+
+Final Instruction for Agent: Your task is to apply these precise CSS rules within a desktop media query to fix the broken horizontal layout. The highest priority is to avoid any impact on the existing mobile design.

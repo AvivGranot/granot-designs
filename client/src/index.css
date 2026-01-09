@@ -1,0 +1,1217 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(40, 25%, 97%);
+  --foreground: hsl(0, 0%, 10%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(0, 0%, 10%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(0, 0%, 10%);
+  --primary: hsl(0, 0%, 17%);
+  --primary-foreground: hsl(40, 25%, 97%);
+  --secondary: hsl(28, 75%, 19%);
+  --secondary-foreground: hsl(40, 25%, 97%);
+  --muted: hsl(0, 0%, 91%);
+  --muted-foreground: hsl(0, 0%, 45%);
+  --accent: hsl(45, 59%, 52%);
+  --accent-foreground: hsl(0, 0%, 10%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --border: hsl(0, 0%, 90%);
+  --input: hsl(0, 0%, 96%);
+  --ring: hsl(45, 59%, 52%);
+  --chart-1: hsl(12, 76%, 61%);
+  --chart-2: hsl(173, 58%, 39%);
+  --chart-3: hsl(197, 37%, 24%);
+  --chart-4: hsl(43, 74%, 66%);
+  --chart-5: hsl(27, 87%, 67%);
+  --sidebar: hsl(0, 0%, 96%);
+  --sidebar-foreground: hsl(0, 0%, 10%);
+  --sidebar-primary: hsl(0, 0%, 17%);
+  --sidebar-primary-foreground: hsl(0, 0%, 98%);
+  --sidebar-accent: hsl(0, 0%, 91%);
+  --sidebar-accent-foreground: hsl(0, 0%, 10%);
+  --sidebar-border: hsl(0, 0%, 85%);
+  --sidebar-ring: hsl(45, 59%, 52%);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: hsl(0, 0%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --card: hsl(0, 0%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --popover: hsl(0, 0%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --primary: hsl(0, 0%, 98%);
+  --primary-foreground: hsl(0, 0%, 9%);
+  --secondary: hsl(0, 0%, 14.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --muted: hsl(0, 0%, 14.9%);
+  --muted-foreground: hsl(0, 0%, 63.9%);
+  --accent: hsl(0, 0%, 14.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --border: hsl(0, 0%, 14.9%);
+  --input: hsl(0, 0%, 14.9%);
+  --ring: hsl(0, 0%, 83.1%);
+  --chart-1: hsl(220, 70%, 50%);
+  --chart-2: hsl(160, 60%, 45%);
+  --chart-3: hsl(30, 80%, 55%);
+  --chart-4: hsl(280, 65%, 60%);
+  --chart-5: hsl(340, 75%, 55%);
+}
+
+/* Two-View System Styles */
+.hero-view {
+  min-height: 100vh;
+  display: block;
+}
+
+.main-content-view {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  color: white;
+  z-index: 900;
+}
+
+/* Active State - Show Main Content, Hide Hero */
+body.main-content-active .hero-view {
+  display: none;
+}
+
+body.main-content-active .main-content-view {
+  display: block;
+}
+
+/* Navigation Icon X Transformation */
+body.main-content-active .nav-toggle-bar:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+body.main-content-active .nav-toggle-bar:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* Main Page Swiper - Full Screen Horizontal Experience */
+.main-page-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.main-page-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  /* Mobile first: Full width slides */
+  width: 100% !important;
+}
+
+.main-page-swiper .swiper-wrapper {
+  /* Mobile first: No padding */
+  padding-left: 0;
+  padding-right: 0;
+  gap: 0;
+}
+
+/* Desktop Peek Carousel Layout (≥1024px) - Minale + Mann Style */
+@media (min-width: 1024px) {
+  /* Main page swiper desktop peek configuration */
+  .main-page-swiper {
+    /* Keep Swiper's overflow handling but hide scrollbars */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .main-page-swiper::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .main-page-swiper .swiper-wrapper {
+    /* Remove padding for side-by-side layout - DESKTOP ONLY */
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .main-page-swiper .swiper-slide {
+    /* Let Swiper handle slide width for side-by-side layout - DESKTOP ONLY */
+    width: auto !important;
+    margin-right: 0;
+  }
+  
+  /* Enhance slide transitions and visibility - DESKTOP ONLY */
+  .main-page-swiper .swiper-slide:not(.swiper-slide-active) {
+    /* Subtle opacity reduction for side peek slides */
+    opacity: 0.7;
+    transform: scale(0.95);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Ensure visible slides are not dimmed - DESKTOP ONLY */
+  .main-page-swiper .swiper-slide.swiper-slide-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .main-page-swiper .swiper-slide.swiper-slide-active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+  }
+}
+
+/* Sophisticated gradient overlay for text readability */
+.slide-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, 
+    rgba(26, 26, 26, 0.85) 0%, 
+    rgba(34, 34, 34, 0.75) 30%,
+    rgba(42, 42, 42, 0.65) 70%,
+    rgba(26, 26, 26, 0.85) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Content inside a slide should be above the overlay */
+.slide-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+  max-width: 800px;
+}
+
+.slide-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-family: var(--font-serif);
+  font-weight: 700;
+}
+
+.slide-content p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 15px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Styling for the thin scrollbar at the bottom */
+.swiper-scrollbar {
+  bottom: 20px !important;
+  left: 25% !important;
+  width: 50% !important;
+  height: 2px !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.swiper-scrollbar-drag {
+  background: white !important;
+}
+
+/* Portfolio Carousel Sections - Horizontal Flow */
+.portfolio-carousel-slide {
+  /* Remove individual slide backgrounds - seamless dark background */
+  background: transparent !important;
+  background-color: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Remove texture overlay for seamless background */
+.portfolio-carousel-slide::before {
+  display: none !important;
+}
+
+/* Ensure content appears above background overlay */
+.portfolio-carousel-slide > * {
+  position: relative;
+  z-index: 2;
+}
+
+.portfolio-section-carousel {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 40px 20px;
+  direction: rtl;
+  /* Sophisticated gradient background matching Minale + Mann aesthetic */
+  background: linear-gradient(135deg, 
+    rgba(26, 26, 26, 0.95) 0%, 
+    rgba(42, 42, 42, 0.92) 50%, 
+    rgba(26, 26, 26, 0.95) 100%);
+}
+
+/* Subtle texture overlay for portfolio sections */
+.portfolio-section-carousel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.02) 0%, transparent 70%),
+    radial-gradient(circle at 70% 80%, rgba(255,255,255,0.01) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure content appears above background overlay */
+.portfolio-section-carousel > * {
+  position: relative;
+  z-index: 2;
+}
+
+.section-header-overlay {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+.vertical-line-overlay {
+  width: 2px;
+  height: 30px;
+  background-color: white;
+  margin-left: 15px;
+}
+
+.section-title-overlay {
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* New Above-Image Header Layout */
+.section-header-above {
+  position: absolute;
+  top: 18vh;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  z-index: 10;
+}
+
+/* Special positioning for portfolio carousel titles - positioned above image */
+.portfolio-header-corner {
+  position: absolute;
+  top: -35px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  z-index: 10;
+}
+
+/* Portfolio elements below image */
+.portfolio-footer-section {
+  position: absolute;
+  bottom: -100px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  z-index: 10;
+  gap: 10px;
+}
+
+/* Separate center-aligned container for project numbers only - positioned well below container */
+.portfolio-project-title {
+  position: absolute;
+  top: calc(100% + clamp(40px, 8vh, 80px));
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 4;
+  /* Ensure proper positioning in carousel context */
+  white-space: nowrap;
+}
+
+/* Consolidate spacing by removing global margin from section-description within project titles */
+.portfolio-project-title .section-description {
+  margin: 0;
+}
+
+/* Right-aligned container for read more buttons */
+.portfolio-read-more {
+  position: absolute;
+  bottom: -130px;
+  right: 40px;
+  text-align: right;
+  z-index: 10;
+}
+
+.section-title-above {
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+  font-family: 'Inter', sans-serif;
+  text-align: right;
+}
+
+.section-description {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+  text-align: right;
+  max-width: 400px;
+}
+
+.read-more-button {
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 12px 24px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  text-align: center;
+  margin: 0;
+}
+
+.read-more-button:hover {
+  border-color: rgba(255, 255, 255, 0.8);
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================= */
+/* == DESKTOP CAROUSEL HORIZONTAL PEEK LAYOUT == */
+/* ============================================= */
+@media (min-width: 1024px) {
+  
+  /* 
+   * STEP 1: Define the main swiper as a horizontal container.
+   * This creates the horizontal track for the peek layout.
+   */
+  .main-page-swiper {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    /* Add padding to create the peek effect - central slide with side previews */
+    padding-left: 20vw;
+    padding-right: 20vw;
+  }
+  
+  .main-page-swiper .swiper-wrapper {
+    /* Reset mobile padding since we handle it at container level */
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+    align-items: stretch;
+  }
+  
+  /* 
+   * STEP 2: Give each slide a specific, non-shrinking width.
+   * This creates the central slide that takes ~60% of viewport with peek effect.
+   */
+  .main-page-swiper .swiper-slide {
+    /* Central slide width - allows adjacent slides to peek in */
+    width: 60vw !important;
+    max-width: 60vw !important;
+    flex: 0 0 60vw;
+    height: 70vh;
+    /* Ensure slides are interactive */
+    pointer-events: auto;
+    cursor: grab;
+    /* Center slides vertically in the viewport */
+    margin-top: 15vh;
+  }
+  
+  .main-page-swiper .swiper-slide:active {
+    cursor: grabbing;
+  }
+  
+  .portfolio-section-carousel {
+    height: 70vh;
+    width: 100%;
+    margin-top: 0;
+    padding: 40px 20px;
+  }
+  
+  /* Desktop portfolio positioning - elevated above image like mobile */
+  .portfolio-header-corner {
+    top: -40px;
+    right: 40px;
+  }
+  
+  .portfolio-project-title {
+    top: auto;
+    bottom: 120px;
+    right: 40px;
+  }
+  
+  .portfolio-footer-section {
+    bottom: 40px;
+    right: 40px;
+    gap: 12px;
+  }
+  
+  .portfolio-read-more {
+    bottom: 60px;
+    right: 40px;
+  }
+  
+  .section-title-above {
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  
+  .section-description {
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    opacity: 0.8;
+  }
+  
+  .read-more-button {
+    padding: 12px 24px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Mobile Peek Carousel Layout */
+@media (max-width: 768px) {
+  .main-page-swiper {
+    /* Add top padding to lower slides down the screen */
+    padding-top: clamp(48px, 7vh, 64px);
+  }
+  
+  .main-page-swiper .swiper-wrapper {
+    /* Asymmetrical padding for RTL mobile peek - show more of second slide */
+    padding-left: 3vw;   /* Dramatically reduce end padding to maximize second slide visibility */
+    padding-right: 0;    /* Eliminate padding at start for maximum second slide visibility */
+  }
+  
+  .main-page-swiper .swiper-slide {
+    /* Set consistent width for peek effect - shortened for better layout */
+    width: 260px !important;
+    /* Ensure slides are interactive */
+    pointer-events: auto;
+    cursor: grab;
+  }
+  
+  .main-page-swiper .swiper-slide:active {
+    cursor: grabbing;
+  }
+  
+  .portfolio-section-carousel {
+    height: 68vh;
+    padding: 20px 10px;
+    width: 100%;
+    margin-top: 1.5vh;
+  }
+  
+  .section-header-above {
+    top: 8vh;
+    right: 20px;
+    z-index: 10;
+  }
+  
+  /* Mobile responsive positioning for portfolio corner headers - above image */
+  .portfolio-header-corner {
+    top: -25px;
+    right: 20px;
+  }
+  
+  /* Mobile responsive positioning for project numbers - elevate them higher */
+  .portfolio-project-title {
+    top: calc(100% + clamp(15px, 3vh, 25px));
+  }
+  
+  /* Mobile responsive positioning for portfolio footer - below image */
+  .portfolio-footer-section {
+    bottom: -80px;
+    right: 20px;
+    gap: 8px;
+  }
+  
+  /* Mobile responsive - no additional overrides needed as calc() handles all viewports */
+  
+  /* Mobile responsive positioning for read more buttons */
+  .portfolio-read-more {
+    bottom: -105px;
+    right: 20px;
+  }
+  
+  .section-title-above {
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  
+  .section-description {
+    font-size: 11px;
+    max-width: 100%;
+    margin: 0 0 8px 0;
+    opacity: 0.8;
+  }
+  
+  .read-more-button {
+    padding: 8px 16px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  
+  .portfolio-section-carousel .portfolio-image-full {
+    width: 100%;
+    height: 70%;
+    max-height: none;
+    min-height: none;
+  }
+  
+  /* Peek carousel specific mobile styling */
+  .portfolio-carousel-slide {
+    /* Remove individual backgrounds for seamless dark background */
+    background: transparent !important;
+    background-color: transparent !important;
+    /* Remove border-radius for seamless embedded effect */
+    border-radius: 0;
+    overflow: hidden;
+  }
+  
+  /* Mobile progress indicator */
+  .swiper-scrollbar {
+    bottom: 10px !important;
+    left: 20% !important;
+    width: 60% !important;
+    height: 2px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .swiper-scrollbar-drag {
+    background: white !important;
+    border-radius: 1px !important;
+  }
+}
+
+.portfolio-image-full {
+  width: 100%;
+  flex: 1;
+  max-width: 800px;
+  max-height: 65vh;
+  min-height: 400px;
+  position: relative;
+  /* Remove any background - ensure transparent */
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Add sophisticated gradient overlay on top of images */
+.portfolio-section-carousel .portfolio-image-full::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(26, 26, 26, 0.3) 0%, 
+    rgba(42, 42, 42, 0.2) 50%, 
+    rgba(26, 26, 26, 0.3) 100%);
+  /* Remove border-radius for seamless embedded effect */
+  border-radius: 0;
+  pointer-events: none;
+  z-index: 3;
+  display: block;
+}
+
+.full-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Remove container styling for seamless embedded effect */
+  border-radius: 0;
+  transition: transform 0.3s ease;
+  /* Remove shadow for seamless integration */
+  box-shadow: none;
+  
+  /* Unified Color Grading System - Minale + Mann Aesthetic */
+  filter: 
+    /* Primary color temperature normalization */
+    sepia(8%) 
+    /* Subtle warm/cool balance correction */
+    hue-rotate(-2deg) 
+    /* Professional contrast enhancement */
+    contrast(1.08) 
+    /* Sophisticated saturation adjustment */
+    saturate(0.92) 
+    /* Brightness normalization */
+    brightness(1.02) 
+    /* Premium clarity enhancement */
+    contrast(1.04);
+}
+
+.full-image:hover {
+  transform: scale(1.02);
+}
+
+/* Color Unification Overlay for Visual Cohesion */
+.portfolio-image-full::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Subtle unified color wash for temperature normalization */
+  background: linear-gradient(
+    135deg,
+    rgba(250, 248, 246, 0.04) 0%,
+    rgba(245, 243, 240, 0.03) 50%,
+    rgba(248, 246, 244, 0.04) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: soft-light;
+  /* Remove border-radius for seamless embedding */
+  border-radius: 0;
+}
+
+/* New Overlay Layout for All Sections */
+.section-overlay-layout {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  direction: rtl;
+}
+
+.background-image-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.full-background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-overlay-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 10;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-header-simple {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.small-vertical-line {
+  width: 1px;
+  height: 20px;
+  background-color: white;
+  margin-right: 10px;
+}
+
+.small-section-label {
+  color: white;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  font-family: 'Inter', sans-serif;
+}
+
+.overlay-main-title {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  line-height: 1.2;
+  font-family: 'Inter', sans-serif;
+}
+
+.overlay-description {
+  color: white;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.contact-info {
+  margin-top: 30px;
+}
+
+.phone-info, .email-info {
+  color: white;
+  font-size: 14px;
+  margin: 8px 0;
+  opacity: 0.9;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Mobile Responsive Optimizations */
+@media (max-width: 768px) {
+  .section-header-overlay {
+    top: 40px;
+    right: 15px;
+  }
+  
+  .section-title-overlay {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  
+  .vertical-line-overlay {
+    height: 25px;
+    margin-left: 12px;
+  }
+  
+  .section-overlay-layout .portfolio-image-full {
+    width: 95%;
+    height: 75%;
+  }
+  
+  .text-overlay-container {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px 20px;
+  }
+  
+  .overlay-main-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .overlay-description {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  
+  .small-section-label {
+    font-size: 11px;
+  }
+  
+  .phone-info, .email-info {
+    font-size: 13px;
+  }
+}
+
+/* Legacy Nested Portfolio Carousel Styles - For backwards compatibility */
+.portfolio-nested-swiper-container {
+  width: 90%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.portfolio-nested-swiper {
+  width: 100%;
+  height: 60vh; /* 60% of the viewport height */
+  margin-top: 20px;
+}
+
+.portfolio-nested-swiper .swiper-slide {
+  width: auto !important;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ensure images in the nested carousel fit correctly */
+.portfolio-nested-image {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain; /* Use 'contain' to see the whole image */
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Style the nested carousel's navigation arrows */
+.portfolio-nested-swiper .swiper-button-next,
+.portfolio-nested-swiper .swiper-button-prev {
+  --swiper-navigation-size: 30px; /* Make arrows smaller */
+  color: #fff !important;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.portfolio-nested-swiper .swiper-button-next:after,
+.portfolio-nested-swiper .swiper-button-prev:after {
+  font-size: 16px;
+}
+
+/* Style the nested carousel's pagination dots */
+.portfolio-nested-swiper .swiper-pagination {
+  bottom: 10px !important;
+}
+
+.portfolio-nested-swiper .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+.portfolio-nested-swiper .swiper-pagination-bullet-active {
+  background: #fff !important;
+}
+
+/* Portfolio Swiper Carousel Styles (for existing portfolio section) */
+.portfolio-carousel-container {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.portfolio-swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.portfolio-swiper .swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 400px;
+}
+
+.portfolio-swiper .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* Swiper Navigation Arrows */
+.portfolio-swiper .swiper-button-next,
+.portfolio-swiper .swiper-button-prev {
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.portfolio-swiper .swiper-button-next:hover,
+.portfolio-swiper .swiper-button-prev:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.portfolio-swiper .swiper-button-next:after,
+.portfolio-swiper .swiper-button-prev:after {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Swiper Pagination */
+.portfolio-swiper .swiper-pagination {
+  bottom: 10px;
+}
+
+.portfolio-swiper .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.portfolio-swiper .swiper-pagination-bullet-active {
+  background: #ffffff;
+  transform: scale(1.2);
+}
+
+/* Custom Swiper overrides for dark theme */
+:root {
+  --swiper-navigation-color: #ffffff;
+  --swiper-pagination-color: #ffffff;
+  --swiper-theme-color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .portfolio-swiper .swiper-slide {
+    width: 280px;
+    height: 350px;
+  }
+  
+  .portfolio-swiper .swiper-button-next,
+  .portfolio-swiper .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+  }
+  
+  .portfolio-swiper .swiper-button-next:after,
+  .portfolio-swiper .swiper-button-prev:after {
+    font-size: 14px;
+  }
+}
+
+/* Hero Carousel - Ultra Clean Custom Fade Styling */
+[data-testid="carousel-hero"] {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  touch-action: none;
+}
+
+[data-testid="carousel-hero"] * {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Custom transition duration for smooth fades */
+.duration-2000 {
+  transition-duration: 2000ms;
+}
+
+/* Allow header navigation to remain functional */
+header {
+  pointer-events: auto;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Ensure navigation toggle remains clickable */
+.nav-toggle {
+  pointer-events: auto;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    direction: rtl;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .carousel-slide.active {
+    opacity: 1;
+  }
+  
+  .overlay-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: hsl(var(--primary));
+    z-index: 3000;
+    transform: translateY(-100%);
+    transition: transform 0.5s ease-in-out;
+    overflow-y: auto;
+  }
+  
+  .overlay-menu.open {
+    transform: translateY(0);
+  }
+  
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    width: 30px;
+    height: 30px;
+    justify-content: space-around;
+    cursor: pointer;
+    padding: 4px;
+    border: 1px solid hsl(var(--foreground));
+    border-radius: 4px;
+  }
+  
+  .hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: hsl(var(--foreground));
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+  
+  .hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+  }
+  
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+}
+
+/* About slide specific styling */
+.about-section-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.about-slide {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-content {
+  padding: 40px;
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #d4a574;
+  padding-bottom: 15px;
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: white;
+  text-align: right;
+  direction: rtl;
+}
+
+/* Mobile responsiveness for about slide */
+@media (max-width: 768px) {
+  .about-content {
+    padding: 30px 20px;
+  }
+  
+  .about-title {
+    font-size: 2rem;
+    margin-bottom: 25px;
+  }
+  
+  .about-text {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section-carousel {
+    padding: 20px 15px;
+  }
+  
+  .about-content {
+    padding: 25px 15px;
+  }
+  
+  .about-title {
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+  }
+  
+  .about-text {
+    font-size: 0.95rem;
+  }
+}

@@ -1,0 +1,99 @@
+Hello. The website's structure is great. Now, I need you to populate the "תיק עבודות" (Portfolio) slide. Instead of a single image, this slide should contain its own interactive carousel with 10 images.
+
+Objective:
+Inside the first slide of our main horizontal swiper, implement a nested Swiper.js carousel to display 10 portfolio images. The main horizontal navigation between sections must not change.
+
+Step-by-Step Instructions:
+
+1. HTML Changes (in index.html):
+
+Locate the slide for the portfolio, which has the class .portfolio-master-slide.
+
+Inside its .slide-content div, right below the <p> tag, insert the complete HTML structure for a new Swiper instance.
+
+This new carousel will hold the 10 portfolio images. The updated slide should look like this:
+
+HTML
+
+<div class="swiper-slide portfolio-master-slide">
+    <div class="slide-content">
+        <h2>תיק עבודות</h2>
+        <p>מבחר מפרוייקטים שביצענו - מהמטבח הביתי ועד לפרוייקטים מסחריים מורכבים.</p>
+
+        <div class="swiper portfolio-nested-swiper">
+            <div class="swiper-wrapper">
+                </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+        </div>
+</div>
+Now, inside the new <div class="swiper-wrapper">, please generate 10 slides. Each slide (<div class="swiper-slide">) should contain an <img> tag pointing to your portfolio images, from portfolio1 to portfolio10.
+
+Important: Please check for both .jpg and .png file extensions for each image and use the correct one that exists in the project files.
+
+2. JavaScript Changes (in script.js):
+
+We need to initialize this second, nested Swiper instance.
+
+In your script.js file, go to the end of the DOMContentLoaded event listener, right after the initialization for mainSwiper.
+
+Add the following new code to initialize the nested carousel:
+
+JavaScript
+
+// Add this code to initialize the nested portfolio carousel
+const portfolioSwiper = new Swiper('.portfolio-nested-swiper', {
+  loop: true,
+  slidesPerView: 'auto',
+  centeredSlides: true,
+  spaceBetween: 20,
+  grabCursor: true,
+
+  // Pagination for the nested carousel
+  pagination: {
+    el: '.portfolio-nested-swiper .swiper-pagination',
+    clickable: true,
+  },
+
+  // Navigation arrows for the nested carousel
+  navigation: {
+    nextEl: '.portfolio-nested-swiper .swiper-button-next',
+    prevEl: '.portfolio-nested-swiper .swiper-button-prev',
+  },
+});
+3. CSS Styling (in your main CSS file):
+
+Add the following CSS to style the nested carousel so it fits nicely within the main slide.
+
+CSS
+
+/* Define the size of the nested carousel container */
+.portfolio-nested-swiper {
+  width: 90%;
+  height: 60vh; /* 60% of the viewport height */
+  margin-top: 20px;
+}
+
+/* Ensure images in the nested carousel fit correctly */
+.portfolio-nested-swiper .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Use 'contain' to see the whole image */
+}
+
+/* Style the nested carousel's navigation arrows */
+ .portfolio-nested-swiper .swiper-button-next,
+ .portfolio-nested-swiper .swiper-button-prev {
+     --swiper-navigation-size: 30px; /* Make arrows smaller */
+     color: #fff;
+ }
+
+ /* Style the nested carousel's pagination dots */
+ .portfolio-nested-swiper .swiper-pagination-bullet-active {
+     background: #fff;
+ }
+Summary of Action:
+After you run this, the "תיק עבודות" slide should remain in its place as the first section of the site. However, it will now contain its own smaller, swipeable carousel showing the 10 portfolio images. The main navigation (swiping left to "Services") should continue to work perfectly.

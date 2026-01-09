@@ -1,0 +1,78 @@
+REPLIT AGENT PROMPT — DESKTOP "PEEK" CAROUSEL UI
+OBJECTIVE
+Redesign the desktop carousel so that on wide screens (≥ 1024px), the user always sees:
+
+A main centered “active” image (about 60–65% of carousel width)
+
+Partial “peek” views of the previous and next images on the left and right sides (about 17–20% each)
+
+Encourages horizontal scrolling just like on the reference architecture website
+
+ANALYSIS
+Current: Each carousel image takes up 100% of the visible area, so only one image is visible at a time (see attached screenshot).
+
+Desired: Mimic the architecture site so three images are always partially visible at once: one fully, two partially (“peek” sides).
+
+REQUIRED CHANGES
+1. CSS for Responsive Desktop Peek Layout
+Use a desktop media query (min-width: 1024px). Set the structure so:
+
+Carousel container uses horizontal flex layout
+
+Each .gallery-slide is 60vw (60% of viewport width)
+
+Carousel container gets side paddings (e.g., 20vw or 17vw) to “peek” next/previous slides
+
+Side gap between slides (e.g., 2vw or 32px)
+
+Hide scrollbars for aesthetics
+
+css
+@media (min-width: 1024px) {
+  .gallery-track {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-left: 17vw;
+    padding-right: 17vw;
+    gap: 2vw;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+  .gallery-track::-webkit-scrollbar {
+    display: none;
+  }
+  .gallery-slide {
+    flex: 0 0 60vw;
+    max-width: 60vw;
+    scroll-snap-align: center;
+    position: relative;
+  }
+  .gallery-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+}
+2. Ensure Desktop-Responsive Behavior
+Do not break the mobile layout; only apply this layout on screens ≥ 1024px.
+
+Keep all JavaScript scroll and navigation logic unchanged.
+
+Scrolling with the mouse, touchpad, or arrows should work as before.
+
+3. Test and Review
+Test the carousel on both desktop and mobile:
+
+On desktop: Three images (one large, two partial peeks). User always sees what’s next/previous.
+
+On mobile: Your existing single-image full-screen layout remains.
+
+Progress bar displays scrolling progress as before.
+
+EXPECTED OUTCOME
+Desktop: The carousel displays a large, centered image with a visible “peek” of the previous and next images, inviting horizontal interaction—matching the architecture website’s look and user experience.
+Mobile: No change; still one image per screen.
+
+Do not change your mobile styles. Only apply these changes for desktop screens (min-width: 1024px). The result must match the multi-image peek effect as demonstrated on the reference architecture site.

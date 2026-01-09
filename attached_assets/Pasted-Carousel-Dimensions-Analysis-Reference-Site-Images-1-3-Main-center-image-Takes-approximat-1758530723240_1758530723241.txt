@@ -1,0 +1,221 @@
+Carousel Dimensions Analysis:
+Reference Site (Images 1 & 3):
+
+Main center image: Takes approximately 60-65% of viewport width
+
+Left partial image: Shows approximately 20% of previous image (peek effect)
+
+Right partial image: Shows approximately 20% of next image (peek effect)
+
+Total visible: One full image + two partial images creating horizontal scroll cue
+
+Gap spacing: Small consistent gaps between images
+
+Your Current Site (Image 2):
+
+Single image: Takes 100% of viewport width
+
+No partial images visible: No peek effect to indicate more content
+
+No horizontal scroll cue: Users don't know they can swipe/scroll
+
+STRUCTURED PLAN - Mobile Carousel Dimensions:
+TASK:
+Convert the single full-width image display to match minaleandmann.com's three-image layout: one center image (60-65% width) with two partial side images (20% each) visible simultaneously on mobile.
+
+PROBLEM:
+Current portfolio sections show one full-width image per viewport, eliminating the "peek effect" that signals horizontal scrolling availability. The reference site shows partial views of adjacent images to encourage horizontal navigation.
+
+SOLUTION:
+Restructure the carousel container to display multiple images simultaneously with proper spacing and scroll snap behavior.
+
+IMPLEMENTATION:
+HTML Changes (in index.html):
+
+xml
+<!-- REPLACE current portfolio structure with: -->
+<section class="portfolio-peek-carousel" id="portfolio">
+    <div class="section-header-mobile">
+        <span class="vertical-line-mobile"></span>
+        <h2 class="section-title-mobile">תיק עבודות</h2>
+    </div>
+    
+    <div class="carousel-container-peek">
+        <div class="portfolio-item-peek">
+            <img src="path/to/image1.jpg" alt="פרויקט 1" class="carousel-image">
+            <div class="image-overlay-text">
+                <h3>עיצוב ארכיטקטוני</h3>
+                <p>מגורים</p>
+            </div>
+        </div>
+        
+        <div class="portfolio-item-peek">
+            <img src="path/to/image2.jpg" alt="פרויקט 2" class="carousel-image">
+            <div class="image-overlay-text">
+                <h3>עיצוב פנים</h3>
+                <p>מסחרי</p>
+            </div>
+        </div>
+        
+        <!-- Continue for all 10 images -->
+    </div>
+    
+    <div class="carousel-progress">
+        <div class="progress-indicator"></div>
+    </div>
+</section>
+CSS Changes (in style.css):
+
+css
+/* MOBILE PEEK CAROUSEL LAYOUT */
+.portfolio-peek-carousel {
+    height: 100vh;
+    background: linear-gradient(135deg, 
+        rgba(26, 26, 26, 0.95) 0%, 
+        rgba(42, 42, 42, 0.92) 50%, 
+        rgba(26, 26, 26, 0.95) 100%);
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+}
+
+.section-header-mobile {
+    display: flex;
+    align-items: center;
+    padding: 60px 20px 40px;
+}
+
+.vertical-line-mobile {
+    width: 2px;
+    height: 30px;
+    background: white;
+    margin-left: 15px;
+}
+
+.section-title-mobile {
+    color: white;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.carousel-container-peek {
+    flex: 1;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 15px; /* Space between images */
+    padding: 0 20vw; /* Creates the peek effect */
+    align-items: center;
+}
+
+.carousel-container-peek::-webkit-scrollbar {
+    display: none;
+}
+
+.portfolio-item-peek {
+    flex: 0 0 60vw; /* Main image width: 60% of viewport */
+    height: 75%;
+    position: relative;
+    scroll-snap-align: center;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.image-overlay-text {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.image-overlay-text h3 {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    text-transform: uppercase;
+}
+
+.image-overlay-text p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 11px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.carousel-progress {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 20px;
+}
+
+.progress-indicator {
+    height: 100%;
+    background: white;
+    width: 20%;
+    transition: width 0.3s ease;
+}
+
+/* Mobile touch optimization */
+.carousel-container-peek {
+    -webkit-overflow-scrolling: touch;
+}
+JavaScript for Progress Bar (in script.js):
+
+javascript
+// ADD scroll progress tracking
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.carousel-container-peek');
+    const progress = document.querySelector('.progress-indicator');
+    
+    if (carousel && progress) {
+        carousel.addEventListener('scroll', function() {
+            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+            const currentScroll = carousel.scrollLeft;
+            const progressPercent = (currentScroll / maxScroll) * 100;
+            progress.style.width = Math.max(20, progressPercent) + '%';
+        });
+    }
+});
+IMPLEMENTATION STEPS:
+
+Replace single full-width portfolio sections with peek carousel
+
+Set main image width to 60vw with 20vw padding on sides
+
+Add gap spacing between images (15px)
+
+Implement horizontal scroll snap behavior
+
+Test peek effect on mobile - ensure partial images are visible
+
+Verify smooth horizontal scrolling and snap behavior
+
+Add progress indicator functionality
+
+KEY MOBILE DIMENSIONS:
+
+Main image: 60vw (center focus)
+
+Side padding: 20vw each side (creates peek effect)
+
+Gap between images: 15px
+
+Image height: 75% of container
+
+Total visible content: 1 full + 2 partial images
+
+This creates the exact peek effect from the reference site, encouraging horizontal navigation on mobile.
