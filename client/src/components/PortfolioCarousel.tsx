@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Keyboard, EffectFade, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Keyboard, Mousewheel, Scrollbar, Autoplay } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
+import 'swiper/css/scrollbar';
 
 interface PortfolioImage {
   src: string;
@@ -46,35 +46,55 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
     <div className="portfolio-carousel-container">
       {/* Main Carousel */}
       <Swiper
-        modules={[Navigation, Pagination, Keyboard, EffectFade, Autoplay]}
-        effect="fade"
-        fadeEffect={{ crossFade: true }}
-        speed={500}
-        slidesPerView={1}
+        modules={[Navigation, Pagination, Keyboard, Mousewheel, Scrollbar, Autoplay]}
+        direction="horizontal"
+        slidesPerView="auto"
+        spaceBetween={20}
+        centeredSlides={true}
+        mousewheel={true}
         keyboard={{ enabled: true }}
         autoplay={{
           delay: 1000,
           disableOnInteraction: false,
         }}
         loop={true}
+        scrollbar={{
+          el: '.swiper-scrollbar',
+          hide: false,
+          draggable: true,
+        }}
+        breakpoints={{
+          320: {
+            slidesPerView: "auto",
+            spaceBetween: 20,
+            centeredSlides: true,
+          },
+          1024: {
+            slidesPerView: "auto",
+            spaceBetween: 40,
+            centeredSlides: true,
+          }
+        }}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
         onSlideChange={handleSlideChange}
-        className="portfolio-fullscreen-swiper"
+        className="main-page-swiper"
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index}>
-            <div
-              className="portfolio-slide"
-              style={{
-                backgroundImage: `url(${image.src})`,
-              }}
-              role="img"
-              aria-label={image.alt}
-            />
+          <SwiperSlide key={index} className="portfolio-carousel-slide">
+            <div className="portfolio-section-carousel">
+              <div className="portfolio-image-full">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="full-image"
+                />
+              </div>
+            </div>
           </SwiperSlide>
         ))}
+        <div className="swiper-scrollbar"></div>
       </Swiper>
 
       {/* Bottom Navigation */}
