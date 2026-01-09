@@ -11,7 +11,7 @@ export default function ContactSection() {
         <div className="contact-info">
           <div className="contact-item">
             <span className="contact-label">טלפון:</span>
-            <a href="tel:054-327-37-19" className="contact-link">054-327-37-19</a>
+            <a href="tel:054-327-3719" className="contact-link">054-327-3719</a>
           </div>
 
           <div className="contact-item">
