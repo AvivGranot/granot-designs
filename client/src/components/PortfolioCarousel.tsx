@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Keyboard, Mousewheel, Scrollbar, Autoplay } from 'swiper/modules';
-import type { Swiper as SwiperType } from 'swiper';
 
 import 'swiper/css';
 import 'swiper/css/scrollbar';
@@ -16,17 +14,6 @@ interface PortfolioCarouselProps {
 }
 
 export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
-  const [currentSlide, setCurrentSlide] = useState(1);
-  const totalSlides = images.length;
-
-  const handleSlideChange = (swiper: SwiperType) => {
-    setCurrentSlide(swiper.realIndex + 1);
-  };
-
-  const formatNumber = (num: number) => {
-    return num.toString().padStart(2, '0');
-  };
-
   return (
     <div className="portfolio-carousel-container">
       <Swiper
@@ -46,7 +33,6 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
           hide: false,
           draggable: true,
         }}
-        onSlideChange={handleSlideChange}
         className="main-page-swiper"
       >
         {images.map((image, index) => (
@@ -64,14 +50,6 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
         ))}
         <div className="swiper-scrollbar"></div>
       </Swiper>
-
-      <div className="portfolio-bottom-nav">
-        <div className="slide-counter">
-          <span className="current">{formatNumber(currentSlide)}</span>
-          <span className="separator">/</span>
-          <span className="total">{formatNumber(totalSlides)}</span>
-        </div>
-      </div>
     </div>
   );
 }
