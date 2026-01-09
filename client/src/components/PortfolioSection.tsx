@@ -81,7 +81,7 @@ export default function PortfolioSection() {
               slideShadows: true,
             }}
             autoplay={{
-              delay: 4000,
+              delay: 3000,
               disableOnInteraction: false,
             }}
             navigation={true}
