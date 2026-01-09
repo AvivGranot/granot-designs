@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Keyboard, EffectFade } from 'swiper/modules';
+import { Navigation, Pagination, Keyboard, EffectFade, Autoplay } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 
 import 'swiper/css';
@@ -38,10 +38,6 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
     setCurrentSlide(swiper.activeIndex + 1);
   };
 
-  const goToSlide = (index: number) => {
-    swiperRef.current?.slideTo(index);
-  };
-
   const formatNumber = (num: number) => {
     return num.toString().padStart(2, '0');
   };
@@ -50,12 +46,17 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
     <div className="portfolio-carousel-container">
       {/* Main Carousel */}
       <Swiper
-        modules={[Navigation, Pagination, Keyboard, EffectFade]}
+        modules={[Navigation, Pagination, Keyboard, EffectFade, Autoplay]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
         speed={500}
         slidesPerView={1}
         keyboard={{ enabled: true }}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
+        loop={true}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
@@ -75,18 +76,6 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-
-      {/* Side Navigation Dots */}
-      <div className="portfolio-side-nav">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`side-nav-dot ${currentSlide === index + 1 ? 'active' : ''}`}
-            onClick={() => goToSlide(index)}
-            aria-label={`עבור לתמונה ${index + 1}`}
-          />
-        ))}
-      </div>
 
       {/* Bottom Navigation */}
       <div className="portfolio-bottom-nav">

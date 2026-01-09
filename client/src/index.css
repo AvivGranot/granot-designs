@@ -1755,7 +1755,7 @@ header {
 
 .floating-share-nav {
   position: fixed;
-  right: 24px;
+  left: 24px;
   bottom: 180px;
   display: flex;
   flex-direction: column;
@@ -1837,7 +1837,7 @@ header {
 
 .copy-toast {
   position: absolute;
-  right: 70px;
+  left: 70px;
   bottom: 10px;
   background: #333;
   color: white;
@@ -1858,7 +1858,7 @@ header {
 /* Mobile adjustments for share nav */
 @media (max-width: 768px) {
   .floating-share-nav {
-    right: 16px;
+    left: 16px;
     bottom: 160px;
   }
 
