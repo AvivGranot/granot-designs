@@ -74,13 +74,15 @@ export default function Navigation({ onMenuToggle, onToggle }: NavigationProps) 
       </div>
       
       {/* Navigation Toggle - Left side for RTL */}
-      <button 
-        className="w-14 h-5 border-2 border-white bg-transparent cursor-pointer transition-all duration-300 hover:border-opacity-70" 
+      <button
+        className="nav-toggle w-14 h-5 border-2 border-white bg-transparent cursor-pointer transition-all duration-300 hover:border-opacity-70 flex flex-col justify-center items-center gap-[3px] px-2"
         onClick={handleMenuToggle}
         data-testid="button-menu-toggle"
         type="button"
         aria-label="Open navigation menu"
       >
+        <span className="nav-toggle-bar w-full h-[2px] bg-white transition-all duration-300"></span>
+        <span className="nav-toggle-bar w-full h-[2px] bg-white transition-all duration-300"></span>
       </button>
     </header>
   );
