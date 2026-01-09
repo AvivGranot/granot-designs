@@ -47,7 +47,6 @@ import hodHasharon from "@assets/Hod_Hasharon.jpg";
 
 // Portfolio images arrays (without about slide - that's now a separate section)
 const mobilePortfolioImages = [
-  { src: hodHasharon, alt: "פרוייקט הוד השרון - מטבח מעוצב" },
   { src: mobilePortfolio1, alt: "פרוייקט נגרות 1 - ארונות מטבח מודרניים" },
   { src: mobilePortfolio2, alt: "פרוייקט נגרות 2 - ספריה מובנית בסלון" },
   { src: mobilePortfolio3, alt: "פרוייקט נגרות 3 - ארון קיר בחדר שינה" },
@@ -62,7 +61,6 @@ const mobilePortfolioImages = [
 ];
 
 const pcPortfolioImages = [
-  { src: hodHasharon, alt: "פרוייקט הוד השרון - מטבח מעוצב" },
   { src: pcPortfolio1, alt: "חדר שינה מינימליסטי עם ארונות לבנים מובנים" },
   { src: pcPortfolio2, alt: "מטבח מודרני עם אי מעוצב ותאורה מעלית" },
   { src: pcPortfolio3, alt: "מטבח שחור עם ארונות עליונים וגופי תאורה" },
@@ -73,6 +71,7 @@ const pcPortfolioImages = [
   { src: newPcPortfolio9, alt: "מטבח לבן עם אי כחול ותאורת קש מעוצבת" },
   { src: newPcPortfolio8, alt: "מטבח מודרני עם אי זהב וכסאות צהובים" },
   { src: newPcPortfolio10, alt: "מטבח בשלבי בנייה - ארונות ירוקים מעוצבים" },
+  { src: hodHasharon, alt: "פרוייקט הוד השרון - מטבח מעוצב" },
   { src: pcAbout1, alt: "סקיצת עיצוב נגרות - תכנון מקצועי ויצירתי" },
 ];
 
