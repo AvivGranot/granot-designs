@@ -21,6 +21,7 @@ import mobilePortfolio8 from "@assets/Mobile_Carousel_9_1758782511120.jpg";
 import mobilePortfolio9 from "@assets/Mobile_Carousel_8_1758782511119.png";
 import mobilePortfolio10 from "@assets/Mobile_Carousel_10_1758782511121.png";
 import mobilePortfolio11 from "@assets/Mobile_About_1_1758798578200.png";
+import dafna from "@assets/dafna.jpeg";
 
 // Import portfolio images for PC carousel
 import pcPortfolio1 from "@assets/PC_Carousel_1_1758790862081.jpg";
@@ -35,6 +36,7 @@ import newPcPortfolio8 from "@assets/PC_Carousel_8_1758796224264.png";
 import newPcPortfolio9 from "@assets/PC_Carousel_9_1758796541477.png";
 import newPcPortfolio10 from "@assets/PC_Carousel_10_1758796936936.png";
 import hodHasharon from "@assets/Hod_Hasharon.jpg";
+import natanya from "@assets/natanya.png";
 
 // Portfolio images arrays
 const mobilePortfolioImages = [
@@ -49,6 +51,7 @@ const mobilePortfolioImages = [
   { src: mobilePortfolio9, alt: "פרוייקט נגרות 9 - ארונות משרד" },
   { src: mobilePortfolio10, alt: "פרוייקט נגרות 10 - פינת אוכל מובנית" },
   { src: mobilePortfolio11, alt: "פרוייקט נגרות 11 - חדר רחצה מעוצב ומינימליסטי" },
+  { src: dafna, alt: "פרוייקט דפנה - עיצוב נגרות מותאם אישית" },
 ];
 
 const pcPortfolioImages = [
@@ -64,6 +67,7 @@ const pcPortfolioImages = [
   { src: newPcPortfolio10, alt: "מטבח בשלבי בנייה - ארונות ירוקים מעוצבים" },
   { src: hodHasharon, alt: "פרוייקט הוד השרון - מטבח מעוצב" },
   { src: pcAbout1, alt: "סקיצת עיצוב נגרות - תכנון מקצועי ויצירתי" },
+  { src: natanya, alt: "פרוייקט נתניה - מטבח מעוצב" },
 ];
 
 export default function HomePage() {
