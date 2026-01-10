@@ -36,20 +36,24 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
         }}
         className="main-page-swiper"
       >
-        {images.map((image, index) => (
-          <SwiperSlide key={index} className="portfolio-carousel-slide">
-            <div className="portfolio-section-carousel">
-              <div className="portfolio-image-full">
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="full-image"
-                  loading="eager"
-                />
+        {images.map((image, index) => {
+          const isDafna = image.src.includes('dafna');
+          return (
+            <SwiperSlide key={index} className="portfolio-carousel-slide">
+              <div className="portfolio-section-carousel">
+                <div className="portfolio-image-full">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="full-image"
+                    loading="eager"
+                    style={isDafna ? { objectPosition: '30% center' } : undefined}
+                  />
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          );
+        })}
         <div className="swiper-scrollbar"></div>
       </Swiper>
     </div>
