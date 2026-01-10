@@ -1,11 +1,4 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-coverflow';
+import { useState, useEffect } from 'react';
 
 // Import actual portfolio images
 import portfolio1 from "@assets/portfolio1_1758397235379.jpg";
@@ -53,6 +46,16 @@ const portfolioItems = [
 ];
 
 export default function PortfolioSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % portfolioItems.length);
+    }, 3000); // 3 seconds per slide
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="portfolio" className="py-20 bg-black text-white" data-testid="section-portfolio">
       <div className="container mx-auto px-6">
@@ -64,71 +67,52 @@ export default function PortfolioSection() {
             מבחר מפרוייקטים שביצענו - מהמטבח הביתי ועד לפרוייקטים מסחריים מורכבים
           </p>
         </div>
-        
-        <div className="portfolio-carousel-container relative">
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
-            spaceBetween={30}
-            centeredSlides={true}
-            slidesPerView={1}
-            slidesPerGroup={1}
-            effect={'coverflow'}
-            coverflowEffect={{
-              rotate: 50,
-              stretch: 0,
-              depth: 100,
-              modifier: 1,
-              slideShadows: true,
-            }}
-            autoplay={{
-              delay: 2000,
-              disableOnInteraction: false,
-            }}
-            speed={300}
-            preloadImages={true}
-            navigation={true}
-            pagination={{
-              clickable: true,
-              dynamicBullets: true,
-            }}
-            loop={true}
-            loopAdditionalSlides={2}
-            className="portfolio-swiper"
-            data-testid="carousel-portfolio"
-            breakpoints={{
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 30,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 40,
-              },
-            }}
-          >
+
+        <div className="portfolio-carousel-container relative" style={{ height: '70vh', maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="relative w-full h-full rounded-lg overflow-hidden" data-testid="carousel-portfolio">
             {portfolioItems.map((item, index) => (
-              <SwiperSlide key={index} data-testid={`slide-portfolio-${index}`}>
-                <div className="swiper-slide-content relative">
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    className="w-full h-[70vh] object-cover rounded-lg shadow-2xl"
-                    data-testid={`img-portfolio-${index}`}
-                    loading="eager"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
-                    <p className="text-white text-center text-lg font-medium" data-testid={`text-portfolio-alt-${index}`}>
-                      {item.alt}
-                    </p>
-                  </div>
+              <div
+                key={index}
+                className={`absolute inset-0 w-full h-full transition-opacity ease-in-out ${
+                  index === currentIndex ? 'opacity-100' : 'opacity-0'
+                }`}
+                data-testid={`slide-portfolio-${index}`}
+                style={{
+                  transitionDuration: '2000ms',
+                  zIndex: index === currentIndex ? 1 : 0,
+                  pointerEvents: index === currentIndex ? 'auto' : 'none'
+                }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  className="w-full h-full object-cover rounded-lg"
+                  data-testid={`img-portfolio-${index}`}
+                  loading="eager"
+                  draggable={false}
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
+                  <p className="text-white text-center text-lg font-medium" data-testid={`text-portfolio-alt-${index}`}>
+                    {item.alt}
+                  </p>
                 </div>
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          </div>
+
+          {/* Slide indicators */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+            {portfolioItems.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex ? 'bg-white w-6' : 'bg-white/50'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
