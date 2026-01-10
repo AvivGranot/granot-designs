@@ -1814,3 +1814,59 @@ header {
     height: 52px;
   }
 }
+
+/* ================================= */
+/* == PORTFOLIO CAROUSEL STYLES   == */
+/* ================================= */
+
+.portfolio-carousel-wrapper {
+  position: relative;
+  padding: 0 60px;
+}
+
+@media (max-width: 768px) {
+  .portfolio-carousel-wrapper {
+    padding: 0 20px;
+  }
+}
+
+.portfolio-swiper {
+  overflow: visible;
+}
+
+.portfolio-swiper .swiper-slide {
+  width: 350px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .portfolio-swiper .swiper-slide {
+    width: 280px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-swiper .swiper-slide {
+    width: 400px;
+  }
+}
+
+/* Progress bar pagination */
+.portfolio-pagination {
+  position: relative;
+}
+
+.portfolio-pagination .swiper-pagination-progressbar-fill {
+  background: white !important;
+  border-radius: 9999px;
+}
+
+/* Navigation buttons */
+.portfolio-nav-btn {
+  color: white;
+}
+
+.portfolio-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
