@@ -1822,6 +1822,7 @@ header {
 .portfolio-carousel-wrapper {
   position: relative;
   padding: 0 60px;
+  margin-bottom: 60px;
 }
 
 @media (max-width: 768px) {
@@ -1832,11 +1833,17 @@ header {
 
 .portfolio-swiper {
   overflow: visible;
+  padding-bottom: 60px;
 }
 
 .portfolio-swiper .swiper-slide {
   width: 350px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  height: auto;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.portfolio-swiper .swiper-slide-active {
+  transform: scale(1.02);
 }
 
 @media (max-width: 768px) {
@@ -1851,22 +1858,335 @@ header {
   }
 }
 
-/* Progress bar pagination */
+/* Navigation Arrows */
+.portfolio-nav-prev,
+.portfolio-nav-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.portfolio-nav-prev {
+  left: 0;
+}
+
+.portfolio-nav-next {
+  right: 0;
+}
+
+.portfolio-nav-prev:hover,
+.portfolio-nav-next:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.portfolio-nav-prev:active,
+.portfolio-nav-next:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.portfolio-nav-prev.swiper-button-disabled,
+.portfolio-nav-next.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .portfolio-nav-prev,
+  .portfolio-nav-next {
+    width: 40px;
+    height: 40px;
+  }
+
+  .portfolio-nav-prev {
+    left: -10px;
+  }
+
+  .portfolio-nav-next {
+    right: -10px;
+  }
+}
+
+/* Pagination Dots */
 .portfolio-pagination {
   position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
 }
 
-.portfolio-pagination .swiper-pagination-progressbar-fill {
-  background: white !important;
-  border-radius: 9999px;
+.portfolio-pagination .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  opacity: 1;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-/* Navigation buttons */
-.portfolio-nav-btn {
+.portfolio-pagination .swiper-pagination-bullet:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.portfolio-pagination .swiper-pagination-bullet-active {
+  background: white;
+  transform: scale(1.2);
+}
+
+.portfolio-pagination .swiper-pagination-bullet-active-main {
+  background: white;
+  transform: scale(1.3);
+}
+
+/* Scrollbar */
+.portfolio-scrollbar {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 3px;
+  margin: 20px auto 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.portfolio-scrollbar .swiper-scrollbar-drag {
+  background: white;
+  border-radius: 2px;
+  cursor: grab;
+}
+
+.portfolio-scrollbar .swiper-scrollbar-drag:active {
+  cursor: grabbing;
+}
+
+/* Slide Item */
+.portfolio-slide-item {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-slide-item:hover {
+  transform: translateY(-4px);
+}
+
+/* Slide Image Wrapper */
+.portfolio-slide-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  aspect-ratio: 3/4;
+}
+
+.portfolio-slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.portfolio-slide-item:hover .portfolio-slide-image {
+  transform: scale(1.05);
+}
+
+/* Hover Overlay */
+.portfolio-slide-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-slide-item:hover .portfolio-slide-overlay {
+  opacity: 1;
+}
+
+/* Slide Caption */
+.portfolio-slide-caption {
+  padding: 16px 8px;
+  text-align: center;
+}
+
+.portfolio-slide-caption h3 {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.portfolio-slide-caption p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ================================= */
+/* == LIGHTBOX STYLES             == */
+/* ================================= */
+
+.portfolio-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lightbox-prev {
+  left: -70px;
+}
+
+.lightbox-next {
+  right: -70px;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-info {
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  right: 0;
+  text-align: center;
   color: white;
 }
 
-.portfolio-nav-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
+.lightbox-info h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.lightbox-info p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+}
+
+.lightbox-counter {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .lightbox-prev,
+  .lightbox-next {
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+  }
+
+  .lightbox-prev {
+    left: 10px;
+  }
+
+  .lightbox-next {
+    right: 10px;
+  }
+
+  .lightbox-close {
+    top: -40px;
+    right: 10px;
+  }
+
+  .lightbox-info {
+    bottom: -80px;
+    padding: 0 20px;
+  }
+
+  .lightbox-info h3 {
+    font-size: 16px;
+  }
+
+  .lightbox-info p {
+    font-size: 12px;
+  }
 }

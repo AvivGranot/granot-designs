@@ -1,12 +1,12 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, Keyboard, A11y } from 'swiper/modules';
-import type { Swiper as SwiperType } from 'swiper';
+import { Navigation, Pagination, Keyboard, Scrollbar, A11y } from 'swiper/modules';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 // Import actual portfolio images
 import portfolio1 from "@assets/portfolio1_1758397235379.jpg";
@@ -64,7 +64,6 @@ const portfolioItems = [
 export default function PortfolioSection() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);
@@ -85,12 +84,17 @@ export default function PortfolioSection() {
     }
   }, []);
 
-  // Handle keyboard navigation for lightbox
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (!lightboxOpen) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowRight') navigateLightbox('next');
-    if (e.key === 'ArrowLeft') navigateLightbox('prev');
+  // Global keyboard handler for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!lightboxOpen) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') navigateLightbox('next');
+      if (e.key === 'ArrowLeft') navigateLightbox('prev');
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxOpen, closeLightbox, navigateLightbox]);
 
   return (
@@ -98,8 +102,6 @@ export default function PortfolioSection() {
       id="portfolio"
       className="py-20 bg-black text-white"
       data-testid="section-portfolio"
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
     >
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
@@ -111,171 +113,172 @@ export default function PortfolioSection() {
           </p>
         </div>
 
-        <div className="portfolio-carousel-wrapper relative">
-          {/* Navigation Arrows */}
+        <div className="portfolio-carousel-wrapper">
+          {/* Left Arrow */}
           <button
-            className="portfolio-nav-btn portfolio-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300 opacity-70 hover:opacity-100 -translate-x-6 md:translate-x-0"
+            className="portfolio-nav-prev"
             aria-label="Previous slide"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6"/>
-            </svg>
-          </button>
-
-          <button
-            className="portfolio-nav-btn portfolio-next absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300 opacity-70 hover:opacity-100 translate-x-6 md:translate-x-0"
-            aria-label="Next slide"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 18l6-6-6-6"/>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
 
           <Swiper
-            modules={[Navigation, Pagination, Autoplay, Keyboard, A11y]}
+            modules={[Navigation, Pagination, Keyboard, Scrollbar, A11y]}
             slidesPerView="auto"
             centeredSlides={true}
-            spaceBetween={20}
+            spaceBetween={24}
             speed={600}
             loop={true}
             grabCursor={true}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true
-            }}
             navigation={{
-              nextEl: '.portfolio-next',
-              prevEl: '.portfolio-prev'
+              nextEl: '.portfolio-nav-next',
+              prevEl: '.portfolio-nav-prev'
             }}
             pagination={{
               el: '.portfolio-pagination',
-              type: 'progressbar'
+              type: 'bullets',
+              clickable: true,
+              dynamicBullets: true,
+              dynamicMainBullets: 3
+            }}
+            scrollbar={{
+              el: '.portfolio-scrollbar',
+              draggable: true,
+              hide: false,
+              snapOnRelease: true
             }}
             keyboard={{
-              enabled: true
+              enabled: true,
+              onlyInViewport: true
             }}
             a11y={{
               prevSlideMessage: 'Previous slide',
               nextSlideMessage: 'Next slide'
             }}
             breakpoints={{
-              320: { slidesPerView: 1, spaceBetween: 10 },
-              768: { slidesPerView: 2, spaceBetween: 15 },
-              1024: { slidesPerView: 3, spaceBetween: 20 }
+              320: {
+                slidesPerView: 1.2,
+                spaceBetween: 16,
+                centeredSlides: true
+              },
+              640: {
+                slidesPerView: 1.5,
+                spaceBetween: 20
+              },
+              1024: {
+                slidesPerView: 2.5,
+                spaceBetween: 24
+              },
+              1400: {
+                slidesPerView: 3,
+                spaceBetween: 32
+              }
             }}
-            onSwiper={setSwiperInstance}
             className="portfolio-swiper"
             data-testid="carousel-portfolio"
           >
             {portfolioItems.map((item, index) => (
-              <SwiperSlide key={index} data-testid={`slide-portfolio-${index}`}>
+              <SwiperSlide
+                key={index}
+                data-testid={`slide-portfolio-${index}`}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`Slide ${index + 1} of ${portfolioItems.length}`}
+              >
                 <div
-                  className="portfolio-slide-content relative cursor-pointer group"
+                  className="portfolio-slide-item"
                   onClick={() => openLightbox(index)}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
-                  aria-label={`View ${item.title} in lightbox`}
+                  aria-label={`View ${item.title} in fullscreen`}
                 >
-                  <div className="relative overflow-hidden rounded-lg">
+                  <div className="portfolio-slide-image-wrapper">
                     <img
                       src={item.image}
                       alt={item.alt}
-                      className="w-full h-[50vh] md:h-[60vh] object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="portfolio-slide-image"
                       data-testid={`img-portfolio-${index}`}
-                      loading="eager"
+                      loading={index < 3 ? "eager" : "lazy"}
+                      decoding="async"
+                      fetchPriority={index === 0 ? "high" : "auto"}
                       draggable={false}
                     />
                     {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                          <circle cx="11" cy="11" r="8"/>
-                          <path d="M21 21l-4.35-4.35"/>
-                          <path d="M11 8v6"/>
-                          <path d="M8 11h6"/>
-                        </svg>
-                      </div>
+                    <div className="portfolio-slide-overlay">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                        <path d="M11 8v6"/>
+                        <path d="M8 11h6"/>
+                      </svg>
                     </div>
                   </div>
-                  <div className="mt-4 text-center">
-                    <h3 className="text-lg font-medium text-white">{item.title}</h3>
-                    <p className="text-sm text-gray-400 mt-1">{item.alt}</p>
+                  <div className="portfolio-slide-caption">
+                    <h3>{item.title}</h3>
+                    <p>{item.alt}</p>
                   </div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
 
-          {/* Progress bar pagination */}
-          <div className="portfolio-pagination mt-8 h-1 bg-white/20 rounded-full overflow-hidden max-w-md mx-auto"></div>
+          {/* Right Arrow */}
+          <button
+            className="portfolio-nav-next"
+            aria-label="Next slide"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          {/* Pagination Dots */}
+          <div className="portfolio-pagination"></div>
+
+          {/* Scrollbar */}
+          <div className="portfolio-scrollbar"></div>
         </div>
       </div>
 
       {/* Lightbox Modal */}
       {lightboxOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
-          onClick={closeLightbox}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Image lightbox"
-        >
-          {/* Close button */}
-          <button
-            className="absolute top-6 right-6 z-50 w-12 h-12 flex items-center justify-center text-white hover:text-gray-300 transition-colors"
-            onClick={closeLightbox}
-            aria-label="Close lightbox"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 6L6 18"/>
-              <path d="M6 6l12 12"/>
-            </svg>
-          </button>
-
-          {/* Previous button */}
-          <button
-            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 w-14 h-14 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full transition-all"
-            onClick={(e) => { e.stopPropagation(); navigateLightbox('prev'); }}
-            aria-label="Previous image"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6"/>
-            </svg>
-          </button>
-
-          {/* Next button */}
-          <button
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 w-14 h-14 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full transition-all"
-            onClick={(e) => { e.stopPropagation(); navigateLightbox('next'); }}
-            aria-label="Next image"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 18l6-6-6-6"/>
-            </svg>
-          </button>
-
-          {/* Image container */}
-          <div
-            className="max-w-[90vw] max-h-[85vh] relative"
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className="portfolio-lightbox" onClick={closeLightbox}>
+          <div className="lightbox-overlay"></div>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="lightbox-close"
+              onClick={closeLightbox}
+              aria-label="Close lightbox"
+            >
+              ×
+            </button>
+            <button
+              className="lightbox-prev"
+              onClick={() => navigateLightbox('prev')}
+              aria-label="Previous image"
+            >
+              ‹
+            </button>
             <img
               src={portfolioItems[lightboxIndex].image}
               alt={portfolioItems[lightboxIndex].alt}
-              className="max-w-full max-h-[85vh] object-contain rounded-lg"
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
-              <h3 className="text-xl font-medium text-white text-center">
-                {portfolioItems[lightboxIndex].title}
-              </h3>
-              <p className="text-gray-300 text-center mt-2">
-                {portfolioItems[lightboxIndex].alt}
-              </p>
-              <p className="text-gray-500 text-center mt-2 text-sm">
+            <button
+              className="lightbox-next"
+              onClick={() => navigateLightbox('next')}
+              aria-label="Next image"
+            >
+              ›
+            </button>
+            <div className="lightbox-info">
+              <h3>{portfolioItems[lightboxIndex].title}</h3>
+              <p>{portfolioItems[lightboxIndex].alt}</p>
+              <span className="lightbox-counter">
                 {lightboxIndex + 1} / {portfolioItems.length}
-              </p>
+              </span>
             </div>
           </div>
         </div>
