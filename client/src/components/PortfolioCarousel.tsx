@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface PortfolioImage {
   src: string;
@@ -11,17 +11,38 @@ interface PortfolioCarouselProps {
 
 export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  // Intersection Observer to detect when section is visible
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.3 } // Start when 30% of section is visible
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Autoplay only when visible
+  useEffect(() => {
+    if (!isVisible) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000); // 3 seconds per slide, same as hero
+    }, 3000); // 3 seconds per slide
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [isVisible, images.length]);
 
   return (
-    <div className="h-screen w-full relative overflow-hidden">
+    <div ref={containerRef} className="h-screen w-full relative overflow-hidden">
       <div className="relative w-full h-full">
         {images.map((image, index) => {
           const isDafna = image.src.includes('dafna');

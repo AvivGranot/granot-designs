@@ -12,7 +12,6 @@ import PortfolioCarousel from "./PortfolioCarousel";
 // Import portfolio images for mobile carousel
 import mobilePortfolio1 from "@assets/Mobile_Carousel_1_1758782507060.jpg";
 import mobilePortfolio2 from "@assets/Mobile_Carousel_2_1758782507061.png";
-import mobilePortfolio3 from "@assets/Mobile_Carousel_3_1758782507063.png";
 import mobilePortfolio4 from "@assets/Mobile_Carousel_4_1758782507064.png";
 import mobilePortfolio5 from "@assets/Mobile_Carousel_5_1758782511117.png";
 import mobilePortfolio6 from "@assets/Mobile_Carousel_6_1758784141892.png";
@@ -42,7 +41,6 @@ import natanya from "@assets/natanya.png";
 const mobilePortfolioImages = [
   { src: mobilePortfolio1, alt: "פרוייקט נגרות 1 - ארונות מטבח מודרניים" },
   { src: mobilePortfolio2, alt: "פרוייקט נגרות 2 - ספריה מובנית בסלון" },
-  { src: mobilePortfolio3, alt: "פרוייקט נגרות 3 - ארון קיר בחדר שינה" },
   { src: mobilePortfolio4, alt: "פרוייקט נגרות 4 - יחידת טלוויזיה מעוצבת" },
   { src: mobilePortfolio5, alt: "פרוייקט נגרות 5 - פינת עבודה ביתית" },
   { src: mobilePortfolio6, alt: "פרוייקט נגרות 6 - ארונות אמבטיה" },
