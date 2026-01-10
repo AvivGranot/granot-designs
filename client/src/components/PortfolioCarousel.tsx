@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Keyboard, Mousewheel, Scrollbar, Autoplay } from 'swiper/modules';
+import { Keyboard, Mousewheel, Scrollbar } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/scrollbar';
@@ -17,16 +17,12 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
   return (
     <div className="portfolio-carousel-container">
       <Swiper
-        modules={[Keyboard, Mousewheel, Scrollbar, Autoplay]}
+        modules={[Keyboard, Mousewheel, Scrollbar]}
         direction="horizontal"
         slidesPerView={1}
         spaceBetween={0}
         mousewheel={true}
         keyboard={{ enabled: true }}
-        autoplay={{
-          delay: 2000,
-          disableOnInteraction: false,
-        }}
         speed={300}
         loop={true}
         loopAdditionalSlides={2}
