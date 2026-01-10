@@ -1,8 +1,4 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Keyboard, Mousewheel, Scrollbar, Autoplay } from 'swiper/modules';
-
-import 'swiper/css';
-import 'swiper/css/scrollbar';
+import { useState, useEffect } from 'react';
 
 interface PortfolioImage {
   src: string;
@@ -14,52 +10,50 @@ interface PortfolioCarouselProps {
 }
 
 export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000); // 3 seconds per slide, same as hero
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
   return (
-    <div className="portfolio-carousel-container">
-      <Swiper
-        modules={[Keyboard, Mousewheel, Scrollbar, Autoplay]}
-        direction="horizontal"
-        slidesPerView={1}
-        spaceBetween={0}
-        mousewheel={true}
-        keyboard={{ enabled: true }}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        speed={300}
-        loop={true}
-        loopAdditionalSlides={2}
-        rewind={false}
-        preloadImages={true}
-        watchSlidesProgress={true}
-        scrollbar={{
-          el: '.swiper-scrollbar',
-          hide: false,
-          draggable: true,
-        }}
-        className="main-page-swiper"
-      >
+    <div className="h-screen w-full relative overflow-hidden">
+      <div className="relative w-full h-full">
         {images.map((image, index) => {
           const isDafna = image.src.includes('dafna');
           return (
-            <SwiperSlide key={index} className="portfolio-carousel-slide">
-              <div className="portfolio-section-carousel">
-                <div className="portfolio-image-full">
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="full-image"
-                    loading="eager"
-                    style={isDafna ? { objectPosition: '60% center' } : undefined}
-                  />
-                </div>
-              </div>
-            </SwiperSlide>
+            <div
+              key={index}
+              className={`absolute inset-0 w-full h-full transition-opacity ease-in-out ${
+                index === currentIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{
+                transitionDuration: '2000ms',
+                zIndex: index === currentIndex ? 1 : 0,
+                pointerEvents: index === currentIndex ? 'auto' : 'none'
+              }}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="w-full h-full object-cover"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                  objectPosition: isDafna ? '60% center' : 'center'
+                }}
+                draggable={false}
+              />
+            </div>
           );
         })}
-        <div className="swiper-scrollbar"></div>
-      </Swiper>
+      </div>
     </div>
   );
 }

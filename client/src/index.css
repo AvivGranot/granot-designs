@@ -262,28 +262,14 @@ body.main-content-active .nav-toggle-bar:last-child {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 40px 20px;
+  padding: 0;
   direction: rtl;
-  /* Sophisticated gradient background matching Minale + Mann aesthetic */
-  background: linear-gradient(135deg, 
-    rgba(26, 26, 26, 0.95) 0%, 
-    rgba(42, 42, 42, 0.92) 50%, 
-    rgba(26, 26, 26, 0.95) 100%);
+  background: transparent;
 }
 
-/* Subtle texture overlay for portfolio sections */
+/* Removed texture overlay for clean look */
 .portfolio-section-carousel::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.02) 0%, transparent 70%),
-    radial-gradient(circle at 70% 80%, rgba(255,255,255,0.01) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 1;
+  display: none;
 }
 
 /* Ensure content appears above background overlay */
@@ -553,7 +539,7 @@ body.main-content-active .nav-toggle-bar:last-child {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #000;
+    background: transparent;
   }
 
   .portfolio-section-carousel::before {
@@ -644,8 +630,8 @@ body.main-content-active .nav-toggle-bar:last-child {
 
   /* Peek carousel specific mobile styling */
   .portfolio-carousel-slide {
-    background: #000 !important;
-    background-color: #000 !important;
+    background: transparent !important;
+    background-color: transparent !important;
     border-radius: 0;
     overflow: hidden;
   }
@@ -1182,9 +1168,15 @@ header {
 }
 
 .header-scrolled {
-  background-color: rgba(30, 30, 30, 0.95);
+  background-color: rgba(250, 248, 245, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+.header-scrolled a,
+.header-scrolled .nav-link,
+.header-scrolled button span {
+  color: #1a1a1a !important;
 }
 
 /* Desktop Navigation Links */
@@ -1312,7 +1304,7 @@ header {
 /* ================================= */
 
 .about-section {
-  background-color: #1a1a1a;
+  background-color: #faf8f5;
   padding: 60px 20px;
   display: flex;
   align-items: center;
@@ -1329,7 +1321,7 @@ header {
   font-family: var(--font-serif);
   font-size: 3rem;
   font-weight: 700;
-  color: white;
+  color: #1a1a1a;
   text-align: center;
   margin-bottom: 50px;
   position: relative;
@@ -1356,7 +1348,7 @@ header {
   font-family: var(--font-serif);
   font-size: 1.25rem;
   font-style: italic;
-  color: #d4a574;
+  color: #8b6914;
   line-height: 1.8;
   margin-bottom: 30px;
 }
@@ -1365,30 +1357,30 @@ header {
   font-family: var(--font-sans);
   font-size: 1.125rem;
   line-height: 1.9;
-  color: rgba(255, 255, 255, 0.9);
+  color: #333333;
   margin-bottom: 25px;
 }
 
 .about-signature {
   margin-top: 50px;
   padding-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .about-signature p {
-  color: rgba(255, 255, 255, 0.8);
+  color: #555555;
   font-size: 1rem;
   margin-bottom: 5px;
 }
 
 .signature-name {
   font-weight: 600;
-  color: white !important;
+  color: #1a1a1a !important;
 }
 
 .signature-title {
   font-size: 0.9rem !important;
-  color: rgba(255, 255, 255, 0.6) !important;
+  color: #666666 !important;
 }
 
 @media (max-width: 768px) {
@@ -1415,7 +1407,7 @@ header {
 /* ================================= */
 
 .contact-section {
-  background-color: #222222;
+  background-color: #f5f3f0;
   min-height: 60vh;
   padding: 80px 20px;
   display: flex;
@@ -1434,7 +1426,7 @@ header {
   font-family: var(--font-serif);
   font-size: 2.5rem;
   font-weight: 700;
-  color: white;
+  color: #1a1a1a;
   margin-bottom: 50px;
   position: relative;
   padding-bottom: 20px;
@@ -1463,12 +1455,12 @@ header {
 .contact-label {
   display: block;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: #666666;
   margin-bottom: 5px;
 }
 
 .contact-link {
-  color: white;
+  color: #1a1a1a;
   text-decoration: none;
   font-size: 1.25rem;
   font-weight: 500;
@@ -1476,13 +1468,13 @@ header {
 }
 
 .contact-link:hover {
-  color: #d4a574;
+  color: #8b6914;
 }
 
 .contact-hours {
   margin-top: 40px;
   padding-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .contact-hours .contact-label {
@@ -1490,7 +1482,7 @@ header {
 }
 
 .contact-hours p {
-  color: rgba(255, 255, 255, 0.8);
+  color: #555555;
   font-size: 1rem;
   margin-bottom: 8px;
 }
@@ -1556,11 +1548,8 @@ header {
 
 #portfolio {
   min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.95);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
+  background-color: transparent;
+  padding: 0;
 }
 
 /* ================================= */
