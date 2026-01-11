@@ -3,23 +3,34 @@ import { useState } from 'react';
 export default function FloatingShareNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [showCopiedToast, setShowCopiedToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   const pageUrl = typeof window !== 'undefined' ? window.location.href : 'https://granotdesign.com';
   const pageTitle = 'גרנות עיצובים - מטבחים וריהוט פנים בעיצוב אישי';
   const whatsappMessage = 'היי, אני מתעניין/ת בשירותי גרנות עיצובים';
 
-  const handleInstagramShare = async () => {
+  const handleCopyAndOpenShare = async (platform: 'instagram' | 'messenger') => {
+    const urls = {
+      instagram: 'https://www.instagram.com/direct/inbox/',
+      messenger: 'https://www.messenger.com/new/',
+    };
+    const messages = {
+      instagram: 'הקישור הועתק! הדבק/י בהודעה באינסטגרם',
+      messenger: 'הקישור הועתק! הדבק/י בהודעה במסנג\'ר',
+    };
+
     try {
       await navigator.clipboard.writeText(pageUrl);
       setShowCopiedToast(true);
+      setToastMessage(messages[platform]);
       setTimeout(() => setShowCopiedToast(false), 3000);
-      // Open Instagram app/website after a brief delay
+      // Open the app/website after a brief delay
       setTimeout(() => {
-        window.open('https://www.instagram.com/direct/inbox/', '_blank', 'noopener,noreferrer');
+        window.open(urls[platform], '_blank', 'noopener,noreferrer');
       }, 500);
     } catch {
-      // Fallback: just open Instagram
-      window.open('https://www.instagram.com/direct/inbox/', '_blank', 'noopener,noreferrer');
+      // Fallback: just open the platform
+      window.open(urls[platform], '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -36,7 +47,8 @@ export default function FloatingShareNav() {
     },
     {
       name: 'Messenger',
-      url: `fb-messenger://share/?link=${encodeURIComponent(pageUrl)}`,
+      url: '',
+      isMessenger: true,
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
           <path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.614 4.469 8.654V24l4.088-2.242c1.092.301 2.246.464 3.443.464 6.627 0 12-4.974 12-11.111S18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26L10.732 8l3.131 3.259L19.752 8l-6.561 6.963z"/>
@@ -69,7 +81,9 @@ export default function FloatingShareNav() {
 
   const handleShareClick = (link: typeof shareLinks[number]) => {
     if ('isInstagram' in link && link.isInstagram) {
-      handleInstagramShare();
+      handleCopyAndOpenShare('instagram');
+    } else if ('isMessenger' in link && link.isMessenger) {
+      handleCopyAndOpenShare('messenger');
     } else {
       window.open(link.url, '_blank', 'noopener,noreferrer,width=600,height=400');
     }
@@ -77,10 +91,10 @@ export default function FloatingShareNav() {
 
   return (
     <div className="floating-share-nav">
-      {/* Toast notification for Instagram */}
+      {/* Toast notification for copy actions */}
       {showCopiedToast && (
         <div className="copy-toast" style={{ bottom: '70px' }}>
-          הקישור הועתק! הדבק/י בהודעה באינסטגרם
+          {toastMessage}
         </div>
       )}
 
