@@ -32,7 +32,6 @@ import pcPortfolio6 from "@assets/PC_Carousel_6_1758790862083.png";
 import pcPortfolio8 from "@assets/PC_Carousel_8_1758790862084.png";
 import pcAbout1 from "@assets/PC_About_1_1758790964412.png";
 import newPcPortfolio8 from "@assets/PC_Carousel_8_1758796224264.png";
-import newPcPortfolio9 from "@assets/PC_Carousel_9_1758796541477.png";
 import newPcPortfolio10 from "@assets/PC_Carousel_10_1758796936936.png";
 import hodHasharon from "@assets/Hod_Hasharon.jpg";
 import natanya from "@assets/natanya.png";
@@ -57,14 +56,13 @@ const pcPortfolioImages = [
   { src: pcPortfolio2, alt: "מטבח מודרני עם אי מעוצב ותאורה מעלית" },
   { src: pcPortfolio3, alt: "מטבח שחור עם ארונות עליונים וגופי תאורה" },
   { src: pcPortfolio4, alt: "מטבח פתוח עם אי כחול ושולחן עגול מעץ" },
-  { src: pcPortfolio5, alt: "מטבח לבן עם אקסנטים צבעוניים ושטיח גיאומטרי" },
-  { src: pcPortfolio6, alt: "מטבח מודרני עם אי כחול ומשטח עץ טבעי" },
   { src: pcPortfolio8, alt: "מטבח כחול עם אי לבן וכסאות בר מעץ" },
-  { src: newPcPortfolio9, alt: "מטבח לבן עם אי כחול ותאורת קש מעוצבת" },
   { src: newPcPortfolio8, alt: "מטבח מודרני עם אי זהב וכסאות צהובים" },
   { src: newPcPortfolio10, alt: "מטבח בשלבי בנייה - ארונות ירוקים מעוצבים" },
   { src: hodHasharon, alt: "פרוייקט הוד השרון - מטבח מעוצב" },
   { src: pcAbout1, alt: "סקיצת עיצוב נגרות - תכנון מקצועי ויצירתי" },
+  { src: pcPortfolio5, alt: "מטבח לבן עם אקסנטים צבעוניים ושטיח גיאומטרי" },
+  { src: pcPortfolio6, alt: "מטבח מודרני עם אי כחול ומשטח עץ טבעי" },
   { src: natanya, alt: "פרוייקט נתניה - מטבח מעוצב" },
 ];
 
@@ -72,13 +70,11 @@ export default function HomePage() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Set document direction and lang
     document.documentElement.setAttribute('dir', 'rtl');
     document.documentElement.setAttribute('lang', 'he');
   }, []);
 
   useEffect(() => {
-    // Check screen size for mobile/desktop image switching
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 1024);
     };
@@ -95,32 +91,20 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Fixed Navigation */}
       <Navigation />
 
-      {/* Hero Section */}
       <section id="hero">
         <HeroSection />
       </section>
 
-      {/* Portfolio Section - Full Screen Carousel */}
       <section id="portfolio">
         <PortfolioCarousel images={portfolioImages} />
       </section>
 
-      {/* About Section */}
       <AboutSection />
-
-      {/* Contact Section */}
       <ContactSection />
-
-      {/* Floating Contact Button (WhatsApp) */}
       <FloatingContactButton />
-
-      {/* Floating Share Navigation */}
       <FloatingShareNav />
-
-      {/* Mobile Overlay Menu */}
       <OverlayMenu />
     </>
   );
