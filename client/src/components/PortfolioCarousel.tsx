@@ -1,4 +1,5 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
 
 interface PortfolioImage {
   src: string;
@@ -12,7 +13,13 @@ interface PortfolioCarouselProps {
 export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    direction: 'rtl',
+    align: 'center',
+    containScroll: 'trimSnaps',
+    loop: false,
+  });
 
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);
@@ -33,38 +40,9 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
     }
   }, [images.length]);
 
-  const scrollCarousel = useCallback((direction: 'left' | 'right') => {
-    const strip = scrollRef.current;
-    if (!strip) return;
-    const items = strip.querySelectorAll('.portfolio-scroll-item');
-    if (!items.length) return;
-
-    // Find the currently most-visible item
-    const stripRect = strip.getBoundingClientRect();
-    const stripCenter = stripRect.left + stripRect.width / 2;
-    let closestIndex = 0;
-    let closestDist = Infinity;
-    items.forEach((item, i) => {
-      const rect = item.getBoundingClientRect();
-      const itemCenter = rect.left + rect.width / 2;
-      const dist = Math.abs(itemCenter - stripCenter);
-      if (dist < closestDist) {
-        closestDist = dist;
-        closestIndex = i;
-      }
-    });
-
-    // RTL: left arrow = next image (higher index), right arrow = previous image (lower index)
-    const targetIndex = direction === 'left'
-      ? Math.min(items.length - 1, closestIndex + 1)
-      : Math.max(0, closestIndex - 1);
-
-    // Save page scroll, scrollIntoView horizontally, restore page scroll
-    const pageY = window.scrollY;
-    items[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    // Restore vertical position immediately to prevent page jump
-    window.scrollTo({ top: pageY });
-  }, []);
+  // RTL: left arrow = forward (next slide, higher index), right arrow = backward (prev slide)
+  const scrollLeft = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  const scrollRight = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -81,53 +59,55 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
   return (
     <>
       <div className="portfolio-carousel-wrapper">
-        <div className="portfolio-scroll-strip" ref={scrollRef}>
-          {images.map((image, index) => {
-            const isDafna = image.src.includes('dafna');
-            return (
-              <div
-                key={index}
-                className="portfolio-scroll-item"
-                onClick={() => openLightbox(index)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
-                aria-label={`הצג ${image.alt} במסך מלא`}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  loading={index < 3 ? "eager" : "lazy"}
-                  decoding="async"
-                  draggable={false}
-                  style={{
-                    objectPosition: isDafna ? '60% center' : 'center'
-                  }}
-                />
-                <div className="portfolio-grid-overlay">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="M21 21l-4.35-4.35"/>
-                    <path d="M11 8v6"/>
-                    <path d="M8 11h6"/>
-                  </svg>
+        <div className="embla-viewport" ref={emblaRef}>
+          <div className="embla-container">
+            {images.map((image, index) => {
+              const isDafna = image.src.includes('dafna');
+              return (
+                <div
+                  key={index}
+                  className="portfolio-scroll-item"
+                  onClick={() => openLightbox(index)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
+                  aria-label={`הצג ${image.alt} במסך מלא`}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading={index < 3 ? "eager" : "lazy"}
+                    decoding="async"
+                    draggable={false}
+                    style={{
+                      objectPosition: isDafna ? '60% center' : 'center'
+                    }}
+                  />
+                  <div className="portfolio-grid-overlay">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="11" cy="11" r="8"/>
+                      <path d="M21 21l-4.35-4.35"/>
+                      <path d="M11 8v6"/>
+                      <path d="M8 11h6"/>
+                    </svg>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
         <div style={{ direction: 'ltr' }}>
           <button
             className="carousel-arrow carousel-arrow-left"
-            onClick={() => scrollCarousel('left')}
+            onClick={scrollLeft}
             aria-label="שמאלה"
           >
             ‹
           </button>
           <button
             className="carousel-arrow carousel-arrow-right"
-            onClick={() => scrollCarousel('right')}
+            onClick={scrollRight}
             aria-label="ימינה"
           >
             ›

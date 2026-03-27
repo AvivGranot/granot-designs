@@ -17,4 +17,10 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
   },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: ["./client/src/test-setup.ts"],
+    css: true,
+  },
 });

@@ -1708,6 +1708,7 @@ header {
   align-items: center;
   gap: 12px;
   z-index: 1000;
+  pointer-events: none;
 }
 
 .share-links {
@@ -1724,6 +1725,7 @@ header {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 .share-link-btn {
@@ -1757,6 +1759,7 @@ header {
 }
 
 .share-toggle-btn {
+  pointer-events: auto;
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -2100,27 +2103,23 @@ header {
   }
 }
 
-.portfolio-scroll-strip {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  gap: 0;
+/* Embla carousel viewport and container */
+.embla-viewport {
+  overflow: hidden;
   background: #FFFFFF;
-  scrollbar-width: none; /* Firefox */
 }
 
-.portfolio-scroll-strip::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+.embla-container {
+  display: flex;
 }
 
 .portfolio-scroll-item {
   flex: 0 0 85vw;
+  min-width: 0;
   height: 100vh;
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  scroll-snap-align: center;
 }
 
 @media (min-width: 768px) {
