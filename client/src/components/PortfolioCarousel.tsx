@@ -59,11 +59,11 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
       ? Math.min(items.length - 1, closestIndex + 1)
       : Math.max(0, closestIndex - 1);
 
-    // Calculate horizontal scroll offset instead of scrollIntoView (which moves the page vertically on mobile)
-    const targetItem = items[targetIndex] as HTMLElement;
-    const targetCenter = targetItem.offsetLeft + targetItem.offsetWidth / 2;
-    const stripWidth = strip.offsetWidth;
-    strip.scrollTo({ left: targetCenter - stripWidth / 2, behavior: 'smooth' });
+    // Save page scroll, scrollIntoView horizontally, restore page scroll
+    const pageY = window.scrollY;
+    items[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    // Restore vertical position immediately to prevent page jump
+    window.scrollTo({ top: pageY });
   }, []);
 
   useEffect(() => {
