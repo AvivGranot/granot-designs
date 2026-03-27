@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 
 interface PortfolioImage {
   src: string;
@@ -10,71 +10,160 @@ interface PortfolioCarouselProps {
 }
 
 export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer to detect when section is visible
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.3 } // Start when 30% of section is visible
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
+  const openLightbox = useCallback((index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+    document.body.style.overflow = 'hidden';
   }, []);
 
-  // Autoplay only when visible
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false);
+    document.body.style.overflow = '';
+  }, []);
+
+  const navigateLightbox = useCallback((direction: 'prev' | 'next') => {
+    if (direction === 'next') {
+      setLightboxIndex((prev) => (prev + 1) % images.length);
+    } else {
+      setLightboxIndex((prev) => (prev - 1 + images.length) % images.length);
+    }
+  }, [images.length]);
+
+  const scrollCarousel = useCallback((direction: 'left' | 'right') => {
+    const strip = scrollRef.current;
+    if (!strip) return;
+    const items = strip.querySelectorAll('.portfolio-scroll-item');
+    if (!items.length) return;
+
+    // Find the currently most-visible item
+    const stripRect = strip.getBoundingClientRect();
+    const stripCenter = stripRect.left + stripRect.width / 2;
+    let closestIndex = 0;
+    let closestDist = Infinity;
+    items.forEach((item, i) => {
+      const rect = item.getBoundingClientRect();
+      const itemCenter = rect.left + rect.width / 2;
+      const dist = Math.abs(itemCenter - stripCenter);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closestIndex = i;
+      }
+    });
+
+    // RTL: left arrow = next image (higher index), right arrow = previous image (lower index)
+    const targetIndex = direction === 'left'
+      ? Math.min(items.length - 1, closestIndex + 1)
+      : Math.max(0, closestIndex - 1);
+
+    items[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }, []);
+
   useEffect(() => {
-    if (!isVisible) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!lightboxOpen) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') navigateLightbox('next');
+      if (e.key === 'ArrowLeft') navigateLightbox('prev');
+    };
 
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000); // 3 seconds per slide
-
-    return () => clearInterval(interval);
-  }, [isVisible, images.length]);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen, closeLightbox, navigateLightbox]);
 
   return (
-    <div ref={containerRef} className="h-screen w-full relative overflow-hidden">
-      <div className="relative w-full h-full">
-        {images.map((image, index) => {
-          const isDafna = image.src.includes('dafna');
-          return (
-            <div
-              key={index}
-              className={`absolute inset-0 w-full h-full transition-opacity ease-in-out ${
-                index === currentIndex ? 'opacity-100' : 'opacity-0'
-              }`}
-              style={{
-                transitionDuration: '2000ms',
-                zIndex: index === currentIndex ? 1 : 0,
-                pointerEvents: index === currentIndex ? 'auto' : 'none'
-              }}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  display: 'block',
-                  objectPosition: isDafna ? '60% center' : 'center'
-                }}
-                draggable={false}
-              />
-            </div>
-          );
-        })}
+    <>
+      <div className="portfolio-carousel-wrapper">
+        <div className="portfolio-scroll-strip" ref={scrollRef}>
+          {images.map((image, index) => {
+            const isDafna = image.src.includes('dafna');
+            return (
+              <div
+                key={index}
+                className="portfolio-scroll-item"
+                onClick={() => openLightbox(index)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
+                aria-label={`הצג ${image.alt} במסך מלא`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading={index < 3 ? "eager" : "lazy"}
+                  decoding="async"
+                  draggable={false}
+                  style={{
+                    objectPosition: isDafna ? '60% center' : 'center'
+                  }}
+                />
+                <div className="portfolio-grid-overlay">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                    <path d="M11 8v6"/>
+                    <path d="M8 11h6"/>
+                  </svg>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div style={{ direction: 'ltr' }}>
+          <button
+            className="carousel-arrow carousel-arrow-left"
+            onClick={() => scrollCarousel('left')}
+            aria-label="שמאלה"
+          >
+            ‹
+          </button>
+          <button
+            className="carousel-arrow carousel-arrow-right"
+            onClick={() => scrollCarousel('right')}
+            aria-label="ימינה"
+          >
+            ›
+          </button>
+        </div>
       </div>
-    </div>
+
+      {/* Lightbox Modal */}
+      {lightboxOpen && (
+        <div className="portfolio-lightbox" onClick={closeLightbox}>
+          <div className="lightbox-overlay"></div>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="lightbox-close"
+              onClick={closeLightbox}
+              aria-label="סגור"
+            >
+              ×
+            </button>
+            <button
+              className="lightbox-prev"
+              onClick={() => navigateLightbox('prev')}
+              aria-label="תמונה קודמת"
+            >
+              ‹
+            </button>
+            <img
+              src={images[lightboxIndex].src}
+              alt={images[lightboxIndex].alt}
+            />
+            <button
+              className="lightbox-next"
+              onClick={() => navigateLightbox('next')}
+              aria-label="תמונה הבאה"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

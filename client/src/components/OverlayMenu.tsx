@@ -74,7 +74,7 @@ export default function OverlayMenu() {
 
   return (
     <div
-      className="fixed inset-0 bg-black/95 backdrop-blur-sm z-[1000] transition-opacity duration-300"
+      className="fixed inset-0 bg-white/97 backdrop-blur-sm z-[1000] transition-opacity duration-300"
       style={{ display: 'none' }}
       id="overlayMenu"
       data-testid="overlay-menu"
@@ -83,15 +83,24 @@ export default function OverlayMenu() {
       aria-modal="true"
       aria-labelledby="nav-title"
     >
+      {/* Close Button */}
+      <button
+        onClick={handleMenuClose}
+        className="absolute top-24 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-transparent text-black text-4xl cursor-pointer transition-all z-10"
+        aria-label="סגור תפריט"
+      >
+        ×
+      </button>
+
       {/* Main Navigation Menu */}
       <div className="absolute top-1/2 right-1/2 transform translate-x-1/2 -translate-y-1/2 text-center">
         <h2 id="nav-title" className="sr-only">תפריט ראשי</h2>
-        <ul className="space-y-10 text-white">
+        <ul className="space-y-10 text-black">
           {menuItems.map((item, index) => (
             <li key={index}>
               <button
                 onClick={() => handleSectionClick(item.sectionId)}
-                className="text-4xl font-black transition-all tracking-wide uppercase hover:text-gray-300 hover:-translate-y-1 hover:scale-105"
+                className="text-4xl font-black transition-all tracking-wide uppercase hover:text-gray-600 hover:-translate-y-1 hover:scale-105"
                 data-testid={`link-nav-${index}`}
                 tabIndex={0}
                 role="button"

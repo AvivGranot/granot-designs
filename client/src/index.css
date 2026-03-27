@@ -4,17 +4,21 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #FFFFFF;
+}
+
 :root {
-  --background: hsl(40, 25%, 97%);
+  --background: hsl(0, 0%, 100%);
   --foreground: hsl(0, 0%, 10%);
   --card: hsl(0, 0%, 100%);
   --card-foreground: hsl(0, 0%, 10%);
   --popover: hsl(0, 0%, 100%);
   --popover-foreground: hsl(0, 0%, 10%);
   --primary: hsl(0, 0%, 17%);
-  --primary-foreground: hsl(40, 25%, 97%);
+  --primary-foreground: hsl(0, 0%, 100%);
   --secondary: hsl(28, 75%, 19%);
-  --secondary-foreground: hsl(40, 25%, 97%);
+  --secondary-foreground: hsl(0, 0%, 100%);
   --muted: hsl(0, 0%, 91%);
   --muted-foreground: hsl(0, 0%, 45%);
   --accent: hsl(45, 59%, 52%);
@@ -264,7 +268,7 @@ body.main-content-active .nav-toggle-bar:last-child {
   position: relative;
   padding: 0;
   direction: rtl;
-  background: transparent;
+  background: #FFFFFF;
 }
 
 /* Removed texture overlay for clean look */
@@ -1304,7 +1308,7 @@ header {
 /* ================================= */
 
 .about-section {
-  background-color: #faf8f5;
+  background-color: #FFFFFF;
   padding: 60px 20px;
   display: flex;
   align-items: center;
@@ -1407,7 +1411,7 @@ header {
 /* ================================= */
 
 .contact-section {
-  background-color: #faf8f5;
+  background-color: #FFFFFF;
   min-height: 60vh;
   padding: 80px 20px;
   display: flex;
@@ -2040,6 +2044,124 @@ header {
 }
 
 /* ================================= */
+/* == PORTFOLIO SCROLL STRIP      == */
+/* ================================= */
+
+.portfolio-carousel-wrapper {
+  position: relative;
+  background: #FFFFFF;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 2.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  line-height: 1;
+}
+
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-arrow-left {
+  left: 16px;
+  right: auto;
+}
+
+.carousel-arrow-right {
+  right: 16px;
+  left: auto;
+}
+
+@media (max-width: 767px) {
+  .carousel-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+  }
+  .carousel-arrow-left {
+    left: 8px;
+  }
+  .carousel-arrow-right {
+    right: 8px;
+  }
+}
+
+.portfolio-scroll-strip {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 0;
+  background: #FFFFFF;
+  scrollbar-width: none; /* Firefox */
+}
+
+.portfolio-scroll-strip::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.portfolio-scroll-item {
+  flex: 0 0 85vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  scroll-snap-align: center;
+}
+
+@media (min-width: 768px) {
+  .portfolio-scroll-item {
+    flex: 0 0 60vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-scroll-item {
+    flex: 0 0 45vw;
+  }
+}
+
+.portfolio-scroll-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.portfolio-scroll-item:hover img {
+  transform: scale(1.03);
+}
+
+.portfolio-grid-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-scroll-item:hover .portfolio-grid-overlay {
+  opacity: 1;
+}
+
+/* ================================= */
 /* == LIGHTBOX STYLES             == */
 /* ================================= */
 
@@ -2055,7 +2177,7 @@ header {
 .lightbox-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(255, 255, 255, 0.97);
 }
 
 .lightbox-content {
@@ -2078,22 +2200,22 @@ header {
   position: absolute;
   top: -50px;
   right: 0;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.15);
   border: none;
   border-radius: 50%;
-  color: white;
+  color: #333;
   font-size: 32px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   transform: scale(1.1);
 }
 
@@ -2107,10 +2229,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.15);
   border: none;
   border-radius: 50%;
-  color: white;
+  color: #333;
   font-size: 36px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -2126,7 +2248,7 @@ header {
 
 .lightbox-prev:hover,
 .lightbox-next:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   transform: translateY(-50%) scale(1.1);
 }
 
