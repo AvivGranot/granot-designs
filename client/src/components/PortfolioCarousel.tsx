@@ -143,24 +143,28 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
             >
               ×
             </button>
-            <button
-              className="lightbox-prev"
-              onClick={() => navigateLightbox('prev')}
-              aria-label="תמונה קודמת"
-            >
-              ‹
-            </button>
+            <div style={{ direction: 'ltr' }}>
+              <button
+                className="lightbox-prev"
+                onClick={() => navigateLightbox('next')}
+                aria-label="תמונה הבאה"
+              >
+                ‹
+              </button>
+            </div>
             <img
               src={images[lightboxIndex].src}
               alt={images[lightboxIndex].alt}
             />
-            <button
-              className="lightbox-next"
-              onClick={() => navigateLightbox('next')}
-              aria-label="תמונה הבאה"
-            >
-              ›
-            </button>
+            <div style={{ direction: 'ltr' }}>
+              <button
+                className="lightbox-next"
+                onClick={() => navigateLightbox('prev')}
+                aria-label="תמונה קודמת"
+              >
+                ›
+              </button>
+            </div>
           </div>
         </div>
       )}
