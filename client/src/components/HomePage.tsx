@@ -35,12 +35,15 @@ import newPcPortfolio8 from "@assets/PC_Carousel_8_1758796224264.webp";
 import newPcPortfolio10 from "@assets/PC_Carousel_10_1758796936936.webp";
 import hodHasharon from "@assets/Hod_Hasharon.webp";
 import natanya from "@assets/natanya.webp";
+import closetPc from "@assets/closet_pc.webp";
+import closetMobile from "@assets/closet_mobile.webp";
 
 // Portfolio images arrays
 const mobilePortfolioImages = [
   { src: mobilePortfolio1, alt: "פרוייקט נגרות 1 - ארונות מטבח מודרניים" },
   { src: mobilePortfolio2, alt: "פרוייקט נגרות 2 - ספריה מובנית בסלון" },
   { src: mobilePortfolio6, alt: "פרוייקט נגרות 6 - ארונות אמבטיה" },
+  { src: closetMobile, alt: "ארון בגדים לבן מובנה עם ידיות ארוכות" },
   { src: mobilePortfolio7, alt: "פרוייקט נגרות 7 - מטבח כפרי" },
   { src: mobilePortfolio8, alt: "פרוייקט נגרות 8 - ארון הזזה בחדר ילדים" },
   { src: mobilePortfolio9, alt: "פרוייקט נגרות 9 - ארונות משרד" },
@@ -55,6 +58,7 @@ const pcPortfolioImages = [
   { src: pcPortfolio1, alt: "חדר שינה מינימליסטי עם ארונות לבנים מובנים" },
   { src: pcPortfolio2, alt: "מטבח מודרני עם אי מעוצב ותאורה מעלית" },
   { src: newPcPortfolio10, alt: "מטבח בשלבי בנייה - ארונות ירוקים מעוצבים" },
+  { src: closetPc, alt: "ארון בגדים לבן מובנה עם נישת אחסון ותאורת LED" },
   { src: hodHasharon, alt: "פרוייקט הוד השרון - מטבח מעוצב" },
   { src: natanya, alt: "פרוייקט נתניה - מטבח מעוצב" },
   { src: pcPortfolio5, alt: "מטבח לבן עם אקסנטים צבעוניים ושטיח גיאומטרי" },
