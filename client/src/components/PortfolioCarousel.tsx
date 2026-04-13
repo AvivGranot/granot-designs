@@ -63,6 +63,12 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
           <div className="embla-container">
             {images.map((image, index) => {
               const isDafna = image.src.includes('dafna');
+              const isWa2 = image.src.includes('_wa2_');
+              const objectPosition = isDafna
+                ? '60% center'
+                : isWa2
+                  ? '30% center'
+                  : 'center';
               return (
                 <div
                   key={index}
@@ -80,7 +86,7 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
                     decoding="async"
                     draggable={false}
                     style={{
-                      objectPosition: isDafna ? '60% center' : 'center'
+                      objectPosition
                     }}
                   />
                   <div className="portfolio-grid-overlay">
