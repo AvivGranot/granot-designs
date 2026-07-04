@@ -54,8 +54,8 @@ function dedupe(list: Project[]): Project[] {
 }
 
 const KITCHENS = new Set(["מטבחים", "הוד השרון", "נתניה"]);
-const STORAGE = new Set(["ארונות", "חדרי שינה", "נגרות אומן"]);
-const LIVING = new Set(["סלון", "אמבטיה", "חדרי ילדים", "משרד", "פינות עבודה", "פינות אוכל"]);
+const STORAGE = new Set(["ארונות", "חדרי שינה", "נגרות אומן", "חדרי ילדים", "משרד"]);
+const LIVING = new Set(["סלון", "אמבטיה", "פינות עבודה", "פינות אוכל"]);
 
 const ALL = dedupe([
   heroAsProject(heroImages.penthouseKitchen, "מטבחים"),
@@ -77,7 +77,7 @@ interface Wing {
 const WINGS: Wing[] = [
   { id: "kitchens", letter: "א", title: "מטבחים", pieces: ALL.filter((p) => KITCHENS.has(p.label)) },
   { id: "storage", letter: "ב", title: "ארונות וחדרי שינה", pieces: ALL.filter((p) => STORAGE.has(p.label)) },
-  { id: "living", letter: "ג", title: "חללי הבית", pieces: ALL.filter((p) => LIVING.has(p.label)) },
+  { id: "living", letter: "ג", title: "חדרי רחצה", pieces: ALL.filter((p) => LIVING.has(p.label)) },
 ];
 
 const TOTAL = WINGS.reduce((n, w) => n + w.pieces.length, 0);
