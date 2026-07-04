@@ -59,7 +59,7 @@ export interface Project {
 // Landscape (PC) shots — best for wide cards and rows
 export const wideProjects: Project[] = [
   { src: pcPortfolio2, alt: "מטבח מודרני עם אי מעוצב ותאורה מעלית", label: "מטבחים" },
-  { src: hodHasharon, alt: "פרוייקט הוד השרון - מטבח מעוצב", label: "הוד השרון" },
+  { src: hodHasharon, alt: "פרוייקט הוד השרון - קיר טלוויזיה עם ספריה מובנית", label: "הוד השרון" },
   { src: natanya, alt: "פרוייקט נתניה - מטבח מעוצב", label: "נתניה" },
   { src: pcPortfolio1, alt: "חדר שינה מינימליסטי עם ארונות לבנים מובנים", label: "חדרי שינה" },
   { src: pcPortfolio4, alt: "מטבח פתוח עם אי כחול ושולחן עגול מעץ", label: "מטבחים" },
@@ -77,7 +77,7 @@ export const wideProjects: Project[] = [
 export const tallProjects: Project[] = [
   { src: mobilePortfolio1, alt: "ארונות מטבח מודרניים", label: "מטבחים", portrait: true },
   { src: mobilePortfolio2, alt: "מטבח יוקרתי עם אי שיש כהה ותאורה תלויה", label: "מטבחים", portrait: true },
-  { src: mobilePortfolio6, alt: "מטבח כפרי ירוק עם אי - בשלבי התקנה", label: "מטבחים", portrait: true },
+  { src: mobilePortfolio6, alt: "ארונות ירוקים בהתאמה אישית - בשלבי התקנה", label: "ארונות", portrait: true },
   { src: mobilePortfolio7, alt: "מטבח כפרי", label: "מטבחים", portrait: true },
   { src: mobilePortfolio8, alt: "ארון הזזה בחדר ילדים", label: "חדרי ילדים", portrait: true },
   { src: mobilePortfolio9, alt: "ארונות משרד", label: "משרד", portrait: true },

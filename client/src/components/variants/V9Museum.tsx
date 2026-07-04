@@ -53,8 +53,8 @@ function dedupe(list: Project[]): Project[] {
   return list.filter((p) => !seen.has(p.src) && seen.add(p.src));
 }
 
-const KITCHENS = new Set(["מטבחים", "הוד השרון", "נתניה"]);
-const STORAGE = new Set(["ארונות", "חדרי שינה", "נגרות אומן", "חדרי ילדים", "משרד"]);
+const KITCHENS = new Set(["מטבחים", "נתניה"]);
+const STORAGE = new Set(["ארונות", "חדרי שינה", "נגרות אומן", "חדרי ילדים", "משרד", "הוד השרון"]);
 const LIVING = new Set(["סלון", "אמבטיה", "פינות עבודה", "פינות אוכל"]);
 
 const ALL = dedupe([
