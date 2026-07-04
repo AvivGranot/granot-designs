@@ -48,8 +48,8 @@ export default function V6Split() {
               className="relative w-full max-h-[420px] md:max-h-[560px] object-cover rounded-xl"
             />
             <img
-              src={heroImages.understairsStorage.src}
-              alt={heroImages.understairsStorage.alt}
+              src={heroImages.wardrobeOakShelves.src}
+              alt={heroImages.wardrobeOakShelves.alt}
               loading="eager"
               decoding="async"
               className="absolute -bottom-8 -right-3 md:-bottom-10 md:-right-6 w-28 md:w-40 rounded-lg shadow-xl rotate-[-4deg] border-4 border-white"
