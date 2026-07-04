@@ -65,7 +65,7 @@ const ALL = dedupe([
   ...newProjects,
   ...wideProjects,
   ...tallProjects,
-]);
+]).filter((p) => p.alt !== "ארונות גובה מפורניר אלון"); // removed from the exhibition per Aviv
 
 interface Wing {
   id: string;
