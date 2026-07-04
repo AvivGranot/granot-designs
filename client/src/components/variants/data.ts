@@ -29,6 +29,20 @@ import closetMobile from "@assets/closet_mobile.webp";
 import waPc2 from "@assets/PC_Carousel_wa2_1776068488860.webp";
 import waMobile2 from "@assets/Mobile_Carousel_wa2_1776068488860.webp";
 
+// New photos (2026-07-04 batch from Aviv)
+import heroPenthouseKitchen from "@assets/hero_penthouse_kitchen.webp";
+import oakCounterCloseup from "@assets/oak_counter_closeup.webp";
+import sageKitchenBlackUnit from "@assets/sage_kitchen_black_unit.webp";
+import wardrobeWhiteGray from "@assets/wardrobe_white_gray.webp";
+import oakTallUnits from "@assets/oak_tall_units.webp";
+import navyOakNiche from "@assets/navy_oak_niche.webp";
+import wardrobeTvWall from "@assets/wardrobe_tv_wall.webp";
+import kitchenOakIsland from "@assets/kitchen_oak_island.webp";
+import understairsStorage from "@assets/understairs_storage.webp";
+import wardrobeOakShelves from "@assets/wardrobe_oak_shelves.webp";
+import heroWardrobePan from "@assets/hero_wardrobe_pan.mp4";
+import heroWardrobePoster from "@assets/hero_wardrobe_poster.webp";
+
 export const CONTACT = {
   phoneDisplay: "054-327-3719",
   phoneHref: "tel:054-327-3719",
@@ -83,6 +97,45 @@ export const sketchImage: Project = {
   alt: "סקיצת עיצוב נגרות - תכנון מקצועי ויצירתי",
   label: "תכנון",
 };
+
+// 2026-07-04 batch — fresh installs, no people in frame
+export const newProjects: Project[] = [
+  { src: kitchenOakIsland, alt: "מטבח לבן עם אי וחזיתות אלון טבעי", label: "מטבחים" },
+  { src: sageKitchenBlackUnit, alt: "מטבח ירוק־אפור עם משטח אלון וקיר נגרות שחור", label: "מטבחים" },
+  { src: wardrobeTvWall, alt: "קיר ארונות לבן עם נישת טלוויזיה", label: "ארונות" },
+  { src: oakTallUnits, alt: "ארונות גובה מפורניר אלון", label: "ארונות" },
+  { src: wardrobeWhiteGray, alt: "ארון חדר שינה לבן עם יחידת מגירות", label: "חדרי שינה" },
+  { src: understairsStorage, alt: "אחסון בהתאמה מלאה מתחת למדרגות", label: "נגרות אומן", portrait: true },
+];
+
+export const heroImages = {
+  penthouseKitchen: {
+    src: heroPenthouseKitchen,
+    alt: "מטבח פנטהאוז עם משטח אלון ונוף עירוני",
+  },
+  oakCounterCloseup: {
+    src: oakCounterCloseup,
+    alt: "משטח אלון בעבודת יד במטבח קלאסי",
+  },
+  navyOakNiche: {
+    src: navyOakNiche,
+    alt: "ארון כחול־כהה עם נישת מדפי אלון",
+  },
+  understairsStorage: {
+    src: understairsStorage,
+    alt: "ארונות בהתאמה אישית מתחת למדרגות עם נישת אלון",
+  },
+  wardrobeOakShelves: {
+    src: wardrobeOakShelves,
+    alt: "חדר ארונות לבן עם מדפי אלון",
+  },
+} as const;
+
+export const heroVideo = {
+  src: heroWardrobePan,
+  poster: heroWardrobePoster,
+  alt: "סיור וידאו בארון קיר בהתקנה אמיתית",
+} as const;
 
 // Only true, verifiable facts — no invented claims
 export const FACTS = [
