@@ -39,9 +39,16 @@ import closetPc from "@assets/closet_pc.webp";
 import closetMobile from "@assets/closet_mobile.webp";
 import waPc2 from "@assets/PC_Carousel_wa2_1776068488860.webp";
 import waMobile2 from "@assets/Mobile_Carousel_wa2_1776068488860.webp";
+import heroPenthouseKitchen from "@assets/hero_penthouse_kitchen.webp";
+import sageKitchenBlackUnit from "@assets/sage_kitchen_black_unit.webp";
+import tvWallOakNiche from "@assets/tv_wall_oak_niche.webp";
+import wardrobeWhiteGray from "@assets/wardrobe_white_gray.webp";
+import navyOakNiche from "@assets/navy_oak_niche.webp";
+import oakCounterCloseup from "@assets/oak_counter_closeup.webp";
 
 // Portfolio images arrays
 const mobilePortfolioImages = [
+  { src: oakCounterCloseup, alt: "מטבח קלאסי עם משטח בר מעץ אלון מלא" },
   { src: mobilePortfolio1, alt: "פרוייקט נגרות 1 - ארונות מטבח מודרניים" },
   { src: mobilePortfolio2, alt: "פרוייקט נגרות 2 - ספריה מובנית בסלון" },
   { src: mobilePortfolio6, alt: "פרוייקט נגרות 6 - ארונות אמבטיה" },
@@ -58,6 +65,11 @@ const mobilePortfolioImages = [
 ];
 
 const pcPortfolioImages = [
+  { src: heroPenthouseKitchen, alt: "מטבח פנטהאוז עם משטח אלון ונוף לים" },
+  { src: sageKitchenBlackUnit, alt: "מטבח מודרני עם משטח בר מאלון ויחידה שחורה" },
+  { src: tvWallOakNiche, alt: "קיר טלוויזיה עם נישת אלון וארונות אפורים" },
+  { src: wardrobeWhiteGray, alt: "ארונות קיר לבנים עם יחידת מגירות אפורה" },
+  { src: navyOakNiche, alt: "ארון כחול כהה עם נישת מדפי אלון" },
   { src: pcPortfolio1, alt: "חדר שינה מינימליסטי עם ארונות לבנים מובנים" },
   { src: pcPortfolio2, alt: "מטבח מודרני עם אי מעוצב ותאורה מעלית" },
   { src: newPcPortfolio10, alt: "מטבח בשלבי בנייה - ארונות ירוקים מעוצבים" },
