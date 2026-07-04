@@ -78,12 +78,6 @@ const WINGS: Wing[] = [
   { id: "kitchens", letter: "א", title: "מטבחים", pieces: ALL.filter((p) => KITCHENS.has(p.label)) },
   { id: "storage", letter: "ב", title: "ארונות וחדרי שינה", pieces: ALL.filter((p) => STORAGE.has(p.label)) },
   { id: "living", letter: "ג", title: "חללי הבית", pieces: ALL.filter((p) => LIVING.has(p.label)) },
-  {
-    id: "craft",
-    letter: "ד",
-    title: "מהנגרייה",
-    pieces: ALL.filter((p) => !KITCHENS.has(p.label) && !STORAGE.has(p.label) && !LIVING.has(p.label)),
-  },
 ];
 
 const TOTAL = WINGS.reduce((n, w) => n + w.pieces.length, 0);
