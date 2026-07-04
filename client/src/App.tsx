@@ -17,6 +17,9 @@ const V5Heritage = lazy(() => import("./components/variants/V5Heritage"));
 const V6Architect = lazy(() => import("./components/variants/V6Architect"));
 const V7Immersive = lazy(() => import("./components/variants/V7Immersive"));
 const V8Bento = lazy(() => import("./components/variants/V8Bento"));
+const V9Museum = lazy(() => import("./components/variants/V9Museum"));
+const V10Stone = lazy(() => import("./components/variants/V10Stone"));
+const V11Porcelain = lazy(() => import("./components/variants/V11Porcelain"));
 
 function Router() {
   return (
@@ -30,6 +33,9 @@ function Router() {
         <Route path="/v6" component={V6Architect} />
         <Route path="/v7" component={V7Immersive} />
         <Route path="/v8" component={V8Bento} />
+        <Route path="/v9" component={V9Museum} />
+        <Route path="/v10" component={V10Stone} />
+        <Route path="/v11" component={V11Porcelain} />
         <Route path="/" component={HomePage} />
         <Route path="*" component={HomePage} />
       </Switch>
