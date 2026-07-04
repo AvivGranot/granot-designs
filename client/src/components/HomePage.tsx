@@ -50,17 +50,17 @@ import oakCounterCloseup from "@assets/oak_counter_closeup.webp";
 const mobilePortfolioImages = [
   { src: oakCounterCloseup, alt: "מטבח קלאסי עם משטח בר מעץ אלון מלא" },
   { src: mobilePortfolio1, alt: "פרוייקט נגרות 1 - ארונות מטבח מודרניים" },
-  { src: mobilePortfolio2, alt: "פרוייקט נגרות 2 - ספריה מובנית בסלון" },
-  { src: mobilePortfolio6, alt: "פרוייקט נגרות 6 - ארונות אמבטיה" },
+  { src: mobilePortfolio2, alt: "פרוייקט נגרות 2 - מטבח יוקרתי עם אי שיש כהה" },
+  { src: mobilePortfolio6, alt: "פרוייקט נגרות 6 - מטבח כפרי ירוק עם אי" },
   { src: mobilePortfolio7, alt: "פרוייקט נגרות 7 - מטבח כפרי" },
   { src: mobilePortfolio8, alt: "פרוייקט נגרות 8 - ארון הזזה בחדר ילדים" },
   { src: mobilePortfolio9, alt: "פרוייקט נגרות 9 - ארונות משרד" },
   { src: waMobile2, alt: "פרוייקט נגרות - עבודת נגרות מקצועית" },
   { src: dafna, alt: "פרוייקט דפנה - עיצוב נגרות מותאם אישית" },
-  { src: mobilePortfolio4, alt: "פרוייקט נגרות 4 - יחידת טלוויזיה מעוצבת" },
-  { src: mobilePortfolio5, alt: "פרוייקט נגרות 5 - פינת עבודה ביתית" },
+  { src: mobilePortfolio4, alt: "פרוייקט נגרות 4 - מטבח שחור כפרי עם נישת תצוגה מעץ" },
+  { src: mobilePortfolio5, alt: "פרוייקט נגרות 5 - מטבח לבן עם אקסנטים צבעוניים" },
   { src: closetMobile, alt: "ארון בגדים לבן מובנה עם ידיות ארוכות" },
-  { src: mobilePortfolio10, alt: "פרוייקט נגרות 10 - פינת אוכל מובנית" },
+  { src: mobilePortfolio10, alt: "פרוייקט נגרות 10 - חדר רחצה עם ארון אמבטיה כפול" },
   { src: mobilePortfolio11, alt: "פרוייקט נגרות 11 - חדר רחצה מעוצב ומינימליסטי" },
 ];
 

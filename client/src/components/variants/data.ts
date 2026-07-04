@@ -34,7 +34,6 @@ import heroPenthouseKitchen from "@assets/hero_penthouse_kitchen.webp";
 import oakCounterCloseup from "@assets/oak_counter_closeup.webp";
 import sageKitchenBlackUnit from "@assets/sage_kitchen_black_unit.webp";
 import wardrobeWhiteGray from "@assets/wardrobe_white_gray.webp";
-import oakTallUnits from "@assets/oak_tall_units.webp";
 import navyOakNiche from "@assets/navy_oak_niche.webp";
 import wardrobeTvWall from "@assets/wardrobe_tv_wall.webp";
 import kitchenOakIsland from "@assets/kitchen_oak_island.webp";
@@ -77,16 +76,16 @@ export const wideProjects: Project[] = [
 // Portrait (mobile) shots — best for masonry and single-column
 export const tallProjects: Project[] = [
   { src: mobilePortfolio1, alt: "ארונות מטבח מודרניים", label: "מטבחים", portrait: true },
-  { src: mobilePortfolio2, alt: "ספריה מובנית בסלון", label: "סלון", portrait: true },
-  { src: mobilePortfolio6, alt: "ארונות אמבטיה", label: "אמבטיה", portrait: true },
+  { src: mobilePortfolio2, alt: "מטבח יוקרתי עם אי שיש כהה ותאורה תלויה", label: "מטבחים", portrait: true },
+  { src: mobilePortfolio6, alt: "מטבח כפרי ירוק עם אי - בשלבי התקנה", label: "מטבחים", portrait: true },
   { src: mobilePortfolio7, alt: "מטבח כפרי", label: "מטבחים", portrait: true },
   { src: mobilePortfolio8, alt: "ארון הזזה בחדר ילדים", label: "חדרי ילדים", portrait: true },
   { src: mobilePortfolio9, alt: "ארונות משרד", label: "משרד", portrait: true },
   { src: dafna, alt: "עיצוב נגרות מותאם אישית", label: "עיצוב אישי", portrait: true },
-  { src: mobilePortfolio4, alt: "יחידת טלוויזיה מעוצבת", label: "סלון", portrait: true },
-  { src: mobilePortfolio5, alt: "פינת עבודה ביתית", label: "פינות עבודה", portrait: true },
+  { src: mobilePortfolio4, alt: "מטבח שחור כפרי עם נישת תצוגה מעץ", label: "מטבחים", portrait: true },
+  { src: mobilePortfolio5, alt: "מטבח לבן עם אקסנטים צבעוניים ושטיח גיאומטרי", label: "מטבחים", portrait: true },
   { src: closetMobile, alt: "ארון בגדים לבן מובנה עם ידיות ארוכות", label: "ארונות", portrait: true },
-  { src: mobilePortfolio10, alt: "פינת אוכל מובנית", label: "פינות אוכל", portrait: true },
+  { src: mobilePortfolio10, alt: "חדר רחצה עם ארון אמבטיה תלוי כפול", label: "אמבטיה", portrait: true },
   { src: mobilePortfolio11, alt: "חדר רחצה מעוצב ומינימליסטי", label: "אמבטיה", portrait: true },
   { src: waMobile2, alt: "עבודת נגרות מקצועית", label: "נגרות", portrait: true },
 ];
@@ -103,7 +102,6 @@ export const newProjects: Project[] = [
   { src: kitchenOakIsland, alt: "מטבח לבן עם אי וחזיתות אלון טבעי", label: "מטבחים" },
   { src: sageKitchenBlackUnit, alt: "מטבח ירוק־אפור עם משטח אלון וקיר נגרות שחור", label: "מטבחים" },
   { src: wardrobeTvWall, alt: "קיר ארונות לבן עם נישת טלוויזיה", label: "ארונות" },
-  { src: oakTallUnits, alt: "ארונות גובה מפורניר אלון", label: "ארונות" },
   { src: wardrobeWhiteGray, alt: "ארון חדר שינה לבן עם יחידת מגירות", label: "חדרי שינה" },
   { src: understairsStorage, alt: "אחסון בהתאמה מלאה מתחת למדרגות", label: "נגרות אומן", portrait: true },
 ];
