@@ -61,6 +61,7 @@ import slattedMediaNiche from "@assets/slatted_media_niche.webp";
 import denMediaWall from "@assets/den_media_wall.webp";
 import officeMintLibrary from "@assets/office_mint_library.webp";
 import sketchKitchenPerspective from "@assets/sketch_kitchen_perspective.webp";
+import sketchWallUnitPlan from "@assets/sketch_wall_unit_plan.webp";
 
 export const CONTACT = {
   phoneDisplay: "054-327-3719",
@@ -114,6 +115,14 @@ export const sketchDrawing: Project = {
   src: sketchKitchenPerspective,
   alt: "סקיצת יד - תכנון מטבח ופינת אוכל בפרספקטיבה",
   label: "תכנון",
+};
+
+// Hand drawing of a wall unit — plan, section and perspective (2026-07-05, cropped to the paper)
+export const sketchDrawing2: Project = {
+  src: sketchWallUnitPlan,
+  alt: "סקיצת יד - תכנון ארונות קיר בחתך ובפרספקטיבה",
+  label: "תכנון",
+  portrait: true,
 };
 
 // The design sketch — great for "process/planning" storytelling

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   CONTACT,
   FACTS,
@@ -6,6 +6,7 @@ import {
   july5Projects,
   newProjects,
   sketchDrawing,
+  sketchDrawing2,
   sketchImage,
   tallProjects,
   wideProjects,
@@ -73,6 +74,10 @@ const FEATURED: Record<string, string> = {
 const PINNED: Record<string, string[]> = {
   storage: ["ארון חדר שינה לבן עם יחידת מגירות", "ספריית תצוגה בגוון מנטה למשרד"],
 };
+// Pairs that trade display positions within their wing (Aviv, 2026-07-05) — keyed by alt
+const SWAPS: [string, string][] = [
+  ["ארון בגדים לבן מובנה עם נישת אחסון ותאורת LED", "ארונות משרד"],
+];
 
 function wingOf(p: Project): string {
   return (
@@ -110,7 +115,13 @@ function orderWing(id: string): Project[] {
     const pin = PINNED[id]?.indexOf(p.alt) ?? -1;
     return pin >= 0 ? 1 + pin : 100;
   };
-  return ALL.filter((p) => wingOf(p) === id).sort((a, b) => rank(a) - rank(b));
+  const sorted = ALL.filter((p) => wingOf(p) === id).sort((a, b) => rank(a) - rank(b));
+  for (const [a, b] of SWAPS) {
+    const ia = sorted.findIndex((p) => p.alt === a);
+    const ib = sorted.findIndex((p) => p.alt === b);
+    if (ia >= 0 && ib >= 0) [sorted[ia], sorted[ib]] = [sorted[ib], sorted[ia]];
+  }
+  return sorted;
 }
 
 const WINGS: Wing[] = [
@@ -148,6 +159,21 @@ function Plaque({ p }: { p: Project }) {
 export default function V9Museum() {
   useVariantPage();
   useReveal();
+
+  // Click-to-zoom: any piece opens full-screen; Escape / tap closes
+  const [zoom, setZoom] = useState<Project | null>(null);
+  useEffect(() => {
+    if (!zoom) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setZoom(null);
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [zoom]);
 
   return (
     <div
@@ -252,10 +278,11 @@ export default function V9Museum() {
                   alt={featured.alt}
                   loading={wing.id === "kitchens" ? "eager" : "lazy"}
                   decoding="async"
+                  onClick={() => setZoom(featured)}
                   className={
                     featured.portrait
-                      ? "w-full max-w-sm md:max-w-md object-cover border"
-                      : "w-full max-w-3xl object-cover border"
+                      ? "w-full max-w-sm md:max-w-md object-cover border cursor-zoom-in"
+                      : "w-full max-w-3xl object-cover border cursor-zoom-in"
                   }
                   style={{ borderColor: HAIRLINE }}
                 />
@@ -277,7 +304,8 @@ export default function V9Museum() {
                         title={p.alt}
                         loading="lazy"
                         decoding="async"
-                        className="w-full border"
+                        onClick={() => setZoom(p)}
+                        className="w-full border cursor-zoom-in"
                         style={{ borderColor: HAIRLINE }}
                       />
                       <figcaption
@@ -309,27 +337,20 @@ export default function V9Museum() {
             כל עבודה מתחילה בנייר
           </span>
         </div>
-        <div className="pt-10 md:pt-14 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
-          <figure data-reveal>
-            <img
-              src={sketchDrawing.src}
-              alt={sketchDrawing.alt}
-              loading="lazy"
-              decoding="async"
-              className="w-full object-cover border"
-              style={{ borderColor: HAIRLINE }}
-            />
-          </figure>
-          <figure data-reveal>
-            <img
-              src={sketchImage.src}
-              alt={sketchImage.alt}
-              loading="lazy"
-              decoding="async"
-              className="w-full object-cover border"
-              style={{ borderColor: HAIRLINE }}
-            />
-          </figure>
+        <div className="pt-10 md:pt-14 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 max-w-6xl mx-auto items-start">
+          {[sketchDrawing, sketchDrawing2, sketchImage].map((s) => (
+            <figure data-reveal key={s.src}>
+              <img
+                src={s.src}
+                alt={s.alt}
+                loading="lazy"
+                decoding="async"
+                onClick={() => setZoom(s)}
+                className="w-full border cursor-zoom-in"
+                style={{ borderColor: HAIRLINE }}
+              />
+            </figure>
+          ))}
         </div>
         <div data-reveal className="mt-8 text-center">
           <div style={serif} className="text-base md:text-lg mx-auto max-w-md">
@@ -398,6 +419,38 @@ export default function V9Museum() {
           גרנות עיצובים · מטבחים וריהוט פנים בעיצוב אישי
         </div>
       </footer>
+
+      {/* zoom overlay */}
+      {zoom && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={zoom.alt}
+          onClick={() => setZoom(null)}
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 md:p-10 cursor-zoom-out"
+          style={{ backgroundColor: "rgba(31, 29, 26, 0.94)" }}
+        >
+          <button
+            aria-label="סגירה"
+            onClick={() => setZoom(null)}
+            className="absolute top-4 end-6 text-2xl leading-none hover:opacity-60 transition-opacity"
+            style={{ color: PAPER }}
+          >
+            ✕
+          </button>
+          <img
+            src={zoom.src}
+            alt={zoom.alt}
+            className="max-w-full max-h-[85vh] object-contain"
+          />
+          <div
+            className="mt-4 text-[13px] text-center px-4"
+            style={{ ...serif, color: PAPER }}
+          >
+            {zoom.alt}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
