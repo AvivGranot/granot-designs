@@ -6,7 +6,7 @@ import mobileHeroImage2 from "@assets/portfolio4_1758398446612.webp";
 import mobileHeroImage3 from "@assets/10_1758706575877.webp";
 
 // PC hero - static
-import pcHeroImage from "@assets/PC_HomeScreen_1_1758787763058.webp";
+import pcHeroImage from "@assets/graygreen_wood_niche_kitchen.webp";
 
 const mobileHeroImages = [
   { src: mobileHeroImage1, alt: "מינימליסטי חדר שינה עם ארונות מובנים" },
