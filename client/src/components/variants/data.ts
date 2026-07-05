@@ -42,6 +42,26 @@ import wardrobeOakShelves from "@assets/wardrobe_oak_shelves.webp";
 import heroWardrobePan from "@assets/hero_wardrobe_pan.mp4";
 import heroWardrobePoster from "@assets/hero_wardrobe_poster.webp";
 
+// New photos (2026-07-05 batch from Aviv, deduped against existing site images)
+import flutedIslandKitchen from "@assets/fluted_island_kitchen.webp";
+import chandelierKitchen from "@assets/chandelier_kitchen.webp";
+import classicBrassKitchen from "@assets/classic_brass_kitchen.webp";
+import graygreenWoodNicheKitchen from "@assets/graygreen_wood_niche_kitchen.webp";
+import blackButcherblockKitchen from "@assets/black_butcherblock_kitchen.webp";
+import farmhouseWhiteKitchen from "@assets/farmhouse_white_kitchen.webp";
+import navyCoffeeNiche from "@assets/navy_coffee_niche.webp";
+import navyGlassHutch from "@assets/navy_glass_hutch.webp";
+import oakSlattedWardrobe from "@assets/oak_slatted_wardrobe.webp";
+import wardrobeOakColumn from "@assets/wardrobe_oak_column.webp";
+import cornerWardrobeOak from "@assets/corner_wardrobe_oak.webp";
+import tvWardrobeOakNiche from "@assets/tv_wardrobe_oak_niche.webp";
+import bathStoneOakVanity from "@assets/bath_stone_oak_vanity.webp";
+import walnutFlutedVanity from "@assets/walnut_fluted_vanity.webp";
+import walnutFloatingVanity from "@assets/walnut_floating_vanity.webp";
+import slattedMediaNiche from "@assets/slatted_media_niche.webp";
+import denMediaWall from "@assets/den_media_wall.webp";
+import officeMintLibrary from "@assets/office_mint_library.webp";
+
 export const CONTACT = {
   phoneDisplay: "054-327-3719",
   phoneHref: "tel:054-327-3719",
@@ -104,6 +124,28 @@ export const newProjects: Project[] = [
   { src: wardrobeTvWall, alt: "קיר ארונות לבן עם נישת טלוויזיה", label: "ארונות" },
   { src: wardrobeWhiteGray, alt: "ארון חדר שינה לבן עם יחידת מגירות", label: "חדרי שינה" },
   { src: understairsStorage, alt: "אחסון בהתאמה מלאה מתחת למדרגות", label: "נגרות אומן", portrait: true },
+];
+
+// 2026-07-05 batch — new installs and finished projects
+export const july5Projects: Project[] = [
+  { src: flutedIslandKitchen, alt: "מטבח בהיר עם אי מעוגל בחיפוי מחורץ", label: "מטבחים", portrait: true },
+  { src: chandelierKitchen, alt: "מטבח יוקרתי עם אי שיש וגופי תאורה מעוצבים", label: "מטבחים", portrait: true },
+  { src: classicBrassKitchen, alt: "מטבח קלאסי לבן עם פרזול זהב", label: "מטבחים" },
+  { src: graygreenWoodNicheKitchen, alt: "מטבח אפור־ירוק עם נישת עץ טבעי ואי שיש כהה", label: "מטבחים" },
+  { src: blackButcherblockKitchen, alt: "מטבח שחור עם משטח עץ אלון וויטרינות", label: "מטבחים", portrait: true },
+  { src: farmhouseWhiteKitchen, alt: "מטבח כפרי לבן עם שולחן וספסל מעץ", label: "מטבחים" },
+  { src: navyCoffeeNiche, alt: "פינת קפה כחולה עם נישת אלון", label: "מטבחים" },
+  { src: navyGlassHutch, alt: "ויטרינה כחולה עם משטח וגב אלון", label: "מטבחים", portrait: true },
+  { src: oakSlattedWardrobe, alt: "ארון אלון מחורץ עם עמודת ספרייה", label: "ארונות", portrait: true },
+  { src: wardrobeOakColumn, alt: "ארון קיר לבן עם עמודת מדפי אלון", label: "ארונות", portrait: true },
+  { src: cornerWardrobeOak, alt: "ארון פינתי עם עמודת תצוגה מאלון", label: "ארונות", portrait: true },
+  { src: tvWardrobeOakNiche, alt: "קיר ארונות עם נישת טלוויזיה מחופה אלון", label: "ארונות" },
+  { src: bathStoneOakVanity, alt: "ארון אמבטיה מחורץ עם משטח אבן", label: "אמבטיה" },
+  { src: walnutFlutedVanity, alt: "ארון אמבטיה מחורץ בגוון אגוז עם כיור מונח", label: "אמבטיה" },
+  { src: walnutFloatingVanity, alt: "ארון אמבטיה צף בגוון אגוז עם כיור שחור", label: "אמבטיה", portrait: true },
+  { src: slattedMediaNiche, alt: "נישת מדיה עם חיפוי מחורץ בסלון", label: "סלון" },
+  { src: denMediaWall, alt: "חדר משפחה עם קיר מדיה וחיפוי עץ", label: "סלון" },
+  { src: officeMintLibrary, alt: "ספריית תצוגה בגוון מנטה למשרד", label: "משרד" },
 ];
 
 export const heroImages = {

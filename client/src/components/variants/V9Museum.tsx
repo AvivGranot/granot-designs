@@ -3,6 +3,7 @@ import {
   CONTACT,
   FACTS,
   heroImages,
+  july5Projects,
   newProjects,
   sketchImage,
   tallProjects,
@@ -63,6 +64,7 @@ const ALL = dedupe([
   heroAsProject(heroImages.navyOakNiche, "ארונות"),
   heroAsProject(heroImages.wardrobeOakShelves, "ארונות"),
   ...newProjects,
+  ...july5Projects,
   ...wideProjects,
   ...tallProjects,
 ]).filter((p) => p.alt !== "ארונות גובה מפורניר אלון"); // removed from the exhibition per Aviv
