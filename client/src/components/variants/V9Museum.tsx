@@ -90,7 +90,12 @@ const ALL = dedupe([
   ...july5Projects,
   ...wideProjects,
   ...tallProjects,
-]).filter((p) => p.alt !== "ארונות גובה מפורניר אלון"); // removed from the exhibition per Aviv
+]).filter(
+  (p) =>
+    // removed from the exhibition per Aviv
+    p.alt !== "ארונות גובה מפורניר אלון" &&
+    p.alt !== "מטבח בשלבי בנייה - ארונות ירוקים מעוצבים",
+);
 
 interface Wing {
   id: string;

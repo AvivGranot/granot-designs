@@ -27,7 +27,6 @@ import natanya from "@assets/natanya.webp";
 import closetPc from "@assets/closet_pc.webp";
 import closetMobile from "@assets/closet_mobile.webp";
 import waPc2 from "@assets/PC_Carousel_wa2_1776068488860.webp";
-import waMobile2 from "@assets/Mobile_Carousel_wa2_1776068488860.webp";
 
 // New photos (2026-07-04 batch from Aviv)
 import heroPenthouseKitchen from "@assets/hero_penthouse_kitchen.webp";
@@ -91,7 +90,7 @@ export const wideProjects: Project[] = [
   { src: pcPortfolio5, alt: "מטבח לבן עם אקסנטים צבעוניים ושטיח גיאומטרי", label: "מטבחים" },
   { src: closetPc, alt: "ארון בגדים לבן מובנה עם נישת אחסון ותאורת LED", label: "ארונות" },
   { src: newPcPortfolio10, alt: "מטבח בשלבי בנייה - ארונות ירוקים מעוצבים", label: "מאחורי הקלעים" },
-  { src: waPc2, alt: "עבודת נגרות מקצועית", label: "נגרות" },
+  { src: waPc2, alt: "מטבח אלון בהתאמה אישית בשלבי התקנה", label: "מטבחים" },
 ];
 
 // Portrait (mobile) shots — best for masonry and single-column
@@ -102,13 +101,12 @@ export const tallProjects: Project[] = [
   { src: mobilePortfolio7, alt: "קיר טלוויזיה כפרי עם קמין ונישות עצי הסקה", label: "סלון", portrait: true },
   { src: mobilePortfolio8, alt: "ארון הזזה בחדר ילדים", label: "חדרי ילדים", portrait: true },
   { src: mobilePortfolio9, alt: "ארונות משרד", label: "משרד", portrait: true },
-  { src: dafna, alt: "עיצוב נגרות מותאם אישית", label: "עיצוב אישי", portrait: true },
+  { src: dafna, alt: "ארון אלון עם חזיתות מחורצות, בעבודה בנגרייה", label: "ארונות", portrait: true },
   { src: mobilePortfolio4, alt: "מטבח שחור כפרי עם נישת תצוגה מעץ", label: "מטבחים", portrait: true },
   { src: mobilePortfolio5, alt: "מטבח לבן עם אקסנטים צבעוניים ושטיח גיאומטרי", label: "מטבחים", portrait: true },
   { src: closetMobile, alt: "ארון בגדים לבן מובנה עם ידיות ארוכות", label: "ארונות", portrait: true },
   { src: mobilePortfolio10, alt: "חדר רחצה עם ארון אמבטיה תלוי כפול", label: "אמבטיה", portrait: true },
   { src: mobilePortfolio11, alt: "חדר רחצה מעוצב ומינימליסטי", label: "אמבטיה", portrait: true },
-  { src: waMobile2, alt: "עבודת נגרות מקצועית", label: "נגרות", portrait: true },
 ];
 
 // Hand drawing of a kitchen design (2026-07-05, cropped to the paper)
