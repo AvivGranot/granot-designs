@@ -61,6 +61,7 @@ import walnutFloatingVanity from "@assets/walnut_floating_vanity.webp";
 import slattedMediaNiche from "@assets/slatted_media_niche.webp";
 import denMediaWall from "@assets/den_media_wall.webp";
 import officeMintLibrary from "@assets/office_mint_library.webp";
+import sketchKitchenPerspective from "@assets/sketch_kitchen_perspective.webp";
 
 export const CONTACT = {
   phoneDisplay: "054-327-3719",
@@ -110,6 +111,13 @@ export const tallProjects: Project[] = [
   { src: waMobile2, alt: "עבודת נגרות מקצועית", label: "נגרות", portrait: true },
 ];
 
+// Hand drawing of a kitchen design (2026-07-05, cropped to the paper)
+export const sketchDrawing: Project = {
+  src: sketchKitchenPerspective,
+  alt: "סקיצת יד - תכנון מטבח ופינת אוכל בפרספקטיבה",
+  label: "תכנון",
+};
+
 // The design sketch — great for "process/planning" storytelling
 export const sketchImage: Project = {
   src: pcAbout1,
@@ -135,7 +143,7 @@ export const july5Projects: Project[] = [
   { src: blackButcherblockKitchen, alt: "מטבח שחור עם משטח עץ אלון וויטרינות", label: "מטבחים", portrait: true },
   { src: farmhouseWhiteKitchen, alt: "מטבח כפרי לבן עם שולחן וספסל מעץ", label: "מטבחים" },
   { src: navyCoffeeNiche, alt: "פינת קפה כחולה עם נישת אלון", label: "מטבחים" },
-  { src: navyGlassHutch, alt: "ויטרינה כחולה עם משטח וגב אלון", label: "מטבחים", portrait: true },
+  { src: navyGlassHutch, alt: "ויטרינה כחולה עם משטח וגב אלון", label: "ארונות", portrait: true },
   { src: oakSlattedWardrobe, alt: "ארון אלון מחורץ עם עמודת ספרייה", label: "ארונות", portrait: true },
   { src: wardrobeOakColumn, alt: "ארון קיר לבן עם עמודת מדפי אלון", label: "ארונות", portrait: true },
   { src: cornerWardrobeOak, alt: "ארון פינתי עם עמודת תצוגה מאלון", label: "ארונות", portrait: true },
@@ -151,7 +159,7 @@ export const july5Projects: Project[] = [
 export const heroImages = {
   penthouseKitchen: {
     src: heroPenthouseKitchen,
-    alt: "מטבח פנטהאוז עם משטח אלון ונוף עירוני",
+    alt: "מטבח עם משטח אלון ונוף עירוני",
   },
   oakCounterCloseup: {
     src: oakCounterCloseup,

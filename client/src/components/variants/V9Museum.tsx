@@ -5,6 +5,7 @@ import {
   heroImages,
   july5Projects,
   newProjects,
+  sketchDrawing,
   sketchImage,
   tallProjects,
   wideProjects,
@@ -56,7 +57,29 @@ function dedupe(list: Project[]): Project[] {
 
 const KITCHENS = new Set(["מטבחים", "נתניה"]);
 const STORAGE = new Set(["ארונות", "חדרי שינה", "נגרות אומן", "חדרי ילדים", "משרד", "הוד השרון"]);
-const LIVING = new Set(["סלון", "אמבטיה", "פינות עבודה", "פינות אוכל"]);
+
+// Hand-curated placement (Aviv, 2026-07-05) — keyed by alt, wins over label sets
+const MOVES: Record<string, string> = {
+  "חדר משפחה עם קיר מדיה וחיפוי עץ": "storage",
+  "נישת מדיה עם חיפוי מחורץ בסלון": "storage",
+  "קיר טלוויזיה כפרי עם קמין ונישות עצי הסקה": "storage",
+  "חדר שינה מינימליסטי עם ארונות לבנים מובנים": "living",
+};
+const FEATURED: Record<string, string> = {
+  kitchens: "מטבח כפרי ירוק בשלבי התקנה",
+  storage: "ארון הזזה בחדר ילדים",
+  living: "חדר רחצה מעוצב ומינימליסטי",
+};
+const PINNED: Record<string, string[]> = {
+  storage: ["ארון חדר שינה לבן עם יחידת מגירות", "ספריית תצוגה בגוון מנטה למשרד"],
+};
+
+function wingOf(p: Project): string {
+  return (
+    MOVES[p.alt] ??
+    (KITCHENS.has(p.label) ? "kitchens" : STORAGE.has(p.label) ? "storage" : "living")
+  );
+}
 
 const ALL = dedupe([
   heroAsProject(heroImages.penthouseKitchen, "מטבחים"),
@@ -76,13 +99,20 @@ interface Wing {
   pieces: Project[];
 }
 
-const WINGS: Wing[] = [
-  { id: "kitchens", letter: "א", title: "מטבחים", pieces: ALL.filter((p) => KITCHENS.has(p.label)) },
-  { id: "storage", letter: "ב", title: "ארונות וחדרי שינה", pieces: ALL.filter((p) => STORAGE.has(p.label)) },
-  { id: "living", letter: "ג", title: "סלון וחדרי רחצה", pieces: ALL.filter((p) => LIVING.has(p.label)) },
-];
+function orderWing(id: string): Project[] {
+  const rank = (p: Project) => {
+    if (p.alt === FEATURED[id]) return 0;
+    const pin = PINNED[id]?.indexOf(p.alt) ?? -1;
+    return pin >= 0 ? 1 + pin : 100;
+  };
+  return ALL.filter((p) => wingOf(p) === id).sort((a, b) => rank(a) - rank(b));
+}
 
-const TOTAL = WINGS.reduce((n, w) => n + w.pieces.length, 0);
+const WINGS: Wing[] = [
+  { id: "kitchens", letter: "א", title: "מטבחים", pieces: orderWing("kitchens") },
+  { id: "storage", letter: "ב", title: "ארונות וקירות טלוויזיה", pieces: orderWing("storage") },
+  { id: "living", letter: "ג", title: "חדרי שינה ורחצה", pieces: orderWing("living") },
+];
 
 // Running catalog number across the whole exhibition
 let counter = 0;
@@ -158,7 +188,7 @@ export default function V9Museum() {
           style={{ transitionDelay: "0.2s", color: MUTED }}
           className="mx-auto max-w-md mt-6 text-[15px] md:text-base leading-relaxed"
         >
-          התערוכה המלאה — {TOTAL} עבודות, כולן תוכננו, יוצרו והותקנו על ידינו.
+          כולן תוכננו, יוצרו, והותקנו על ידינו.
         </p>
 
         {/* floor map */}
@@ -274,21 +304,33 @@ export default function V9Museum() {
             כל עבודה מתחילה בנייר
           </span>
         </div>
-        <figure data-reveal className="pt-10 md:pt-14 flex flex-col items-center">
-          <img
-            src={sketchImage.src}
-            alt={sketchImage.alt}
-            loading="lazy"
-            decoding="async"
-            className="w-full max-w-3xl object-cover border"
-            style={{ borderColor: HAIRLINE }}
-          />
-          <figcaption className="mt-6 text-center max-w-md">
-            <div style={serif} className="text-base md:text-lg">
-              תכנון קפדני ברמת המאקרו והמיקרו — ואז ייצור בנגרייה שלנו.
-            </div>
-          </figcaption>
-        </figure>
+        <div className="pt-10 md:pt-14 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
+          <figure data-reveal>
+            <img
+              src={sketchDrawing.src}
+              alt={sketchDrawing.alt}
+              loading="lazy"
+              decoding="async"
+              className="w-full object-cover border"
+              style={{ borderColor: HAIRLINE }}
+            />
+          </figure>
+          <figure data-reveal>
+            <img
+              src={sketchImage.src}
+              alt={sketchImage.alt}
+              loading="lazy"
+              decoding="async"
+              className="w-full object-cover border"
+              style={{ borderColor: HAIRLINE }}
+            />
+          </figure>
+        </div>
+        <div data-reveal className="mt-8 text-center">
+          <div style={serif} className="text-base md:text-lg mx-auto max-w-md">
+            תכנון קפדני ברמת המאקרו והמיקרו — ואז ייצור בנגרייה שלנו.
+          </div>
+        </div>
       </section>
 
       {/* facts — one hairline row */}
