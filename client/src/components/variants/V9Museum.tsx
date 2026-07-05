@@ -296,14 +296,14 @@ export default function V9Museum() {
                 <Plaque p={featured} />
               </figure>
 
-              {/* salon wall — the rest of the wing, masonry, natural aspect */}
+              {/* salon wall — aligned 2-col grid on mobile, natural-aspect masonry on desktop */}
               <div className="px-6 md:px-16 pt-8 md:pt-12 pb-4">
-                <div className="columns-2 md:columns-3 gap-3 md:gap-5">
+                <div className="grid grid-cols-2 gap-x-3 md:block md:columns-3 md:gap-5">
                   {rest.map((p) => (
                     <figure
                       key={p.src}
                       data-reveal
-                      className="break-inside-avoid mb-5 md:mb-8"
+                      className="mb-5 md:mb-8 md:break-inside-avoid"
                     >
                       <img
                         src={p.src}
@@ -312,7 +312,7 @@ export default function V9Museum() {
                         loading="lazy"
                         decoding="async"
                         onClick={() => setZoom(p)}
-                        className="w-full border cursor-zoom-in"
+                        className="w-full aspect-[4/5] object-cover md:aspect-auto border cursor-zoom-in"
                         style={{ borderColor: HAIRLINE }}
                       />
                       <figcaption
