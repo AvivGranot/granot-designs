@@ -78,6 +78,12 @@ const PINNED: Record<string, string[]> = {
 const SWAPS: [string, string][] = [
   ["ארון בגדים לבן מובנה עם נישת אחסון ותאורת LED", "ארונות משרד"],
 ];
+// Pushed to the lower rows of their wing (Aviv, 2026-07-05) — keyed by alt
+const DEMOTED = new Set([
+  "מטבח שחור עם משטח עץ אלון וויטרינות",
+  "מטבח מודרני עם אי כחול ומשטח עץ טבעי",
+  "מטבח לבן עם אקסנטים צבעוניים ושטיח גיאומטרי",
+]);
 
 function wingOf(p: Project): string {
   return (
@@ -113,7 +119,8 @@ function orderWing(id: string): Project[] {
   const rank = (p: Project) => {
     if (p.alt === FEATURED[id]) return 0;
     const pin = PINNED[id]?.indexOf(p.alt) ?? -1;
-    return pin >= 0 ? 1 + pin : 100;
+    if (pin >= 0) return 1 + pin;
+    return DEMOTED.has(p.alt) ? 200 : 100;
   };
   const sorted = ALL.filter((p) => wingOf(p) === id).sort((a, b) => rank(a) - rank(b));
   for (const [a, b] of SWAPS) {
