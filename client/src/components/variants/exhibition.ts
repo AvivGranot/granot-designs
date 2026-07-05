@@ -71,8 +71,76 @@ const ALL = dedupe([
   (p) =>
     // removed from the exhibition per Aviv
     p.alt !== "ארונות גובה מפורניר אלון" &&
-    p.alt !== "מטבח בשלבי בנייה - ארונות ירוקים מעוצבים",
+    p.alt !== "מטבח בשלבי בנייה - ארונות ירוקים מעוצבים" &&
+    p.alt !== "ארון פינתי עם עמודת תצוגה מאלון" &&
+    p.alt !== "ארון קיר לבן עם עמודת מדפי אלון" &&
+    p.alt !== "מטבח יוקרתי עם אי שיש כהה ותאורה תלויה",
 );
+
+// True pixel dimensions of every exhibition asset (ffprobe, 2026-07-05).
+// Keyed by asset basename — hashed build URLs still contain it.
+const DIMS: Record<string, [number, number]> = {
+  hero_penthouse_kitchen: [1920, 1440],
+  oak_counter_closeup: [1400, 1867],
+  navy_oak_niche: [1600, 893],
+  wardrobe_oak_shelves: [1200, 1600],
+  kitchen_oak_island: [1600, 1463],
+  sage_kitchen_black_unit: [1920, 1071],
+  wardrobe_tv_wall: [1448, 1086],
+  wardrobe_white_gray: [1400, 1050],
+  understairs_storage: [1200, 1600],
+  fluted_island_kitchen: [864, 1152],
+  chandelier_kitchen: [900, 1600],
+  classic_brass_kitchen: [1600, 1200],
+  graygreen_wood_niche_kitchen: [1600, 720],
+  black_butcherblock_kitchen: [1200, 1600],
+  farmhouse_white_kitchen: [750, 758],
+  navy_coffee_niche: [1024, 768],
+  navy_glass_hutch: [864, 1152],
+  oak_slatted_wardrobe: [900, 1600],
+  tv_wardrobe_oak_niche: [1600, 892],
+  bath_stone_oak_vanity: [1600, 892],
+  walnut_fluted_vanity: [1600, 1200],
+  walnut_floating_vanity: [1064, 1600],
+  slatted_media_niche: [1280, 720],
+  den_media_wall: [1600, 720],
+  office_mint_library: [1024, 768],
+  Mobile_Carousel_1_1758782507060: [1600, 1064],
+  Mobile_Carousel_2_1758782507061: [1080, 1920],
+  Mobile_Carousel_4_1758782507064: [1080, 1920],
+  Mobile_Carousel_5_1758782511117: [1080, 1920],
+  Mobile_Carousel_6_1758784141892: [1080, 1920],
+  Mobile_Carousel_7_1758782511118: [1080, 1920],
+  Mobile_Carousel_8_1758782511119: [1080, 1920],
+  Mobile_Carousel_9_1758782511120: [576, 1024],
+  Mobile_Carousel_10_1758782511121: [1080, 1920],
+  Mobile_About_1_1758798578200: [768, 1344],
+  dafna: [3840, 5120],
+  PC_Carousel_1_1758790862081: [1600, 1064],
+  PC_Carousel_2_1758790862081: [1366, 768],
+  PC_Carousel_3_1758790862082: [1366, 768],
+  PC_Carousel_4_1758790862082: [1600, 1200],
+  PC_Carousel_5_1758790862083: [1344, 768],
+  PC_Carousel_6_1758790862083: [1344, 768],
+  PC_Carousel_8_1758790862084: [1366, 768],
+  PC_Carousel_8_1758796224264: [1366, 768],
+  Hod_Hasharon: [1920, 1080],
+  natanya: [2336, 1760],
+  closet_pc: [1200, 1600],
+  closet_mobile: [1200, 1600],
+  PC_Carousel_wa2_1776068488860: [1600, 1200],
+};
+
+// Width/height ratio of an image by its src URL; <1 means portrait
+export function ratioOf(src: string): number {
+  for (const name in DIMS) {
+    if (src.includes(name)) {
+      const [w, h] = DIMS[name];
+      return w / h;
+    }
+  }
+  return 4 / 3;
+}
 
 export interface Wing {
   id: string;
