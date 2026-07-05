@@ -74,7 +74,9 @@ const ALL = dedupe([
     p.alt !== "מטבח בשלבי בנייה - ארונות ירוקים מעוצבים" &&
     p.alt !== "ארון פינתי עם עמודת תצוגה מאלון" &&
     p.alt !== "ארון קיר לבן עם עמודת מדפי אלון" &&
-    p.alt !== "מטבח יוקרתי עם אי שיש כהה ותאורה תלויה",
+    p.alt !== "מטבח יוקרתי עם אי שיש כהה ותאורה תלויה" &&
+    p.alt !== "חדר משפחה עם קיר מדיה וחיפוי עץ" &&
+    p.alt !== "ספריית תצוגה בגוון מנטה למשרד",
 );
 
 // True pixel dimensions of every exhibition asset (ffprobe, 2026-07-05).
@@ -126,6 +128,11 @@ const DIMS: Record<string, [number, number]> = {
   PC_Carousel_8_1758796224264: [1366, 768],
   Hod_Hasharon: [1920, 1080],
   natanya: [2336, 1760],
+  // Legacy duplicate files — Vite dedupes identical content to one URL and may
+  // pick these older names, so they must resolve too (same pixels as
+  // Mobile_Carousel_1 / Mobile_Carousel_9 respectively)
+  portfolio1_1758398100598: [1600, 1064],
+  portfolio4_1758398446612: [576, 1024],
   closet_pc: [1200, 1600],
   closet_mobile: [1200, 1600],
   PC_Carousel_wa2_1776068488860: [1600, 1200],
