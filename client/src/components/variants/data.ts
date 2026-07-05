@@ -77,7 +77,7 @@ export const wideProjects: Project[] = [
 export const tallProjects: Project[] = [
   { src: mobilePortfolio1, alt: "ארונות מטבח מודרניים", label: "מטבחים", portrait: true },
   { src: mobilePortfolio2, alt: "מטבח יוקרתי עם אי שיש כהה ותאורה תלויה", label: "מטבחים", portrait: true },
-  { src: mobilePortfolio6, alt: "ארונות ירוקים בהתאמה אישית - בשלבי התקנה", label: "ארונות", portrait: true },
+  { src: mobilePortfolio6, alt: "מטבח כפרי ירוק בשלבי התקנה", label: "מטבחים", portrait: true },
   { src: mobilePortfolio7, alt: "קיר טלוויזיה כפרי עם קמין ונישות עצי הסקה", label: "סלון", portrait: true },
   { src: mobilePortfolio8, alt: "ארון הזזה בחדר ילדים", label: "חדרי ילדים", portrait: true },
   { src: mobilePortfolio9, alt: "ארונות משרד", label: "משרד", portrait: true },
