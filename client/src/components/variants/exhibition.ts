@@ -33,7 +33,7 @@ const MOVES: Record<string, string> = {
   "חדר שינה מינימליסטי עם ארונות לבנים מובנים": "living",
 };
 const FEATURED: Record<string, string> = {
-  kitchens: "מטבח כפרי ירוק בשלבי התקנה",
+  kitchens: "מטבח אפור־ירוק עם נישת עץ טבעי ואי שיש כהה",
   storage: "ארון הזזה בחדר ילדים",
   living: "חדר רחצה מעוצב ומינימליסטי",
 };
@@ -77,7 +77,10 @@ const ALL = dedupe([
     p.alt !== "מטבח יוקרתי עם אי שיש כהה ותאורה תלויה" &&
     p.alt !== "חדר משפחה עם קיר מדיה וחיפוי עץ" &&
     p.alt !== "ספריית תצוגה בגוון מנטה למשרד" &&
-    p.alt !== "מטבח יוקרתי עם אי שיש וגופי תאורה מעוצבים",
+    p.alt !== "מטבח יוקרתי עם אי שיש וגופי תאורה מעוצבים" &&
+    // removed 2026-07-06 per Aviv — ugly pair (staircase closet + LED closet)
+    p.alt !== "אחסון בהתאמה מלאה מתחת למדרגות" &&
+    p.alt !== "חדר ארונות לבן עם מדפי אלון",
 );
 
 // True pixel dimensions of every exhibition asset (ffprobe, 2026-07-05).

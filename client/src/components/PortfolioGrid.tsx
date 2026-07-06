@@ -1,29 +1,9 @@
 import { useState, useCallback, useEffect } from 'react';
 import { exhibitionPieces, ratioOf } from './variants/exhibition';
-import type { Project } from './variants/data';
 
-// Vertical 2-image rows of the full curated collection — replaces the carousel.
-// Images are paired by orientation (portrait with portrait, landscape with
-// landscape) and each row takes the average natural ratio of its pair, so
-// tall photos get tall rows and wide photos get short wide rows with minimal
-// cropping. No gap between images, like the old carousel strip.
-const isPortrait = (p: Project) => ratioOf(p.src) < 1;
-
-const rows: Project[][] = (() => {
-  const pool = [...exhibitionPieces];
-  const out: Project[][] = [];
-  while (pool.length) {
-    const first = pool.shift()!;
-    const match = pool.findIndex((p) => isPortrait(p) === isPortrait(first));
-    if (match >= 0) out.push([first, ...pool.splice(match, 1)]);
-    else if (pool.length) out.push([first, pool.shift()!]);
-    else out.push([first]);
-  }
-  return out;
-})();
-
-const flatPieces = rows.flat();
-
+// One image after another, each at its own true aspect ratio (no cropping,
+// no twisting) in a contained, centered column — click any image to zoom to
+// a large 90vw/80vh view for furniture/material detail.
 export default function PortfolioGrid() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -41,9 +21,9 @@ export default function PortfolioGrid() {
 
   const navigateLightbox = useCallback((direction: 'prev' | 'next') => {
     if (direction === 'next') {
-      setLightboxIndex((prev) => (prev + 1) % flatPieces.length);
+      setLightboxIndex((prev) => (prev + 1) % exhibitionPieces.length);
     } else {
-      setLightboxIndex((prev) => (prev - 1 + flatPieces.length) % flatPieces.length);
+      setLightboxIndex((prev) => (prev - 1 + exhibitionPieces.length) % exhibitionPieces.length);
     }
   }, []);
 
@@ -59,46 +39,32 @@ export default function PortfolioGrid() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxOpen, closeLightbox, navigateLightbox]);
 
-  let flatIndex = 0;
-
   return (
     <>
-      <div>
-        {rows.map((row) => {
-          const rowRatio =
-            row.reduce((sum, p) => sum + ratioOf(p.src), 0) / row.length;
-          return (
+      <div className="bg-white py-8 md:py-12">
+        <div className="flex flex-col items-center gap-8 md:gap-12 px-4">
+          {exhibitionPieces.map((image, index) => (
             <div
-              key={row[0].src}
-              className={row.length === 2 ? 'grid grid-cols-2 gap-0' : 'grid grid-cols-1 gap-0'}
+              key={image.src}
+              onClick={() => openLightbox(index)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
+              aria-label={`הצג ${image.alt} במסך מלא`}
+              className="cursor-pointer w-full max-w-3xl"
             >
-              {row.map((image) => {
-                const index = flatIndex++;
-                return (
-                  <div
-                    key={image.src}
-                    onClick={() => openLightbox(index)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
-                    aria-label={`הצג ${image.alt} במסך מלא`}
-                    className="cursor-pointer"
-                  >
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      loading={index < 4 ? 'eager' : 'lazy'}
-                      decoding="async"
-                      draggable={false}
-                      className="block w-full h-full object-cover"
-                      style={{ aspectRatio: rowRatio }}
-                    />
-                  </div>
-                );
-              })}
+              <img
+                src={image.src}
+                alt={image.alt}
+                loading={index < 4 ? 'eager' : 'lazy'}
+                decoding="async"
+                draggable={false}
+                className="block w-full h-auto"
+                style={{ aspectRatio: ratioOf(image.src) }}
+              />
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
 
       {/* Lightbox Modal — same look and RTL arrow logic as the old carousel */}
@@ -123,8 +89,8 @@ export default function PortfolioGrid() {
               </button>
             </div>
             <img
-              src={flatPieces[lightboxIndex].src}
-              alt={flatPieces[lightboxIndex].alt}
+              src={exhibitionPieces[lightboxIndex].src}
+              alt={exhibitionPieces[lightboxIndex].alt}
             />
             <div style={{ direction: 'ltr' }}>
               <button
