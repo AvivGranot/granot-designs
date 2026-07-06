@@ -80,7 +80,11 @@ const ALL = dedupe([
     p.alt !== "מטבח יוקרתי עם אי שיש וגופי תאורה מעוצבים" &&
     // removed 2026-07-06 per Aviv — ugly pair (staircase closet + LED closet)
     p.alt !== "אחסון בהתאמה מלאה מתחת למדרגות" &&
-    p.alt !== "חדר ארונות לבן עם מדפי אלון",
+    p.alt !== "חדר ארונות לבן עם מדפי אלון" &&
+    // removed 2026-07-06 per Aviv — vertical duplicate of the same kitchen
+    // (mobilePortfolio5); the horizontal one (pcPortfolio5) stays. Same alt
+    // text on both, so this must key off `portrait` too or it'd drop both.
+    !(p.portrait && p.alt === "מטבח לבן עם אקסנטים צבעוניים ושטיח גיאומטרי"),
 );
 
 // True pixel dimensions of every exhibition asset (ffprobe, 2026-07-05).
