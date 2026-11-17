@@ -2136,6 +2136,8 @@ header {
 
 .embla-container {
   display: flex;
+  /* Phone: vertical swipe scrolls the page, horizontal swipe moves the strip */
+  touch-action: pan-y pinch-zoom;
 }
 
 .portfolio-scroll-item {

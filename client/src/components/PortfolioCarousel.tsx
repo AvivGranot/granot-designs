@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 
 interface PortfolioImage {
@@ -13,6 +13,8 @@ interface PortfolioCarouselProps {
 export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const lightboxOpenRef = useRef(false);
+  lightboxOpenRef.current = lightboxOpen;
 
   const [progress, setProgress] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -47,6 +49,53 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
     emblaApi.on('pointerDown', down).on('pointerUp', up);
     return () => {
       emblaApi.off('scroll', update).off('reInit', update);
+      emblaApi.off('pointerDown', down).off('pointerUp', up);
+    };
+  }, [emblaApi]);
+
+  // Auto-advance every 3s (same pace as the hero). Swiping or dragging still
+  // works: it pauses while touched and for 5s after, pauses off-screen, and
+  // goes back to the first image after the last. Skipped if the visitor asked
+  // their device for reduced motion.
+  useEffect(() => {
+    if (!emblaApi) return;
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+
+    const root = emblaApi.rootNode();
+    let visible = true;
+    let touching = false;
+    let resumeAt = 0;
+
+    const observer =
+      'IntersectionObserver' in window
+        ? new IntersectionObserver(
+            ([entry]) => {
+              visible = entry.isIntersecting;
+            },
+            { threshold: 0.4 }
+          )
+        : null;
+    observer?.observe(root);
+
+    const down = () => {
+      touching = true;
+    };
+    const up = () => {
+      touching = false;
+      resumeAt = Date.now() + 5000;
+    };
+    emblaApi.on('pointerDown', down).on('pointerUp', up);
+
+    const timer = setInterval(() => {
+      if (!visible || touching || lightboxOpenRef.current) return;
+      if (Date.now() < resumeAt) return;
+      if (emblaApi.canScrollNext()) emblaApi.scrollNext();
+      else emblaApi.scrollTo(0);
+    }, 3000);
+
+    return () => {
+      clearInterval(timer);
+      observer?.disconnect();
       emblaApi.off('pointerDown', down).off('pointerUp', up);
     };
   }, [emblaApi]);
