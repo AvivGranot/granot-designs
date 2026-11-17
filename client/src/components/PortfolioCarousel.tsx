@@ -14,12 +14,42 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
+  const [progress, setProgress] = useState(0);
+  const [dragging, setDragging] = useState(false);
+
+  // Swipe (touch) or drag (mouse) to move. No arrow buttons.
   const [emblaRef, emblaApi] = useEmblaCarousel({
     direction: 'rtl',
     align: 'center',
     containScroll: 'trimSnaps',
     loop: false,
+    dragFree: false,
   });
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    // Measured from the real position (Embla's own progress number is
+    // unreliable in right-to-left): how far the strip has moved from its start.
+    const update = () => {
+      const root = emblaApi.rootNode();
+      const track = emblaApi.containerNode();
+      const total = track.scrollWidth - root.clientWidth;
+      if (total <= 0) return setProgress(0);
+      const moved = Math.abs(
+        track.getBoundingClientRect().right - root.getBoundingClientRect().right
+      );
+      setProgress(Math.min(1, moved / total));
+    };
+    const down = () => setDragging(true);
+    const up = () => setDragging(false);
+    update();
+    emblaApi.on('scroll', update).on('reInit', update);
+    emblaApi.on('pointerDown', down).on('pointerUp', up);
+    return () => {
+      emblaApi.off('scroll', update).off('reInit', update);
+      emblaApi.off('pointerDown', down).off('pointerUp', up);
+    };
+  }, [emblaApi]);
 
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);
@@ -40,10 +70,6 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
     }
   }, [images.length]);
 
-  // RTL: left arrow = forward (next slide, higher index), right arrow = backward (prev slide)
-  const scrollLeft = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-  const scrollRight = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen) return;
@@ -59,7 +85,8 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
   return (
     <>
       <div className="portfolio-carousel-wrapper">
-        <div className="embla-viewport" ref={emblaRef}>
+        <div className={`embla-viewport${dragging ? ' is-dragging' : ''}`}
+          ref={emblaRef}>
           <div className="embla-container">
             {images.map((image, index) => {
               const isDafna = image.src.includes('dafna');
@@ -103,21 +130,11 @@ export default function PortfolioCarousel({ images }: PortfolioCarouselProps) {
           </div>
         </div>
 
-        <div style={{ direction: 'ltr' }}>
-          <button
-            className="carousel-arrow carousel-arrow-left"
-            onClick={scrollLeft}
-            aria-label="שמאלה"
-          >
-            ‹
-          </button>
-          <button
-            className="carousel-arrow carousel-arrow-right"
-            onClick={scrollRight}
-            aria-label="ימינה"
-          >
-            ›
-          </button>
+        <div className="carousel-progress" aria-hidden="true">
+          <div
+            className="carousel-progress-fill"
+            style={{ transform: `scaleX(${Math.max(progress, 0.08)})` }}
+          />
         </div>
       </div>
 
